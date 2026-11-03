@@ -265,6 +265,21 @@ class Engine:
 
     # --- persistence --------------------------------------------------------------------------
 
+    def rerender(self) -> None:
+        """Rewrite every task and post-mortem from saved state (after a template change), no model calls."""
+        keep = set()
+        for record in self.memory.tasks.values():
+            inc = self.incident(record.incident_uid)
+            inc.slug = None
+            inc.slug = stem(inc)
+            keep.add(inc.slug + ".md")
+            self._write(record)
+        for folder in (self.tracker.tasks_dir, self.tracker.pm_dir):
+            for path in folder.glob("ARG-*.md"):
+                if path.name not in keep:
+                    path.unlink()
+        self.save()
+
     def save(self) -> None:
         self.memory.incidents = self.book.incidents
         self.memory.owner = {k: i.uid for k, i in self.book.owner.items()}

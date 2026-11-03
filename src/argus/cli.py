@@ -154,5 +154,16 @@ def report(out: Path = OutOpt, config: Path = ConfigOpt) -> None:
     typer.echo(str(path))
 
 
+
+@app.command()
+def render(out: Path = OutOpt, config: Path = ConfigOpt) -> None:
+    """Re-render tasks and post-mortems from the saved run state (after editing templates); no model calls."""
+    from .engine import build_engine
+
+    engine = build_engine(load_config(config, out_dir=out), llm="off")
+    engine.rerender()
+    typer.echo(f"re-rendered {len(engine.memory.tasks)} tasks")
+
+
 if __name__ == "__main__":
     app()

@@ -4,13 +4,13 @@
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 % — PaaS Engineer",
+      "text": "🟡 SEV-3 · Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 %",
+            "text": "🟡 SEV-3 · Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет",
             "emoji": true
           }
         },
@@ -39,7 +39,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 16:30 24.08 RPS идёт выше нормы: 109 689 запросов за 10 минут на пике против обычных 80 001,6 (×1,4), всего за окно 189,2 млн запросов (+50,2 млн). Почти весь прирост даёт одна страна: хиты из IN выросли с 13,1 тыс./с в 14:00 до 40,2 тыс./с в 17:00 при плавном росте. Остальные страны из топ-10 стоят на месте (US 9 736 → 8 818). Ошибок мало, новых сигнатур нет. CPU поднялся с 17,9 % до 44,3 % и пока не упёрся в потолок."
+            "text": "С 16:30 до 17:00 24.08 RPS вырос с 95299 до 109689 за 10 мин при обычных ~80001,6 (ratio 1,4), и рост идёт плавно примерно с 15:50. Почти весь прирост даёт Индия: sampled hits/s по IN выросли с 21837,7 (15:50) до 40164,2 (17:00), а US и DE не растут. Трафик органический: мобильные ISP Reliance Jio и Bharti Airtel, тысячи разных IP. Поток ошибок остаётся малым. CPU вырос с 21,7 % до 44,3 % — пока запас есть, но ёмкость нужно держать под наблюдением."
           }
         },
         {
@@ -47,7 +47,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический или маркетинговый рост трафика из Индии: кампания, публикация, сезонный пик или изменение в поисковой выдаче _(высокая)_"
+              "text": "*Гипотеза:* Органический рост трафика из Индии (вечерний пик, маркетинговая кампания, внешний реферал или изменения в поисковой выдаче/SEO) _(высокая)_"
             }
           ]
         },
@@ -90,13 +90,13 @@
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-001: SEV-3 → SEV-2.* Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 %",
+      "text": "⬆️ *Эскалация ARG-001: SEV-3 → SEV-2.* Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-001: SEV-3 → SEV-2.* Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 %"
+            "text": "⬆️ *Эскалация ARG-001: SEV-3 → SEV-2.* Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет"
           }
         }
       ],
@@ -138,13 +138,13 @@
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 % — PaaS Engineer",
+      "text": "🟠 SEV-2 · Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 %",
+            "text": "🟠 SEV-2 · Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет",
             "emoji": true
           }
         },
@@ -173,7 +173,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 16:30 24.08 RPS идёт выше нормы: 109 689 запросов за 10 минут на пике против обычных 80 001,6 (×1,4), всего за окно 189,2 млн запросов (+50,2 млн). Почти весь прирост даёт одна страна: хиты из IN выросли с 13,1 тыс./с в 14:00 до 40,2 тыс./с в 17:00 при плавном росте. Остальные страны из топ-10 стоят на месте (US 9 736 → 8 818). Ошибок мало, новых сигнатур нет. CPU поднялся с 17,9 % до 44,3 % и пока не упёрся в потолок."
+            "text": "С 16:30 до 17:00 24.08 RPS вырос с 95299 до 109689 за 10 мин при обычных ~80001,6 (ratio 1,4), и рост идёт плавно примерно с 15:50. Почти весь прирост даёт Индия: sampled hits/s по IN выросли с 21837,7 (15:50) до 40164,2 (17:00), а US и DE не растут. Трафик органический: мобильные ISP Reliance Jio и Bharti Airtel, тысячи разных IP. Поток ошибок остаётся малым. CPU вырос с 21,7 % до 44,3 % — пока запас есть, но ёмкость нужно держать под наблюдением."
           }
         },
         {
@@ -181,7 +181,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический или маркетинговый рост трафика из Индии: кампания, публикация, сезонный пик или изменение в поисковой выдаче _(высокая)_"
+              "text": "*Гипотеза:* Органический рост трафика из Индии (вечерний пик, маркетинговая кампания, внешний реферал или изменения в поисковой выдаче/SEO) _(высокая)_"
             }
           ]
         },
@@ -247,13 +247,13 @@
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 % — PaaS Engineer",
+      "text": "✅ SEV-2 · Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · Рост RPS в 1,4 раза за счёт трафика из Индии (IN), CPU вырос до 44 %",
+            "text": "✅ SEV-2 · Рост RPS в 1,4 раза за счёт трафика из IN; CPU до 44,3 %, ошибок почти нет",
             "emoji": true
           }
         },
@@ -282,7 +282,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 16:30 24.08 RPS идёт выше нормы: 109 689 запросов за 10 минут на пике против обычных 80 001,6 (×1,4), всего за окно 189,2 млн запросов (+50,2 млн). Почти весь прирост даёт одна страна: хиты из IN выросли с 13,1 тыс./с в 14:00 до 40,2 тыс./с в 17:00 при плавном росте. Остальные страны из топ-10 стоят на месте (US 9 736 → 8 818). Ошибок мало, новых сигнатур нет. CPU поднялся с 17,9 % до 44,3 % и пока не упёрся в потолок."
+            "text": "С 16:30 до 17:00 24.08 RPS вырос с 95299 до 109689 за 10 мин при обычных ~80001,6 (ratio 1,4), и рост идёт плавно примерно с 15:50. Почти весь прирост даёт Индия: sampled hits/s по IN выросли с 21837,7 (15:50) до 40164,2 (17:00), а US и DE не растут. Трафик органический: мобильные ISP Reliance Jio и Bharti Airtel, тысячи разных IP. Поток ошибок остаётся малым. CPU вырос с 21,7 % до 44,3 % — пока запас есть, но ёмкость нужно держать под наблюдением."
           }
         },
         {
@@ -290,7 +290,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический или маркетинговый рост трафика из Индии: кампания, публикация, сезонный пик или изменение в поисковой выдаче _(высокая)_"
+              "text": "*Гипотеза:* Органический рост трафика из Индии (вечерний пик, маркетинговая кампания, внешний реферал или изменения в поисковой выдаче/SEO) _(высокая)_"
             }
           ]
         },
@@ -332,13 +332,13 @@
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -367,7 +367,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -375,7 +375,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -418,13 +418,13 @@
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Таймауты внутреннего REST API (entity list, Privileges API) на 231 хосте, 5xx с 02:30 — Backend Lead",
+      "text": "🟠 SEV-2 · Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Таймауты внутреннего REST API (entity list, Privileges API) на 231 хосте, 5xx с 02:30",
+            "text": "🟠 SEV-2 · Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина",
             "emoji": true
           }
         },
@@ -433,7 +433,7 @@
           "fields": [
             {
               "type": "mrkdwn",
-              "text": "*Исполнитель*\n@backend-lead (Backend Lead)"
+              "text": "*Исполнитель*\n@dba-oncall (DBA)"
             },
             {
               "type": "mrkdwn",
@@ -453,7 +453,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 25.08 02:30 приложение массово получает таймауты от внутренних REST-сервисов: «Rest error: Operation timed out…» выросла с обычных ~110 до 259 674 за 10 минут (рост в 2350 раз), одновременно растут «Failed get entity list» и «Privileges API not available». Ошибки равномерно распределены по 231 хосту, RPS (~66,8 тыс./с) и CPU (~21,9 %) не изменились, поэтому дело не в нагрузке и не в отдельных узлах. Таймауты MongoDB (monitor/Socket/Connection pool for mongos) появились только на kube0129.infra.internal и только с 02:42, то есть позже начала REST-таймаутов. Первопричину внутри REST-сервиса по логам приложения установить нельзя."
+            "text": "С 25.08 02:30 резко выросли таймауты внутренних REST-вызовов: «Rest error: Operation timed out…» дошли до 259 674 за 10 минут при обычных 110,5. Это и есть основной поток 5xx: 395 857 строк с 5xx, затронута 233 из 278 хостов. С 02:40 появились новые сигнатуры MongoDB-драйвера (monitor timeout, Socket timed out, очистка пула mongos.local-services.svc.cluster.local). Они почти целиком приходят с kube0129.infra.internal. RPS и CPU не изменились, поэтому версия о нагрузке не подтверждается. Наиболее вероятно, что недоступен mongos/MongoDB, но рост REST-таймаутов на несколько минут опережает первые ошибки драйвера, так что причинность ещё нужно подтвердить."
           }
         },
         {
@@ -461,7 +461,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Деградация или зависание внутреннего REST-сервиса (сервис entity list / Privileges API): запросы не укладываются в таймаут клиента _(высокая)_"
+              "text": "*Гипотеза:* Деградация или потеря связности с mongos / репликасетом MongoDB (mongos.local-services.svc.cluster.local). Внутренние сервисы, которые на нём работают (entity list, Privileges API), висят до таймаута, и он каскадом расходится по всем подам _(средняя)_"
             }
           ]
         },
@@ -470,7 +470,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "Голоса — rules: DBA · analyst: Backend Lead · arbiter: Backend Lead"
+              "text": "Голоса — rules: DBA · analyst: DBA · arbiter: DBA"
             }
           ]
         },
@@ -495,131 +495,22 @@
       "incident": "ARG-003",
       "event": "opened",
       "severity": "SEV-2",
-      "assignee": "Backend Lead",
+      "assignee": "DBA",
       "at": "2026-08-25T03:00:00Z"
     }
   },
   {
-    "ts": "1787627400.000009",
+    "ts": "1787628600.000009",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "ℹ️ переназначено: Backend Lead → DBA",
+      "text": "⬆️ *Эскалация ARG-003: SEV-2 → SEV-1.* Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "ℹ️ переназначено: Backend Lead → DBA"
-          }
-        }
-      ],
-      "thread_ts": "1787626800.000008",
-      "reply_broadcast": false
-    },
-    "meta": {
-      "incident": "ARG-003",
-      "event": "updated",
-      "at": "2026-08-25T03:10:00Z"
-    }
-  },
-  {
-    "ts": "1787627400.000010",
-    "method": "chat.update",
-    "payload": {
-      "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38 — Backend Lead",
-      "blocks": [
-        {
-          "type": "header",
-          "text": {
-            "type": "plain_text",
-            "text": "🟠 SEV-2 · Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38",
-            "emoji": true
-          }
-        },
-        {
-          "type": "section",
-          "fields": [
-            {
-              "type": "mrkdwn",
-              "text": "*Исполнитель*\n@backend-lead (Backend Lead)"
-            },
-            {
-              "type": "mrkdwn",
-              "text": "*Затронуто*\n≈294,2 тыс. клиентов, пик ошибок 0,72 %"
-            },
-            {
-              "type": "mrkdwn",
-              "text": "*Начало*\n25.08 02:40 UTC"
-            },
-            {
-              "type": "mrkdwn",
-              "text": "*Обнаружено*\nчерез 30 мин"
-            }
-          ]
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "С 25.08 02:38 на большинстве app-хостов растут таймауты вызовов внутреннего REST API: «Rest error: Operation timed out» дошёл до 259 674 за 10 минут при норме 110,5; следом идут «Failed get entity list» и «Privileges API not available». Почти все ошибки — 5xx (395 857 из 400 537 строк). RPS (~67 тыс./с) и CPU (~20–22 %) не изменились, так что дело не в нагрузке. Ошибки MongoDB (monitor/socket timeout, сброс пула к mongos) появились на 4 минуты позже и только на 1–3 хостах (в основном kube0129), поэтому база похожа на сопутствующий симптом, а не на первопричину. Это продолжение ARG-003."
-          }
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "mrkdwn",
-              "text": "*Гипотеза:* Деградация или зависание внутреннего REST-сервиса (entity list / Privileges API): медленные ответы или исчерпанные воркеры, клиенты упираются в таймаут _(высокая)_"
-            }
-          ]
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "mrkdwn",
-              "text": "Голоса — rules: DBA · analyst: Backend Lead · arbiter: Backend Lead"
-            }
-          ]
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "text": "Задача ARG-003"
-              },
-              "url": "https://tracker.example.com/browse/ARG-003"
-            }
-          ]
-        }
-      ],
-      "unfurl_links": false,
-      "unfurl_media": false,
-      "ts": "1787626800.000008"
-    },
-    "meta": {
-      "incident": "ARG-003",
-      "event": "updated-root",
-      "at": "2026-08-25T03:10:00Z"
-    }
-  },
-  {
-    "ts": "1787628600.000011",
-    "method": "chat.postMessage",
-    "payload": {
-      "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-003: SEV-2 → SEV-1.* Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38",
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-003: SEV-2 → SEV-1.* Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38"
+            "text": "⬆️ *Эскалация ARG-003: SEV-2 → SEV-1.* Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина"
           }
         }
       ],
@@ -633,7 +524,7 @@
     }
   },
   {
-    "ts": "1787628600.000012",
+    "ts": "1787628600.000010",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -657,17 +548,17 @@
     }
   },
   {
-    "ts": "1787628600.000013",
+    "ts": "1787628600.000011",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🔴 SEV-1 · Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38 — Backend Lead",
+      "text": "🔴 SEV-1 · Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🔴 SEV-1 · Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38",
+            "text": "🔴 SEV-1 · Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина",
             "emoji": true
           }
         },
@@ -676,7 +567,7 @@
           "fields": [
             {
               "type": "mrkdwn",
-              "text": "*Исполнитель*\n@backend-lead (Backend Lead)"
+              "text": "*Исполнитель*\n@dba-oncall (DBA)"
             },
             {
               "type": "mrkdwn",
@@ -696,7 +587,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 25.08 02:38 на большинстве app-хостов растут таймауты вызовов внутреннего REST API: «Rest error: Operation timed out» дошёл до 259 674 за 10 минут при норме 110,5; следом идут «Failed get entity list» и «Privileges API not available». Почти все ошибки — 5xx (395 857 из 400 537 строк). RPS (~67 тыс./с) и CPU (~20–22 %) не изменились, так что дело не в нагрузке. Ошибки MongoDB (monitor/socket timeout, сброс пула к mongos) появились на 4 минуты позже и только на 1–3 хостах (в основном kube0129), поэтому база похожа на сопутствующий симптом, а не на первопричину. Это продолжение ARG-003."
+            "text": "С 25.08 02:30 резко выросли таймауты внутренних REST-вызовов: «Rest error: Operation timed out…» дошли до 259 674 за 10 минут при обычных 110,5. Это и есть основной поток 5xx: 395 857 строк с 5xx, затронута 233 из 278 хостов. С 02:40 появились новые сигнатуры MongoDB-драйвера (monitor timeout, Socket timed out, очистка пула mongos.local-services.svc.cluster.local). Они почти целиком приходят с kube0129.infra.internal. RPS и CPU не изменились, поэтому версия о нагрузке не подтверждается. Наиболее вероятно, что недоступен mongos/MongoDB, но рост REST-таймаутов на несколько минут опережает первые ошибки драйвера, так что причинность ещё нужно подтвердить."
           }
         },
         {
@@ -704,7 +595,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Деградация или зависание внутреннего REST-сервиса (entity list / Privileges API): медленные ответы или исчерпанные воркеры, клиенты упираются в таймаут _(высокая)_"
+              "text": "*Гипотеза:* Деградация или потеря связности с mongos / репликасетом MongoDB (mongos.local-services.svc.cluster.local). Внутренние сервисы, которые на нём работают (entity list, Privileges API), висят до таймаута, и он каскадом расходится по всем подам _(средняя)_"
             }
           ]
         },
@@ -713,7 +604,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "Голоса — rules: DBA · analyst: Backend Lead · arbiter: Backend Lead"
+              "text": "Голоса — rules: DBA · analyst: DBA · arbiter: DBA"
             }
           ]
         },
@@ -742,7 +633,7 @@
     }
   },
   {
-    "ts": "1787634000.000014",
+    "ts": "1787634000.000012",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -766,17 +657,17 @@
     }
   },
   {
-    "ts": "1787634000.000015",
+    "ts": "1787634000.000013",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -805,7 +696,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -813,7 +704,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -851,7 +742,7 @@
     }
   },
   {
-    "ts": "1787637600.000016",
+    "ts": "1787637600.000014",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -875,17 +766,17 @@
     }
   },
   {
-    "ts": "1787637600.000017",
+    "ts": "1787637600.000015",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -914,7 +805,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -922,7 +813,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -960,7 +851,7 @@
     }
   },
   {
-    "ts": "1787641200.000018",
+    "ts": "1787641200.000016",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -984,17 +875,17 @@
     }
   },
   {
-    "ts": "1787641200.000019",
+    "ts": "1787641200.000017",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -1023,7 +914,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -1031,7 +922,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -1069,17 +960,17 @@
     }
   },
   {
-    "ts": "1787643600.000020",
+    "ts": "1787643600.000018",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · kube0270/kube0271: Could not resolve host backend-service-test*-headless — всплеск 5xx — PaaS Engineer",
+      "text": "🟠 SEV-2 · DNS: не резолвится backend-service-test<N>-headless на kube0270/kube0271, 5xx пользователям — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · kube0270/kube0271: Could not resolve host backend-service-test*-headless — всплеск 5xx",
+            "text": "🟠 SEV-2 · DNS: не резолвится backend-service-test<N>-headless на kube0270/kube0271, 5xx пользователям",
             "emoji": true
           }
         },
@@ -1108,7 +999,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 07:19 на двух продовых узлах из 278 сервис обращается к тестовым адресам backend-service-test<N>-headless.backend-service.svc.cluster.local, которые не резолвятся. Каждый такой вызов отдаёт 5xx. Сначала на kube0270 было 3,8 тыс. ошибок в 07:19 (backend-service-test1). С 07:35 пошёл kube0271 (backend-service-test2): 51,3 тыс. строк, и ошибки продолжаются. До 25.08 этих адресов в логах не было ни разу. RPS и CPU в норме, так что похоже на ошибку конфигурации окружения или выкладки на этих узлах, а не на общий сбой DNS кластера."
+            "text": "С 25.08 07:10 на двух хостах из 278 появилась новая ошибка `Rest error: Could not resolve host: backend-service-test<N>-headless.backend-service.svc.cluster.local`, раньше её не было (never_seen_before). С 07:19 она идёт на kube0270.infra.internal (имя backend-service-test1-headless), с 07:35 — на kube0271.infra.internal (backend-service-test2-headless). Всего 55 032 строки, из них 51 239 за последние 10 минут. Трафик (RPS около 76,8 тыс./с) и CPU (27,8 %) в норме, значит причина в service discovery или конфигурации окружения на этих хостах, а не в нагрузке."
           }
         },
         {
@@ -1116,7 +1007,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Ошибка конфигурации окружения после выкладки: на kube0270/kube0271 приложение получило адрес тестового сервиса (backend-service-test1/test2) вместо продового _(высокая)_"
+              "text": "*Гипотеза:* Пропала DNS-запись headless-сервиса backend-service-test1/test2 в namespace backend-service: сервис удалён, нет endpoints или сбой CoreDNS для этих имён _(высокая)_"
             }
           ]
         },
@@ -1155,7 +1046,7 @@
     }
   },
   {
-    "ts": "1787646600.000021",
+    "ts": "1787646600.000019",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -1179,17 +1070,17 @@
     }
   },
   {
-    "ts": "1787646600.000022",
+    "ts": "1787646600.000020",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -1218,7 +1109,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -1226,7 +1117,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -1264,7 +1155,7 @@
     }
   },
   {
-    "ts": "1787647800.000023",
+    "ts": "1787647800.000021",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -1278,7 +1169,7 @@
           }
         }
       ],
-      "thread_ts": "1787643600.000020",
+      "thread_ts": "1787643600.000018",
       "reply_broadcast": false
     },
     "meta": {
@@ -1288,17 +1179,17 @@
     }
   },
   {
-    "ts": "1787647800.000024",
+    "ts": "1787647800.000022",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · kube0270/kube0271: Could not resolve host backend-service-test*-headless — всплеск 5xx — PaaS Engineer",
+      "text": "✅ SEV-2 · DNS: не резолвится backend-service-test<N>-headless на kube0270/kube0271, 5xx пользователям — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · kube0270/kube0271: Could not resolve host backend-service-test*-headless — всплеск 5xx",
+            "text": "✅ SEV-2 · DNS: не резолвится backend-service-test<N>-headless на kube0270/kube0271, 5xx пользователям",
             "emoji": true
           }
         },
@@ -1327,7 +1218,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 07:19 на двух продовых узлах из 278 сервис обращается к тестовым адресам backend-service-test<N>-headless.backend-service.svc.cluster.local, которые не резолвятся. Каждый такой вызов отдаёт 5xx. Сначала на kube0270 было 3,8 тыс. ошибок в 07:19 (backend-service-test1). С 07:35 пошёл kube0271 (backend-service-test2): 51,3 тыс. строк, и ошибки продолжаются. До 25.08 этих адресов в логах не было ни разу. RPS и CPU в норме, так что похоже на ошибку конфигурации окружения или выкладки на этих узлах, а не на общий сбой DNS кластера."
+            "text": "С 25.08 07:10 на двух хостах из 278 появилась новая ошибка `Rest error: Could not resolve host: backend-service-test<N>-headless.backend-service.svc.cluster.local`, раньше её не было (never_seen_before). С 07:19 она идёт на kube0270.infra.internal (имя backend-service-test1-headless), с 07:35 — на kube0271.infra.internal (backend-service-test2-headless). Всего 55 032 строки, из них 51 239 за последние 10 минут. Трафик (RPS около 76,8 тыс./с) и CPU (27,8 %) в норме, значит причина в service discovery или конфигурации окружения на этих хостах, а не в нагрузке."
           }
         },
         {
@@ -1335,7 +1226,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Ошибка конфигурации окружения после выкладки: на kube0270/kube0271 приложение получило адрес тестового сервиса (backend-service-test1/test2) вместо продового _(высокая)_"
+              "text": "*Гипотеза:* Пропала DNS-запись headless-сервиса backend-service-test1/test2 в namespace backend-service: сервис удалён, нет endpoints или сбой CoreDNS для этих имён _(высокая)_"
             }
           ]
         },
@@ -1364,7 +1255,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1787643600.000020"
+      "ts": "1787643600.000018"
     },
     "meta": {
       "incident": "ARG-004",
@@ -1373,7 +1264,7 @@
     }
   },
   {
-    "ts": "1787650200.000025",
+    "ts": "1787650200.000023",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -1397,17 +1288,17 @@
     }
   },
   {
-    "ts": "1787650200.000026",
+    "ts": "1787650200.000024",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -1436,7 +1327,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -1444,7 +1335,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -1482,17 +1373,17 @@
     }
   },
   {
-    "ts": "1787650800.000027",
+    "ts": "1787650800.000025",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⚪ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста трафика и CPU — артефакт сбора — PaaS Engineer",
+      "text": "⚪ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста CPU, ошибок и трафика стран — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "⚪ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста трафика и CPU — артефакт сбора",
+            "text": "⚪ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста CPU, ошибок и трафика стран",
             "emoji": true
           }
         },
@@ -1521,7 +1412,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Три раза подряд (24.08 12:30, 24.08 14:10, 25.08 09:30) metric_rps на одно 10-минутное окно примерно удваивается (пик 162 511 при обычных ~82,6 тыс., ratio 2,0), затем сразу возвращается к норме. При этом CPU не меняется (18–23 %), а независимый сэмплированный счётчик хитов по странам остаётся ровным. Значит, это не реальная нагрузка, а артефакт метрики: двойной scrape или сброс счётчика. Пользовательского эффекта от самого артефакта нет: в пакете 0 ошибок и 0 клиентов."
+            "text": "Метрика RPS трижды за одно 10-минутное окно подскакивала примерно в 2 раза: 24.08 12:30–12:40, 24.08 14:10–14:20 и 25.08 09:30–09:40 (162 511 против обычных ~82,6 тыс.). В следующем окне значение каждый раз возвращается к норме. CPU, число ошибок в логах и выборочный трафик по странам в эти окна не меняются, значит реальной нагрузки нет: это артефакт сбора метрики. Пользователи не пострадали."
           }
         },
         {
@@ -1529,7 +1420,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Двойной сбор метрики RPS: дублирующийся scrape target или лишняя реплика экспортера периодически попадает в выборку _(высокая)_"
+              "text": "*Гипотеза:* Метрику RPS собирают дважды: дублирующийся scrape target или лишняя реплика экспортера, которая на время попадает в сумму _(высокая)_"
             }
           ]
         },
@@ -1568,7 +1459,7 @@
     }
   },
   {
-    "ts": "1787657400.000028",
+    "ts": "1787657400.000026",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -1592,17 +1483,17 @@
     }
   },
   {
-    "ts": "1787657400.000029",
+    "ts": "1787657400.000027",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -1631,7 +1522,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -1639,7 +1530,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -1677,17 +1568,17 @@
     }
   },
   {
-    "ts": "1787659800.000030",
+    "ts": "1787659800.000028",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду — Backend Lead",
+      "text": "🟡 SEV-3 · Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду",
+            "text": "🟡 SEV-3 · Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах",
             "emoji": true
           }
         },
@@ -1716,7 +1607,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "25.08 в 11:50 сигнатура «Timeout <N> wait exceeded» выросла до 2078 строк за 10 мин при норме около 18 (в 115,4 раза). 2058 строк со статусом 200 записаны за одну секунду (11:50:54) на 222 хостах. Значит, запросы одновременно упёрлись в ожидание одной блокировки, но в итоге отработали. Это 23-й такой залп с 24.08 11:30: до 08:20 залпы шли каждый час в окне 10-минутки, заканчивающейся в :20, затем в 09:30 и 12:00. RPS, CPU и задержки эндпоинтов на уровне вчерашних, 5xx всего 20."
+            "text": "В окне 11:50–12:00 25.08 сигнатура «Timeout <N> wait exceeded» дала 2078 строк против обычных 18 за 10 мин (×115,4) на 222 из 278 хостов. Это не новая проблема: с 24.08 такие одиночные 10-минутные всплески повторяются почти каждый час (обычно в :20; до 3578 строк за 10 мин в 24.08 17:20), а в бакете 12:10 сигнатура уже упала до 28. RPS, CPU, задержки эндпоинтов и трафик стран не изменились, сигнатур MongoDB/Valkey/DNS в окне нет. Похоже на синхронное событие в самом приложении (cron или истечение TTL с ожиданием одной блокировки), а не на сбой инфраструктуры."
           }
         },
         {
@@ -1724,7 +1615,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Синхронное истечение TTL или периодическая задача (cache stampede): в один момент все поды перестраивают один и тот же ключ под общей блокировкой, остальные запросы ждут и упираются в таймаут ожидания _(высокая)_"
+              "text": "*Гипотеза:* Периодическая задача или синхронное истечение TTL (cache stampede): пачка запросов одновременно ждёт одну блокировку приложения и упирается в таймаут ожидания _(высокая)_"
             }
           ]
         },
@@ -1763,7 +1654,7 @@
     }
   },
   {
-    "ts": "1787661000.000031",
+    "ts": "1787661000.000029",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -1787,17 +1678,17 @@
     }
   },
   {
-    "ts": "1787661000.000032",
+    "ts": "1787661000.000030",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx — Backend Lead",
+      "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Twitter-интеграция: рост ошибок «Twitter integration error» с 20:40, без 5xx",
+            "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token): растут ошибки входа через Twitter",
             "emoji": true
           }
         },
@@ -1826,7 +1717,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 24.08 20:40 растёт сигнатура «Twitter integration error» (tpl 47d2268968): обычно около 30 строк за 10 мин, пик 98 к 21:40, к 23:50 уже 115. 5xx нет, ошибки размазаны по 221 из 278 хостов и по многим ISP, CPU падает (23,3 % в окне). Падение RPS (ratio 0,7) похоже на плавный суточный спад после пика 18:00, но базы «вчера» нет: данные начинаются 24.08 11:10. Самая вероятная причина — сбой или изменение API Twitter либо регрессия в коде интеграции."
+            "text": "С 24.08 20:40 растут ошибки «Twitter integration error» на вызове oauth/request_token, то есть при входе через Twitter. За окно — 1 281 строка у 1 047 анонимных клиентов, 5xx нет. В 23:00–23:50 было 760 строк за час, а днём (12:00–18:00) — 48–102 в час. Сигнатура не новая: она идёт с 11:12. Падение RPS до 0,7 от обычного выглядит как плавный вечерний спад после пика в 18:00 (123,9 тыс.), а не как сбой: CPU снижается так же плавно, до 19,2 %. Инфраструктурной причины в данных не видно."
           }
         },
         {
@@ -1834,7 +1725,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сбой или изменение API внешнего провайдера Twitter (новый формат ответа или ошибка на стороне провайдера) _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер (Twitter/X API) отклоняет или ограничивает запросы oauth/request_token: истёк или отозван ключ, сработал rate limit или изменилось API _(средняя)_"
             }
           ]
         },
@@ -1872,21 +1763,21 @@
     }
   },
   {
-    "ts": "1787663400.000033",
+    "ts": "1787663400.000031",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-006: SEV-3 → SEV-2.* Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду",
+      "text": "⬆️ *Эскалация ARG-006: SEV-3 → SEV-2.* Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-006: SEV-3 → SEV-2.* Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду"
+            "text": "⬆️ *Эскалация ARG-006: SEV-3 → SEV-2.* Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах"
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": true
     },
     "meta": {
@@ -1896,7 +1787,7 @@
     }
   },
   {
-    "ts": "1787663400.000034",
+    "ts": "1787663400.000032",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -1910,7 +1801,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -1920,17 +1811,17 @@
     }
   },
   {
-    "ts": "1787663400.000035",
+    "ts": "1787663400.000033",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду — Backend Lead",
+      "text": "🟠 SEV-2 · Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду",
+            "text": "🟠 SEV-2 · Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах",
             "emoji": true
           }
         },
@@ -1959,7 +1850,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "25.08 в 11:50 сигнатура «Timeout <N> wait exceeded» выросла до 2078 строк за 10 мин при норме около 18 (в 115,4 раза). 2058 строк со статусом 200 записаны за одну секунду (11:50:54) на 222 хостах. Значит, запросы одновременно упёрлись в ожидание одной блокировки, но в итоге отработали. Это 23-й такой залп с 24.08 11:30: до 08:20 залпы шли каждый час в окне 10-минутки, заканчивающейся в :20, затем в 09:30 и 12:00. RPS, CPU и задержки эндпоинтов на уровне вчерашних, 5xx всего 20."
+            "text": "В окне 11:50–12:00 25.08 сигнатура «Timeout <N> wait exceeded» дала 2078 строк против обычных 18 за 10 мин (×115,4) на 222 из 278 хостов. Это не новая проблема: с 24.08 такие одиночные 10-минутные всплески повторяются почти каждый час (обычно в :20; до 3578 строк за 10 мин в 24.08 17:20), а в бакете 12:10 сигнатура уже упала до 28. RPS, CPU, задержки эндпоинтов и трафик стран не изменились, сигнатур MongoDB/Valkey/DNS в окне нет. Похоже на синхронное событие в самом приложении (cron или истечение TTL с ожиданием одной блокировки), а не на сбой инфраструктуры."
           }
         },
         {
@@ -1967,7 +1858,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Синхронное истечение TTL или периодическая задача (cache stampede): в один момент все поды перестраивают один и тот же ключ под общей блокировкой, остальные запросы ждут и упираются в таймаут ожидания _(высокая)_"
+              "text": "*Гипотеза:* Периодическая задача или синхронное истечение TTL (cache stampede): пачка запросов одновременно ждёт одну блокировку приложения и упирается в таймаут ожидания _(высокая)_"
             }
           ]
         },
@@ -1996,7 +1887,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1787659800.000030"
+      "ts": "1787659800.000028"
     },
     "meta": {
       "incident": "ARG-006",
@@ -2005,7 +1896,7 @@
     }
   },
   {
-    "ts": "1787670000.000036",
+    "ts": "1787670000.000034",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2019,7 +1910,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -2029,17 +1920,17 @@
     }
   },
   {
-    "ts": "1787670000.000037",
+    "ts": "1787670000.000035",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду — Backend Lead",
+      "text": "✅ SEV-2 · Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · Блокировки приложения: всплеск «Timeout <N> wait exceeded» на 222 хостах за одну секунду",
+            "text": "✅ SEV-2 · Периодический всплеск «Timeout <N> wait exceeded» (блокировки app) на 222 хостах",
             "emoji": true
           }
         },
@@ -2068,7 +1959,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "25.08 в 11:50 сигнатура «Timeout <N> wait exceeded» выросла до 2078 строк за 10 мин при норме около 18 (в 115,4 раза). 2058 строк со статусом 200 записаны за одну секунду (11:50:54) на 222 хостах. Значит, запросы одновременно упёрлись в ожидание одной блокировки, но в итоге отработали. Это 23-й такой залп с 24.08 11:30: до 08:20 залпы шли каждый час в окне 10-минутки, заканчивающейся в :20, затем в 09:30 и 12:00. RPS, CPU и задержки эндпоинтов на уровне вчерашних, 5xx всего 20."
+            "text": "В окне 11:50–12:00 25.08 сигнатура «Timeout <N> wait exceeded» дала 2078 строк против обычных 18 за 10 мин (×115,4) на 222 из 278 хостов. Это не новая проблема: с 24.08 такие одиночные 10-минутные всплески повторяются почти каждый час (обычно в :20; до 3578 строк за 10 мин в 24.08 17:20), а в бакете 12:10 сигнатура уже упала до 28. RPS, CPU, задержки эндпоинтов и трафик стран не изменились, сигнатур MongoDB/Valkey/DNS в окне нет. Похоже на синхронное событие в самом приложении (cron или истечение TTL с ожиданием одной блокировки), а не на сбой инфраструктуры."
           }
         },
         {
@@ -2076,7 +1967,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Синхронное истечение TTL или периодическая задача (cache stampede): в один момент все поды перестраивают один и тот же ключ под общей блокировкой, остальные запросы ждут и упираются в таймаут ожидания _(высокая)_"
+              "text": "*Гипотеза:* Периодическая задача или синхронное истечение TTL (cache stampede): пачка запросов одновременно ждёт одну блокировку приложения и упирается в таймаут ожидания _(высокая)_"
             }
           ]
         },
@@ -2105,7 +1996,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1787659800.000030"
+      "ts": "1787659800.000028"
     },
     "meta": {
       "incident": "ARG-006",
@@ -2114,7 +2005,7 @@
     }
   },
   {
-    "ts": "1787671200.000038",
+    "ts": "1787671200.000036",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2128,7 +2019,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -2138,7 +2029,7 @@
     }
   },
   {
-    "ts": "1787674800.000039",
+    "ts": "1787674800.000037",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2152,7 +2043,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -2162,7 +2053,7 @@
     }
   },
   {
-    "ts": "1787689200.000040",
+    "ts": "1787689200.000038",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2186,17 +2077,17 @@
     }
   },
   {
-    "ts": "1787689200.000041",
+    "ts": "1787689200.000039",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-1 · Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38 — Backend Lead",
+      "text": "✅ SEV-1 · Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-1 · Таймауты внутреннего REST API (entity list, Privileges) на 231 хосте — 5xx с 02:38",
+            "text": "✅ SEV-1 · Таймауты внутренних REST-вызовов на 231 хосте, MongoDB (mongos) — подозреваемая причина",
             "emoji": true
           }
         },
@@ -2205,7 +2096,7 @@
           "fields": [
             {
               "type": "mrkdwn",
-              "text": "*Исполнитель*\n@backend-lead (Backend Lead)"
+              "text": "*Исполнитель*\n@dba-oncall (DBA)"
             },
             {
               "type": "mrkdwn",
@@ -2225,7 +2116,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 25.08 02:38 на большинстве app-хостов растут таймауты вызовов внутреннего REST API: «Rest error: Operation timed out» дошёл до 259 674 за 10 минут при норме 110,5; следом идут «Failed get entity list» и «Privileges API not available». Почти все ошибки — 5xx (395 857 из 400 537 строк). RPS (~67 тыс./с) и CPU (~20–22 %) не изменились, так что дело не в нагрузке. Ошибки MongoDB (monitor/socket timeout, сброс пула к mongos) появились на 4 минуты позже и только на 1–3 хостах (в основном kube0129), поэтому база похожа на сопутствующий симптом, а не на первопричину. Это продолжение ARG-003."
+            "text": "С 25.08 02:30 резко выросли таймауты внутренних REST-вызовов: «Rest error: Operation timed out…» дошли до 259 674 за 10 минут при обычных 110,5. Это и есть основной поток 5xx: 395 857 строк с 5xx, затронута 233 из 278 хостов. С 02:40 появились новые сигнатуры MongoDB-драйвера (monitor timeout, Socket timed out, очистка пула mongos.local-services.svc.cluster.local). Они почти целиком приходят с kube0129.infra.internal. RPS и CPU не изменились, поэтому версия о нагрузке не подтверждается. Наиболее вероятно, что недоступен mongos/MongoDB, но рост REST-таймаутов на несколько минут опережает первые ошибки драйвера, так что причинность ещё нужно подтвердить."
           }
         },
         {
@@ -2233,7 +2124,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Деградация или зависание внутреннего REST-сервиса (entity list / Privileges API): медленные ответы или исчерпанные воркеры, клиенты упираются в таймаут _(высокая)_"
+              "text": "*Гипотеза:* Деградация или потеря связности с mongos / репликасетом MongoDB (mongos.local-services.svc.cluster.local). Внутренние сервисы, которые на нём работают (entity list, Privileges API), висят до таймаута, и он каскадом расходится по всем подам _(средняя)_"
             }
           ]
         },
@@ -2242,7 +2133,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "Голоса — rules: DBA · analyst: Backend Lead · arbiter: Backend Lead"
+              "text": "Голоса — rules: DBA · analyst: DBA · arbiter: DBA"
             }
           ]
         },
@@ -2271,7 +2162,7 @@
     }
   },
   {
-    "ts": "1787694600.000042",
+    "ts": "1787694600.000040",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2295,7 +2186,7 @@
     }
   },
   {
-    "ts": "1787706000.000043",
+    "ts": "1787706000.000041",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2319,7 +2210,7 @@
     }
   },
   {
-    "ts": "1787727600.000044",
+    "ts": "1787727600.000042",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2343,21 +2234,21 @@
     }
   },
   {
-    "ts": "1787757600.000045",
+    "ts": "1787757600.000043",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-006: SEV-2 → SEV-1.* Блокировки приложения: «Timeout <N> wait exceeded» на 226 хостах, повторяется с 25.08",
+      "text": "⬆️ *Эскалация ARG-006: SEV-2 → SEV-1.* Блокировки приложения: всплески «Timeout <N> wait exceeded» на 227 хостах, растут день ко дню",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-006: SEV-2 → SEV-1.* Блокировки приложения: «Timeout <N> wait exceeded» на 226 хостах, повторяется с 25.08"
+            "text": "⬆️ *Эскалация ARG-006: SEV-2 → SEV-1.* Блокировки приложения: всплески «Timeout <N> wait exceeded» на 227 хостах, растут день ко дню"
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": true
     },
     "meta": {
@@ -2367,7 +2258,7 @@
     }
   },
   {
-    "ts": "1787757600.000046",
+    "ts": "1787757600.000044",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2381,7 +2272,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -2391,7 +2282,7 @@
     }
   },
   {
-    "ts": "1787765400.000047",
+    "ts": "1787765400.000045",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2415,7 +2306,7 @@
     }
   },
   {
-    "ts": "1787765400.000048",
+    "ts": "1787765400.000046",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alert-predictions",
@@ -2460,7 +2351,7 @@
     }
   },
   {
-    "ts": "1787824800.000049",
+    "ts": "1787824800.000047",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2484,7 +2375,7 @@
     }
   },
   {
-    "ts": "1787826600.000050",
+    "ts": "1787826600.000048",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2508,7 +2399,7 @@
     }
   },
   {
-    "ts": "1787829600.000051",
+    "ts": "1787829600.000049",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2532,7 +2423,7 @@
     }
   },
   {
-    "ts": "1787907000.000052",
+    "ts": "1787907000.000050",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2546,7 +2437,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -2556,7 +2447,7 @@
     }
   },
   {
-    "ts": "1787907000.000053",
+    "ts": "1787907000.000051",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2580,7 +2471,7 @@
     }
   },
   {
-    "ts": "1787910600.000054",
+    "ts": "1787910600.000052",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2604,7 +2495,7 @@
     }
   },
   {
-    "ts": "1787911200.000055",
+    "ts": "1787911200.000053",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2618,7 +2509,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -2628,7 +2519,7 @@
     }
   },
   {
-    "ts": "1788097800.000056",
+    "ts": "1788097800.000054",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2642,7 +2533,7 @@
           }
         }
       ],
-      "thread_ts": "1787650800.000027",
+      "thread_ts": "1787650800.000025",
       "reply_broadcast": false
     },
     "meta": {
@@ -2652,17 +2543,17 @@
     }
   },
   {
-    "ts": "1788097800.000057",
+    "ts": "1788097800.000055",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста трафика и CPU — артефакт сбора — PaaS Engineer",
+      "text": "✅ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста CPU, ошибок и трафика стран — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста трафика и CPU — артефакт сбора",
+            "text": "✅ SEV-4 · Метрика RPS: одиночные удвоения за 10 мин без роста CPU, ошибок и трафика стран",
             "emoji": true
           }
         },
@@ -2691,7 +2582,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Три раза подряд (24.08 12:30, 24.08 14:10, 25.08 09:30) metric_rps на одно 10-минутное окно примерно удваивается (пик 162 511 при обычных ~82,6 тыс., ratio 2,0), затем сразу возвращается к норме. При этом CPU не меняется (18–23 %), а независимый сэмплированный счётчик хитов по странам остаётся ровным. Значит, это не реальная нагрузка, а артефакт метрики: двойной scrape или сброс счётчика. Пользовательского эффекта от самого артефакта нет: в пакете 0 ошибок и 0 клиентов."
+            "text": "Метрика RPS трижды за одно 10-минутное окно подскакивала примерно в 2 раза: 24.08 12:30–12:40, 24.08 14:10–14:20 и 25.08 09:30–09:40 (162 511 против обычных ~82,6 тыс.). В следующем окне значение каждый раз возвращается к норме. CPU, число ошибок в логах и выборочный трафик по странам в эти окна не меняются, значит реальной нагрузки нет: это артефакт сбора метрики. Пользователи не пострадали."
           }
         },
         {
@@ -2699,7 +2590,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Двойной сбор метрики RPS: дублирующийся scrape target или лишняя реплика экспортера периодически попадает в выборку _(высокая)_"
+              "text": "*Гипотеза:* Метрику RPS собирают дважды: дублирующийся scrape target или лишняя реплика экспортера, которая на время попадает в сумму _(высокая)_"
             }
           ]
         },
@@ -2728,7 +2619,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1787650800.000027"
+      "ts": "1787650800.000025"
     },
     "meta": {
       "incident": "ARG-005",
@@ -2737,17 +2628,17 @@
     }
   },
   {
-    "ts": "1788142800.000058",
+    "ts": "1788142800.000056",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Рост трафика из CN в 2,6 раза с 00:00 без ошибок и нагрузки на инфраструктуру — SEO Specialist",
+      "text": "🟡 SEV-3 · Трафик из CN вырос в 2,6 раза с 31.08 00:00, все клиенты анонимные; ошибок и нагрузки нет — SEO Specialist",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Рост трафика из CN в 2,6 раза с 00:00 без ошибок и нагрузки на инфраструктуру",
+            "text": "🟡 SEV-3 · Трафик из CN вырос в 2,6 раза с 31.08 00:00, все клиенты анонимные; ошибок и нагрузки нет",
             "emoji": true
           }
         },
@@ -2776,7 +2667,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 31.08 00:00 хиты из CN плавно растут: от 1678 до 4420 хитов за 10 мин к 02:20, а обычный уровень — 1709. Это в 2,6 раза выше нормы, всего 40,5 тыс. хитов. Общий RPS (60,4 тыс. против 62,7 тыс. вчера), CPU (20,2 % против 19,2 %) и латентность эндпоинтов не изменились. Детектор не связывает с инцидентом ни одной ошибки, а ошибки из CN в основном относятся к уже известной сигнатуре «Timeout <N> wait exceeded» (ARG-006). Пользователи не пострадали; нужно выяснить, откуда пришёл трафик: поиск или маркетинг, или боты."
+            "text": "С 31.08 00:00 трафик из CN держится выше нормы: пик 4420 хитов за 10 мин против обычных 1709,3 (×2,6). В среднем за окно 2894,8 hits/s против 1419,0 вчера (×2,04). Общий RPS (60 426 против 62 731 вчера), CPU (20,2 % против 19,2 %) и задержки эндпоинтов не изменились, так что влияния на инфраструктуру нет. Ошибки из CN выросли вместе с трафиком, но это фоновая сигнатура «Timeout <N> wait exceeded» (уже в работе по ARG-006), а не новая проблема. Природа трафика пока не ясна: почти все запросы анонимные, половина приходит от одного мобильного оператора."
           }
         },
         {
@@ -2784,7 +2675,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический рост из CN: изменились позиции в поиске или индексация, либо идёт внешняя или маркетинговая кампания на регион _(средняя)_"
+              "text": "*Гипотеза:* Органический рост из CN: изменение поисковой выдачи или индексации, внешняя ссылка или кампания _(средняя)_"
             }
           ]
         },
@@ -2823,17 +2714,17 @@
     }
   },
   {
-    "ts": "1788163800.000059",
+    "ts": "1788163800.000057",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Таймауты внутреннего REST API (entity list, Privileges) на 233 хостах — 5xx с 08:00 — Backend Lead",
+      "text": "🟠 SEV-2 · Таймауты внутренних REST на 233 хостах после всплеска блокировок «Timeout <N> wait exceeded» — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Таймауты внутреннего REST API (entity list, Privileges) на 233 хостах — 5xx с 08:00",
+            "text": "🟠 SEV-2 · Таймауты внутренних REST на 233 хостах после всплеска блокировок «Timeout <N> wait exceeded»",
             "emoji": true
           }
         },
@@ -2862,7 +2753,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В окне 08:00–08:10 массово пошли таймауты внутреннего REST API: «Rest error: Operation timed out…» дал 154 686 строк на 233 хостах при обычных 6 за 10 мин. Вместе с ним выросли «Failed get entity list» и «Privileges API not available». В последнем бакете 163 398 ответов 5xx. Сигнатура та же, что 24.08 и 25.08 (ARG-003, 4 повтора). Всплеск Redis/Mongo в 07:30–07:40 затронул только 3 хоста и прекратился за 20 минут до таймаутов, поэтому причиной его считать нельзя."
+            "text": "В 31.08 08:08 на 233 из 282 хостов разом выросли таймауты внутренних REST-вызовов: 154 686 строк за 10 минут при обычных 6. Минутой раньше, в 31.08 08:07, на 229 хостах прошёл всплеск блокировок приложения «Timeout <N> wait exceeded» (9273 строки за минуту). Это повторяющийся паттерн из ARG-006. Ошибки Redis/MongoDB в 07:37–07:38 были только на 3 хостах, задолго до таймаутов, и в прошлые дни такие ошибки шли тысячами без инцидентов, поэтому причиной они не выглядят. Трафик стран и задержки эндпоинтов в норме, CPU вырос до 27,7 % против 24,1 % вчера."
           }
         },
         {
@@ -2870,7 +2761,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Деградация или недоступность внутреннего REST-сервиса, который отдаёт entity list и Privileges: зависание или перегрузка его бэкенда _(высокая)_"
+              "text": "*Гипотеза:* Конкуренция за блокировки в приложении (lock wait timeout) разом подвесила воркеры, и вызовы внутренних REST-сервисов упёрлись в таймаут _(средняя)_"
             }
           ]
         },
@@ -2909,7 +2800,7 @@
     }
   },
   {
-    "ts": "1788167400.000060",
+    "ts": "1788167400.000058",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -2923,7 +2814,7 @@
           }
         }
       ],
-      "thread_ts": "1788142800.000058",
+      "thread_ts": "1788142800.000056",
       "reply_broadcast": false
     },
     "meta": {
@@ -2933,17 +2824,17 @@
     }
   },
   {
-    "ts": "1788167400.000061",
+    "ts": "1788167400.000059",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Рост трафика из CN в 2,6 раза с 00:00 без ошибок и нагрузки на инфраструктуру — SEO Specialist",
+      "text": "✅ SEV-3 · Трафик из CN вырос в 2,6 раза с 31.08 00:00, все клиенты анонимные; ошибок и нагрузки нет — SEO Specialist",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Рост трафика из CN в 2,6 раза с 00:00 без ошибок и нагрузки на инфраструктуру",
+            "text": "✅ SEV-3 · Трафик из CN вырос в 2,6 раза с 31.08 00:00, все клиенты анонимные; ошибок и нагрузки нет",
             "emoji": true
           }
         },
@@ -2972,7 +2863,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 31.08 00:00 хиты из CN плавно растут: от 1678 до 4420 хитов за 10 мин к 02:20, а обычный уровень — 1709. Это в 2,6 раза выше нормы, всего 40,5 тыс. хитов. Общий RPS (60,4 тыс. против 62,7 тыс. вчера), CPU (20,2 % против 19,2 %) и латентность эндпоинтов не изменились. Детектор не связывает с инцидентом ни одной ошибки, а ошибки из CN в основном относятся к уже известной сигнатуре «Timeout <N> wait exceeded» (ARG-006). Пользователи не пострадали; нужно выяснить, откуда пришёл трафик: поиск или маркетинг, или боты."
+            "text": "С 31.08 00:00 трафик из CN держится выше нормы: пик 4420 хитов за 10 мин против обычных 1709,3 (×2,6). В среднем за окно 2894,8 hits/s против 1419,0 вчера (×2,04). Общий RPS (60 426 против 62 731 вчера), CPU (20,2 % против 19,2 %) и задержки эндпоинтов не изменились, так что влияния на инфраструктуру нет. Ошибки из CN выросли вместе с трафиком, но это фоновая сигнатура «Timeout <N> wait exceeded» (уже в работе по ARG-006), а не новая проблема. Природа трафика пока не ясна: почти все запросы анонимные, половина приходит от одного мобильного оператора."
           }
         },
         {
@@ -2980,7 +2871,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический рост из CN: изменились позиции в поиске или индексация, либо идёт внешняя или маркетинговая кампания на регион _(средняя)_"
+              "text": "*Гипотеза:* Органический рост из CN: изменение поисковой выдачи или индексации, внешняя ссылка или кампания _(средняя)_"
             }
           ]
         },
@@ -3009,7 +2900,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788142800.000058"
+      "ts": "1788142800.000056"
     },
     "meta": {
       "incident": "ARG-007",
@@ -3018,7 +2909,7 @@
     }
   },
   {
-    "ts": "1788168000.000062",
+    "ts": "1788168000.000060",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3032,7 +2923,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -3042,17 +2933,17 @@
     }
   },
   {
-    "ts": "1788168000.000063",
+    "ts": "1788168000.000061",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · Таймауты внутреннего REST API (entity list, Privileges) на 233 хостах — 5xx с 08:00 — Backend Lead",
+      "text": "✅ SEV-2 · Таймауты внутренних REST на 233 хостах после всплеска блокировок «Timeout <N> wait exceeded» — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · Таймауты внутреннего REST API (entity list, Privileges) на 233 хостах — 5xx с 08:00",
+            "text": "✅ SEV-2 · Таймауты внутренних REST на 233 хостах после всплеска блокировок «Timeout <N> wait exceeded»",
             "emoji": true
           }
         },
@@ -3081,7 +2972,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В окне 08:00–08:10 массово пошли таймауты внутреннего REST API: «Rest error: Operation timed out…» дал 154 686 строк на 233 хостах при обычных 6 за 10 мин. Вместе с ним выросли «Failed get entity list» и «Privileges API not available». В последнем бакете 163 398 ответов 5xx. Сигнатура та же, что 24.08 и 25.08 (ARG-003, 4 повтора). Всплеск Redis/Mongo в 07:30–07:40 затронул только 3 хоста и прекратился за 20 минут до таймаутов, поэтому причиной его считать нельзя."
+            "text": "В 31.08 08:08 на 233 из 282 хостов разом выросли таймауты внутренних REST-вызовов: 154 686 строк за 10 минут при обычных 6. Минутой раньше, в 31.08 08:07, на 229 хостах прошёл всплеск блокировок приложения «Timeout <N> wait exceeded» (9273 строки за минуту). Это повторяющийся паттерн из ARG-006. Ошибки Redis/MongoDB в 07:37–07:38 были только на 3 хостах, задолго до таймаутов, и в прошлые дни такие ошибки шли тысячами без инцидентов, поэтому причиной они не выглядят. Трафик стран и задержки эндпоинтов в норме, CPU вырос до 27,7 % против 24,1 % вчера."
           }
         },
         {
@@ -3089,7 +2980,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Деградация или недоступность внутреннего REST-сервиса, который отдаёт entity list и Privileges: зависание или перегрузка его бэкенда _(высокая)_"
+              "text": "*Гипотеза:* Конкуренция за блокировки в приложении (lock wait timeout) разом подвесила воркеры, и вызовы внутренних REST-сервисов упёрлись в таймаут _(средняя)_"
             }
           ]
         },
@@ -3118,7 +3009,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788163800.000059"
+      "ts": "1788163800.000057"
     },
     "meta": {
       "incident": "ARG-008",
@@ -3127,7 +3018,7 @@
     }
   },
   {
-    "ts": "1788174600.000064",
+    "ts": "1788174600.000062",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3141,7 +3032,7 @@
           }
         }
       ],
-      "thread_ts": "1787650800.000027",
+      "thread_ts": "1787650800.000025",
       "reply_broadcast": false
     },
     "meta": {
@@ -3151,17 +3042,17 @@
     }
   },
   {
-    "ts": "1788177600.000065",
+    "ts": "1788177600.000063",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx — DBA",
+      "text": "🟡 SEV-3 · Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx",
+            "text": "🟡 SEV-3 · Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx",
             "emoji": true
           }
         },
@@ -3190,7 +3081,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:04–11:07 на четырёх узлах (kube0565, kube0568, kube0591, kube0594) одновременно пошли ошибки «Redis failure», «Unexpected Redis exception», «Mongo DB failure» и «GRPC invalid response code»; на остальных хостах их почти нет. Redis, MongoDB и GRPC отказали одновременно на одних и тех же узлах, а на остальном кластере не отказали — поэтому вероятнее проблема с сетью или самими узлами, а не с кластером Valkey. Эта группа узлов kube056x/059x уже давала такие же короткие всплески сегодня в 07:00, 08:00 и 09:00. Трафик и CPU в норме, к 11:10 всплеск закончился, остались единичные ошибки GRPC на kube0568/kube0594."
+            "text": "В 11:04–11:06 на четырёх узлах (kube0568, kube0594, kube0591, kube0565) одновременно появились «Redis failure», «Unexpected Redis exception», «GRPC invalid response code», а на двух из них ещё и «Mongo DB failure». Остальные из 282 хостов этих ошибок почти не пишут, поэтому сам кластер Valkey/Redis, скорее всего, ни при чём: похоже на проблему сети или узлов в пуле kube056x–059x. Сегодня в этом же пуле такие всплески уже были: в 07:00 на kube0566/0565/0591, в 08:00 на kube0569, в 09:00 на kube0595. RPS и CPU в норме, доля ошибок от трафика ничтожна."
           }
         },
         {
@@ -3198,7 +3089,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сеть или ресурсы на группе узлов kube056x/059x (сетевой сбой узла или CNI, conntrack, проблемы с исходящими соединениями): поды на этих узлах временно теряют связь со всеми бэкендами _(высокая)_"
+              "text": "*Гипотеза:* Сбой сети или самих узлов в пуле kube056x–059x (node pool, CNI, conntrack, сетевой интерфейс): поды на этих узлах на 1–2 минуты теряют связь сразу со всеми зависимостями _(средняя)_"
             }
           ]
         },
@@ -3237,21 +3128,21 @@
     }
   },
   {
-    "ts": "1788181200.000066",
+    "ts": "1788181200.000064",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-009: SEV-3 → SEV-2.* Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx",
+      "text": "⬆️ *Эскалация ARG-009: SEV-3 → SEV-2.* Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-009: SEV-3 → SEV-2.* Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx"
+            "text": "⬆️ *Эскалация ARG-009: SEV-3 → SEV-2.* Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx"
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": true
     },
     "meta": {
@@ -3261,7 +3152,7 @@
     }
   },
   {
-    "ts": "1788181200.000067",
+    "ts": "1788181200.000065",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3275,7 +3166,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3285,17 +3176,17 @@
     }
   },
   {
-    "ts": "1788181200.000068",
+    "ts": "1788181200.000066",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx — DBA",
+      "text": "🟠 SEV-2 · Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx",
+            "text": "🟠 SEV-2 · Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx",
             "emoji": true
           }
         },
@@ -3324,7 +3215,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:04–11:07 на четырёх узлах (kube0565, kube0568, kube0591, kube0594) одновременно пошли ошибки «Redis failure», «Unexpected Redis exception», «Mongo DB failure» и «GRPC invalid response code»; на остальных хостах их почти нет. Redis, MongoDB и GRPC отказали одновременно на одних и тех же узлах, а на остальном кластере не отказали — поэтому вероятнее проблема с сетью или самими узлами, а не с кластером Valkey. Эта группа узлов kube056x/059x уже давала такие же короткие всплески сегодня в 07:00, 08:00 и 09:00. Трафик и CPU в норме, к 11:10 всплеск закончился, остались единичные ошибки GRPC на kube0568/kube0594."
+            "text": "В 11:04–11:06 на четырёх узлах (kube0568, kube0594, kube0591, kube0565) одновременно появились «Redis failure», «Unexpected Redis exception», «GRPC invalid response code», а на двух из них ещё и «Mongo DB failure». Остальные из 282 хостов этих ошибок почти не пишут, поэтому сам кластер Valkey/Redis, скорее всего, ни при чём: похоже на проблему сети или узлов в пуле kube056x–059x. Сегодня в этом же пуле такие всплески уже были: в 07:00 на kube0566/0565/0591, в 08:00 на kube0569, в 09:00 на kube0595. RPS и CPU в норме, доля ошибок от трафика ничтожна."
           }
         },
         {
@@ -3332,7 +3223,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сеть или ресурсы на группе узлов kube056x/059x (сетевой сбой узла или CNI, conntrack, проблемы с исходящими соединениями): поды на этих узлах временно теряют связь со всеми бэкендами _(высокая)_"
+              "text": "*Гипотеза:* Сбой сети или самих узлов в пуле kube056x–059x (node pool, CNI, conntrack, сетевой интерфейс): поды на этих узлах на 1–2 минуты теряют связь сразу со всеми зависимостями _(средняя)_"
             }
           ]
         },
@@ -3361,7 +3252,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788177600.000065"
+      "ts": "1788177600.000063"
     },
     "meta": {
       "incident": "ARG-009",
@@ -3370,7 +3261,7 @@
     }
   },
   {
-    "ts": "1788192000.000069",
+    "ts": "1788192000.000067",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3384,7 +3275,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3394,17 +3285,17 @@
     }
   },
   {
-    "ts": "1788192000.000070",
+    "ts": "1788192000.000068",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx — DBA",
+      "text": "✅ SEV-2 · Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · Сбой Redis/Mongo/GRPC на 4 узлах kube0565/0568/0591/0594 в 11:04–11:07, 5xx",
+            "text": "✅ SEV-2 · Кратковременные сбои Redis/Mongo/GRPC на 4 узлах kube056x/059x, 825 ответов 5xx",
             "emoji": true
           }
         },
@@ -3433,7 +3324,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:04–11:07 на четырёх узлах (kube0565, kube0568, kube0591, kube0594) одновременно пошли ошибки «Redis failure», «Unexpected Redis exception», «Mongo DB failure» и «GRPC invalid response code»; на остальных хостах их почти нет. Redis, MongoDB и GRPC отказали одновременно на одних и тех же узлах, а на остальном кластере не отказали — поэтому вероятнее проблема с сетью или самими узлами, а не с кластером Valkey. Эта группа узлов kube056x/059x уже давала такие же короткие всплески сегодня в 07:00, 08:00 и 09:00. Трафик и CPU в норме, к 11:10 всплеск закончился, остались единичные ошибки GRPC на kube0568/kube0594."
+            "text": "В 11:04–11:06 на четырёх узлах (kube0568, kube0594, kube0591, kube0565) одновременно появились «Redis failure», «Unexpected Redis exception», «GRPC invalid response code», а на двух из них ещё и «Mongo DB failure». Остальные из 282 хостов этих ошибок почти не пишут, поэтому сам кластер Valkey/Redis, скорее всего, ни при чём: похоже на проблему сети или узлов в пуле kube056x–059x. Сегодня в этом же пуле такие всплески уже были: в 07:00 на kube0566/0565/0591, в 08:00 на kube0569, в 09:00 на kube0595. RPS и CPU в норме, доля ошибок от трафика ничтожна."
           }
         },
         {
@@ -3441,7 +3332,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Сеть или ресурсы на группе узлов kube056x/059x (сетевой сбой узла или CNI, conntrack, проблемы с исходящими соединениями): поды на этих узлах временно теряют связь со всеми бэкендами _(высокая)_"
+              "text": "*Гипотеза:* Сбой сети или самих узлов в пуле kube056x–059x (node pool, CNI, conntrack, сетевой интерфейс): поды на этих узлах на 1–2 минуты теряют связь сразу со всеми зависимостями _(средняя)_"
             }
           ]
         },
@@ -3470,7 +3361,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788177600.000065"
+      "ts": "1788177600.000063"
     },
     "meta": {
       "incident": "ARG-009",
@@ -3479,7 +3370,7 @@
     }
   },
   {
-    "ts": "1788192000.000071",
+    "ts": "1788192000.000069",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alert-predictions",
@@ -3524,7 +3415,7 @@
     }
   },
   {
-    "ts": "1788211200.000072",
+    "ts": "1788211200.000070",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3538,7 +3429,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3548,7 +3439,7 @@
     }
   },
   {
-    "ts": "1788214200.000073",
+    "ts": "1788214200.000071",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3562,7 +3453,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3572,7 +3463,7 @@
     }
   },
   {
-    "ts": "1788248400.000074",
+    "ts": "1788248400.000072",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3586,7 +3477,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3596,7 +3487,7 @@
     }
   },
   {
-    "ts": "1788252600.000075",
+    "ts": "1788252600.000073",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3610,7 +3501,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3620,7 +3511,7 @@
     }
   },
   {
-    "ts": "1788262800.000076",
+    "ts": "1788262800.000074",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3634,7 +3525,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -3644,7 +3535,7 @@
     }
   },
   {
-    "ts": "1788265800.000077",
+    "ts": "1788265800.000075",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3658,7 +3549,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -3668,7 +3559,7 @@
     }
   },
   {
-    "ts": "1788268200.000078",
+    "ts": "1788268200.000076",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3682,7 +3573,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3692,7 +3583,7 @@
     }
   },
   {
-    "ts": "1788269400.000079",
+    "ts": "1788269400.000077",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3706,7 +3597,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -3716,7 +3607,7 @@
     }
   },
   {
-    "ts": "1788271200.000080",
+    "ts": "1788271200.000078",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3730,7 +3621,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -3740,7 +3631,7 @@
     }
   },
   {
-    "ts": "1788271800.000081",
+    "ts": "1788271800.000079",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3754,7 +3645,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3764,7 +3655,7 @@
     }
   },
   {
-    "ts": "1788277800.000082",
+    "ts": "1788277800.000080",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3778,7 +3669,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3788,7 +3679,7 @@
     }
   },
   {
-    "ts": "1788283200.000083",
+    "ts": "1788283200.000081",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3802,7 +3693,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": true
     },
     "meta": {
@@ -3812,7 +3703,7 @@
     }
   },
   {
-    "ts": "1788289800.000084",
+    "ts": "1788289800.000082",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3826,7 +3717,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -3836,7 +3727,7 @@
     }
   },
   {
-    "ts": "1788316200.000085",
+    "ts": "1788316200.000083",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3850,7 +3741,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3860,7 +3751,7 @@
     }
   },
   {
-    "ts": "1788321600.000086",
+    "ts": "1788321600.000084",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3874,7 +3765,7 @@
           }
         }
       ],
-      "thread_ts": "1788142800.000058",
+      "thread_ts": "1788142800.000056",
       "reply_broadcast": false
     },
     "meta": {
@@ -3884,7 +3775,7 @@
     }
   },
   {
-    "ts": "1788327000.000087",
+    "ts": "1788327000.000085",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -3898,7 +3789,7 @@
           }
         }
       ],
-      "thread_ts": "1788177600.000065",
+      "thread_ts": "1788177600.000063",
       "reply_broadcast": false
     },
     "meta": {
@@ -3908,17 +3799,17 @@
     }
   },
   {
-    "ts": "1788333000.000088",
+    "ts": "1788333000.000086",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 минут — Backend Lead",
+      "text": "🟡 SEV-3 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:02, без 5xx — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 минут",
+            "text": "🟡 SEV-3 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:02, без 5xx",
             "emoji": true
           }
         },
@@ -3947,7 +3838,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 07:02:15 на двух узлах, kube0409.infra.internal и kube0590.infra.internal, одновременно начался всплеск «GRPC invalid response code»: 7641 строка за 10 минут при обычных 4 (ratio 1910,2). Других хостов почти нет: на остальных узлах по 1–2 строки. 5xx нет, RPS (68,6 тыс./с) и CPU (19,3 %) в норме. Падение RPS к вчерашнему дню — артефакт вчерашнего одиночного удвоения в 07:00 (138 882), см. ARG-005. Медленные SQL-запросы («Query execution was interrupted», 127 строк на 31 хосте) небольшие по объёму и GRPC-всплеск не объясняют."
+            "text": "В 07:02 на двух хостах (kube0409.infra.internal и kube0590.infra.internal) резко вырос поток «GRPC invalid response code»: 7641 строка за 10 мин при обычных 4. Пик пришёлся на 07:02 (3418 и 1395 строк в минуту), к 07:09 спал до 108 и 25. Раньше, с 06:40, на 23 хостах выросли таймауты SQL «Query execution was interrupted, maximum statement execution time exceeded» (до 40 за 10 мин, обычно пик 12–13), но связи с GRPC-всплеском они не показывают. 5xx нет, CPU и задержки эндпоинтов на уровне вчерашних. Падение RPS относительно вчера — артефакт: вчерашнее окно завышено одиночным выбросом 138 882 в 01.09 07:00."
           }
         },
         {
@@ -3955,7 +3846,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Проблема на уровне подов/узлов kube0409 и kube0590: деградировал GRPC-клиент или канал этих подов, например залипшее соединение, сломанный upstream-эндпоинт или локальная сеть узла _(высокая)_"
+              "text": "*Гипотеза:* Локальный сбой GRPC-клиента или upstream-подов, которые обслуживают kube0409/kube0590: например, переподключение или рестарт сервиса, отдающего неверный код ответа _(средняя)_"
             }
           ]
         },
@@ -3994,7 +3885,7 @@
     }
   },
   {
-    "ts": "1788333600.000089",
+    "ts": "1788333600.000087",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4008,7 +3899,7 @@
           }
         }
       ],
-      "thread_ts": "1788333000.000088",
+      "thread_ts": "1788333000.000086",
       "reply_broadcast": false
     },
     "meta": {
@@ -4018,17 +3909,17 @@
     }
   },
   {
-    "ts": "1788333600.000090",
+    "ts": "1788333600.000088",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин — Backend Lead",
+      "text": "🟡 SEV-3 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин",
+            "text": "🟡 SEV-3 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками",
             "emoji": true
           }
         },
@@ -4057,7 +3948,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 02.09 07:02 два узла, kube0409.infra.internal (6016 строк) и kube0590.infra.internal (2490 строк), массово пишут «GRPC invalid response code». За окно 07:00–07:10 таких строк 7641 при обычных 4, затронуто 4615 клиентов. RPS (69,9 тыс./с в 07:20) и CPU (19,3 % против 19,8 % вчера) в норме. Сигналы БД («Query execution was interrupted…» — до 40 за 10 мин, «Server error» — до 40 за 10 мин на 5 хостах) идут с 06:30–06:40, но по объёму они на два порядка меньше и не объясняют всплеск GRPC. Это продолжение ARG-010."
+            "text": "С 02.09 07:00 сигнатура «GRPC invalid response code» выросла с обычных 4 до 7641 строк за 10 мин. Почти все строки приходятся на два узла: kube0409.infra.internal (6017) и kube0590.infra.internal (2490). Пик пришёлся на 07:00–07:05, к 07:15 поток спадает, но ещё не прекратился. RPS (69,9 тыс. против 69,4 тыс. сутки назад при том же уровне по 10-минуткам) и CPU (19,3 % против 19,8 %) не изменились, ответов 5xx нет. Признаков отказа MongoDB/Valkey нет: сигнатур драйвера в окне не найдено, а таймауты запросов к БД малы, фоновые и начались раньше. Так что «база данных» как причина доказательствами не подтверждается."
           }
         },
         {
@@ -4065,7 +3956,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Локальная проблема на двух узлах kube0409/kube0590: подам на них отвечает неисправный GRPC-апстрим или канал/соединение к нему (неверный endpoint, мёртвый канал, несовместимая версия после выкладки) _(высокая)_"
+              "text": "*Гипотеза:* Локальная проблема на подах/узлах kube0409 и kube0590: деградировавший экземпляр приложения или GRPC-клиент/соединение к апстрим-сервису на этих узлах (битый канал, неверная конфигурация, неудачный рестарт) _(высокая)_"
             }
           ]
         },
@@ -4094,7 +3985,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788333000.000088"
+      "ts": "1788333000.000086"
     },
     "meta": {
       "incident": "ARG-010",
@@ -4103,21 +3994,21 @@
     }
   },
   {
-    "ts": "1788334800.000091",
+    "ts": "1788334800.000089",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-010: SEV-3 → SEV-2.* GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин",
+      "text": "⬆️ *Эскалация ARG-010: SEV-3 → SEV-2.* Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-010: SEV-3 → SEV-2.* GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин"
+            "text": "⬆️ *Эскалация ARG-010: SEV-3 → SEV-2.* Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками"
           }
         }
       ],
-      "thread_ts": "1788333000.000088",
+      "thread_ts": "1788333000.000086",
       "reply_broadcast": true
     },
     "meta": {
@@ -4127,7 +4018,7 @@
     }
   },
   {
-    "ts": "1788334800.000092",
+    "ts": "1788334800.000090",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4141,7 +4032,7 @@
           }
         }
       ],
-      "thread_ts": "1788333000.000088",
+      "thread_ts": "1788333000.000086",
       "reply_broadcast": false
     },
     "meta": {
@@ -4151,17 +4042,17 @@
     }
   },
   {
-    "ts": "1788334800.000093",
+    "ts": "1788334800.000091",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин — Backend Lead",
+      "text": "🟠 SEV-2 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин",
+            "text": "🟠 SEV-2 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками",
             "emoji": true
           }
         },
@@ -4190,7 +4081,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 02.09 07:02 два узла, kube0409.infra.internal (6016 строк) и kube0590.infra.internal (2490 строк), массово пишут «GRPC invalid response code». За окно 07:00–07:10 таких строк 7641 при обычных 4, затронуто 4615 клиентов. RPS (69,9 тыс./с в 07:20) и CPU (19,3 % против 19,8 % вчера) в норме. Сигналы БД («Query execution was interrupted…» — до 40 за 10 мин, «Server error» — до 40 за 10 мин на 5 хостах) идут с 06:30–06:40, но по объёму они на два порядка меньше и не объясняют всплеск GRPC. Это продолжение ARG-010."
+            "text": "С 02.09 07:00 сигнатура «GRPC invalid response code» выросла с обычных 4 до 7641 строк за 10 мин. Почти все строки приходятся на два узла: kube0409.infra.internal (6017) и kube0590.infra.internal (2490). Пик пришёлся на 07:00–07:05, к 07:15 поток спадает, но ещё не прекратился. RPS (69,9 тыс. против 69,4 тыс. сутки назад при том же уровне по 10-минуткам) и CPU (19,3 % против 19,8 %) не изменились, ответов 5xx нет. Признаков отказа MongoDB/Valkey нет: сигнатур драйвера в окне не найдено, а таймауты запросов к БД малы, фоновые и начались раньше. Так что «база данных» как причина доказательствами не подтверждается."
           }
         },
         {
@@ -4198,7 +4089,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Локальная проблема на двух узлах kube0409/kube0590: подам на них отвечает неисправный GRPC-апстрим или канал/соединение к нему (неверный endpoint, мёртвый канал, несовместимая версия после выкладки) _(высокая)_"
+              "text": "*Гипотеза:* Локальная проблема на подах/узлах kube0409 и kube0590: деградировавший экземпляр приложения или GRPC-клиент/соединение к апстрим-сервису на этих узлах (битый канал, неверная конфигурация, неудачный рестарт) _(высокая)_"
             }
           ]
         },
@@ -4227,7 +4118,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788333000.000088"
+      "ts": "1788333000.000086"
     },
     "meta": {
       "incident": "ARG-010",
@@ -4236,7 +4127,7 @@
     }
   },
   {
-    "ts": "1788343800.000094",
+    "ts": "1788343800.000092",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4250,7 +4141,7 @@
           }
         }
       ],
-      "thread_ts": "1788142800.000058",
+      "thread_ts": "1788142800.000056",
       "reply_broadcast": false
     },
     "meta": {
@@ -4260,7 +4151,7 @@
     }
   },
   {
-    "ts": "1788343800.000095",
+    "ts": "1788343800.000093",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4274,7 +4165,7 @@
           }
         }
       ],
-      "thread_ts": "1788333000.000088",
+      "thread_ts": "1788333000.000086",
       "reply_broadcast": false
     },
     "meta": {
@@ -4284,17 +4175,17 @@
     }
   },
   {
-    "ts": "1788343800.000096",
+    "ts": "1788343800.000094",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин — Backend Lead",
+      "text": "✅ SEV-2 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · GRPC invalid response code на kube0409/kube0590 с 07:02 — 7,6 тыс. ошибок за 10 мин",
+            "text": "✅ SEV-2 · Всплеск «GRPC invalid response code» на kube0409/kube0590 с 07:00, 4630 клиентов с ошибками",
             "emoji": true
           }
         },
@@ -4323,7 +4214,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 02.09 07:02 два узла, kube0409.infra.internal (6016 строк) и kube0590.infra.internal (2490 строк), массово пишут «GRPC invalid response code». За окно 07:00–07:10 таких строк 7641 при обычных 4, затронуто 4615 клиентов. RPS (69,9 тыс./с в 07:20) и CPU (19,3 % против 19,8 % вчера) в норме. Сигналы БД («Query execution was interrupted…» — до 40 за 10 мин, «Server error» — до 40 за 10 мин на 5 хостах) идут с 06:30–06:40, но по объёму они на два порядка меньше и не объясняют всплеск GRPC. Это продолжение ARG-010."
+            "text": "С 02.09 07:00 сигнатура «GRPC invalid response code» выросла с обычных 4 до 7641 строк за 10 мин. Почти все строки приходятся на два узла: kube0409.infra.internal (6017) и kube0590.infra.internal (2490). Пик пришёлся на 07:00–07:05, к 07:15 поток спадает, но ещё не прекратился. RPS (69,9 тыс. против 69,4 тыс. сутки назад при том же уровне по 10-минуткам) и CPU (19,3 % против 19,8 %) не изменились, ответов 5xx нет. Признаков отказа MongoDB/Valkey нет: сигнатур драйвера в окне не найдено, а таймауты запросов к БД малы, фоновые и начались раньше. Так что «база данных» как причина доказательствами не подтверждается."
           }
         },
         {
@@ -4331,7 +4222,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Локальная проблема на двух узлах kube0409/kube0590: подам на них отвечает неисправный GRPC-апстрим или канал/соединение к нему (неверный endpoint, мёртвый канал, несовместимая версия после выкладки) _(высокая)_"
+              "text": "*Гипотеза:* Локальная проблема на подах/узлах kube0409 и kube0590: деградировавший экземпляр приложения или GRPC-клиент/соединение к апстрим-сервису на этих узлах (битый канал, неверная конфигурация, неудачный рестарт) _(высокая)_"
             }
           ]
         },
@@ -4360,7 +4251,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788333000.000088"
+      "ts": "1788333000.000086"
     },
     "meta": {
       "incident": "ARG-010",
@@ -4369,7 +4260,7 @@
     }
   },
   {
-    "ts": "1788343800.000097",
+    "ts": "1788343800.000095",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alert-predictions",
@@ -4414,17 +4305,17 @@
     }
   },
   {
-    "ts": "1788348600.000098",
+    "ts": "1788348600.000096",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Таймауты внутреннего REST API на 238 хостах с 11:28: 5xx, CPU 95 %, RPS падает — Backend Lead",
+      "text": "🟠 SEV-2 · CPU app-серверов 95 %: REST-таймауты на 238 хостах, 137 тыс. ответов 5xx — PaaS Engineer",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Таймауты внутреннего REST API на 238 хостах с 11:28: 5xx, CPU 95 %, RPS падает",
+            "text": "🟠 SEV-2 · CPU app-серверов 95 %: REST-таймауты на 238 хостах, 137 тыс. ответов 5xx",
             "emoji": true
           }
         },
@@ -4433,7 +4324,7 @@
           "fields": [
             {
               "type": "mrkdwn",
-              "text": "*Исполнитель*\n@backend-lead (Backend Lead)"
+              "text": "*Исполнитель*\n@paas-oncall (PaaS Engineer)"
             },
             {
               "type": "mrkdwn",
@@ -4453,7 +4344,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:28 одновременно на 238 хостах из 276 начались таймауты внутреннего REST API: «Rest error: Operation timed out after <N> milliseconds…». За 10 минут их 136,7 тыс. при обычных 2. В том же окне средний CPU app-серверов вырос с 20,4 % до 95,2 %, а RPS упал с 69,5 тыс. до 61,7 тыс. Падение трафика равномерное по всем крупным странам, так что дело не в одной стране и не в боте. Ошибки Redis появились только на 4–5 узлах и минутой позже, поэтому похожи на следствие, а не на причину. Такая же сигнатура уже была: 31.08 (368 тыс. за сутки, задача ARG-008) и 26.08."
+            "text": "В окне 11:20–11:30 02.09 средняя загрузка CPU app-серверов выросла с 20,4 % до 95,2 %. Трафик при этом не вырос: RPS снизился с 69,5 тыс. до 61,7 тыс. Одновременно на 238 хостах из 276 появились «Rest error: Operation timed out…» (136,7 тыс. строк при обычных 2 за 10 минут). Раньше всего, в 11:10–11:20, на тех же 5 узлах (kube0058, kube0110, kube0312, kube0314, kube0315) появились новая сигнатура «502 Bad Gateway» и «HTTP client failure». Затем на этих узлах пошли ошибки Redis. Сравнение «с 98,7 тыс. RPS вчера» вводит в заблуждение: 01.09 в 11:30 был разовый пик трафика до 130,3 тыс. RPS, а 31.08 в 11:30 было 69,3 тыс."
           }
         },
         {
@@ -4461,7 +4352,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Внутренний REST-сервис, через который приложение получает entity list и прочие данные, перестал отвечать или упёрся в лимит. Воркеры висят до таймаута, и пул исчерпывается на всём кластере _(высокая)_"
+              "text": "*Гипотеза:* Нехватка вычислительных ресурсов: CPU app-серверов насыщен, поэтому внутренние REST-вызовы не укладываются в таймаут на всём парке _(высокая)_"
             }
           ]
         },
@@ -4470,7 +4361,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "Голоса — rules: Backend Lead · analyst: Backend Lead · arbiter: DBA"
+              "text": "⚠️ *Нужно решение человека:* голоса разошлись: правила — Backend Lead, аналитик — PaaS Engineer, арбитр — DBA"
             }
           ]
         },
@@ -4495,26 +4386,26 @@
       "incident": "ARG-011",
       "event": "opened",
       "severity": "SEV-2",
-      "assignee": "Backend Lead",
+      "assignee": "PaaS Engineer",
       "at": "2026-09-02T11:30:00Z"
     }
   },
   {
-    "ts": "1788349200.000099",
+    "ts": "1788349200.000097",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "ℹ️ переназначено: Backend Lead → DBA",
+      "text": "ℹ️ переназначено: PaaS Engineer → DBA",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "ℹ️ переназначено: Backend Lead → DBA"
+            "text": "ℹ️ переназначено: PaaS Engineer → DBA"
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -4524,17 +4415,17 @@
     }
   },
   {
-    "ts": "1788349200.000100",
+    "ts": "1788349200.000098",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 % — DBA",
+      "text": "🟠 SEV-2 · Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 %",
+            "text": "🟠 SEV-2 · Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах",
             "emoji": true
           }
         },
@@ -4563,7 +4454,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:28 на всех хостах одновременно появились таймауты внутреннего REST API (106,4 тыс. строк за минуту), а через минуту начались ошибки Redis. Новые всплески пришли в 11:36 (Rest error и MOVED на 168 строках) и в 11:39: тогда впервые за 14 дней появилась ошибка «LOADING Valkey is loading the dataset in memory» (215,2 тыс. строк, 36 хостов). Похоже на рестарт или failover узлов Valkey со сменой карты слотов. Из-за промахов кэша растёт нагрузка на REST/GRPC-бэкенды, CPU держится на 95 %. Затронуто не меньше 114,8 тыс. клиентов, 5xx — 137,1 тыс. строк."
+            "text": "С 11:28 на 239 хостах лавинообразно растут таймауты внутренних REST. Одновременно на 8 хостах появились «Redis failure», «Unexpected Redis exception» и Predis «Connection timed out». В 11:39 впервые за 14 дней появилась сигнатура «LOADING Valkey is loading the dataset in memory»: 215 249 строк с 35 хостов. Это говорит о рестарте или failover узла Valkey. Средний CPU приложений вырос до 95 %. RPS сначала просел до 61,7 тыс., затем удвоился до 136,6 тыс. — похоже на ретраи и промахи кэша. Ошибки получили не менее 114,8 тыс. клиентов."
           }
         },
         {
@@ -4571,7 +4462,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Рестарт или failover узлов Valkey: узлы загружают датасет (LOADING), карта слотов меняется (MOVED), клиенты получают ошибки и таймауты, и лавина промахов уходит в бэкенды _(высокая)_"
+              "text": "*Гипотеза:* Рестарт или failover узла Valkey: сначала он перестал отвечать (таймауты соединений Predis), затем поднялся и грузит датасет (LOADING). Промахи кэша и ожидание Redis подвешивают воркеры: отсюда CPU 95 %, массовые таймауты REST и 5xx _(высокая)_"
             }
           ]
         },
@@ -4600,7 +4491,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788348600.000098"
+      "ts": "1788348600.000096"
     },
     "meta": {
       "incident": "ARG-011",
@@ -4609,21 +4500,21 @@
     }
   },
   {
-    "ts": "1788350400.000101",
+    "ts": "1788350400.000099",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "⬆️ *Эскалация ARG-011: SEV-2 → SEV-1.* Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 %",
+      "text": "⬆️ *Эскалация ARG-011: SEV-2 → SEV-1.* Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах",
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "⬆️ *Эскалация ARG-011: SEV-2 → SEV-1.* Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 %"
+            "text": "⬆️ *Эскалация ARG-011: SEV-2 → SEV-1.* Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах"
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": true
     },
     "meta": {
@@ -4633,7 +4524,7 @@
     }
   },
   {
-    "ts": "1788350400.000102",
+    "ts": "1788350400.000100",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4647,7 +4538,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -4657,17 +4548,17 @@
     }
   },
   {
-    "ts": "1788350400.000103",
+    "ts": "1788350400.000101",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🔴 SEV-1 · Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 % — DBA",
+      "text": "🔴 SEV-1 · Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🔴 SEV-1 · Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 %",
+            "text": "🔴 SEV-1 · Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах",
             "emoji": true
           }
         },
@@ -4696,7 +4587,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:28 на всех хостах одновременно появились таймауты внутреннего REST API (106,4 тыс. строк за минуту), а через минуту начались ошибки Redis. Новые всплески пришли в 11:36 (Rest error и MOVED на 168 строках) и в 11:39: тогда впервые за 14 дней появилась ошибка «LOADING Valkey is loading the dataset in memory» (215,2 тыс. строк, 36 хостов). Похоже на рестарт или failover узлов Valkey со сменой карты слотов. Из-за промахов кэша растёт нагрузка на REST/GRPC-бэкенды, CPU держится на 95 %. Затронуто не меньше 114,8 тыс. клиентов, 5xx — 137,1 тыс. строк."
+            "text": "С 11:28 на 239 хостах лавинообразно растут таймауты внутренних REST. Одновременно на 8 хостах появились «Redis failure», «Unexpected Redis exception» и Predis «Connection timed out». В 11:39 впервые за 14 дней появилась сигнатура «LOADING Valkey is loading the dataset in memory»: 215 249 строк с 35 хостов. Это говорит о рестарте или failover узла Valkey. Средний CPU приложений вырос до 95 %. RPS сначала просел до 61,7 тыс., затем удвоился до 136,6 тыс. — похоже на ретраи и промахи кэша. Ошибки получили не менее 114,8 тыс. клиентов."
           }
         },
         {
@@ -4704,7 +4595,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Рестарт или failover узлов Valkey: узлы загружают датасет (LOADING), карта слотов меняется (MOVED), клиенты получают ошибки и таймауты, и лавина промахов уходит в бэкенды _(высокая)_"
+              "text": "*Гипотеза:* Рестарт или failover узла Valkey: сначала он перестал отвечать (таймауты соединений Predis), затем поднялся и грузит датасет (LOADING). Промахи кэша и ожидание Redis подвешивают воркеры: отсюда CPU 95 %, массовые таймауты REST и 5xx _(высокая)_"
             }
           ]
         },
@@ -4733,7 +4624,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788348600.000098"
+      "ts": "1788348600.000096"
     },
     "meta": {
       "incident": "ARG-011",
@@ -4742,7 +4633,7 @@
     }
   },
   {
-    "ts": "1788391800.000104",
+    "ts": "1788391800.000102",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4756,7 +4647,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -4766,17 +4657,17 @@
     }
   },
   {
-    "ts": "1788391800.000105",
+    "ts": "1788391800.000103",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-1 · Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 % — DBA",
+      "text": "✅ SEV-1 · Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах — DBA",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-1 · Сбой Valkey (LOADING, MOVED) и таймауты внутреннего REST API на 238 хостах: 5xx, CPU 95 %",
+            "text": "✅ SEV-1 · Сбой кэша Valkey (LOADING, таймауты Predis): таймауты REST и 5xx на 238 хостах",
             "emoji": true
           }
         },
@@ -4805,7 +4696,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В 11:28 на всех хостах одновременно появились таймауты внутреннего REST API (106,4 тыс. строк за минуту), а через минуту начались ошибки Redis. Новые всплески пришли в 11:36 (Rest error и MOVED на 168 строках) и в 11:39: тогда впервые за 14 дней появилась ошибка «LOADING Valkey is loading the dataset in memory» (215,2 тыс. строк, 36 хостов). Похоже на рестарт или failover узлов Valkey со сменой карты слотов. Из-за промахов кэша растёт нагрузка на REST/GRPC-бэкенды, CPU держится на 95 %. Затронуто не меньше 114,8 тыс. клиентов, 5xx — 137,1 тыс. строк."
+            "text": "С 11:28 на 239 хостах лавинообразно растут таймауты внутренних REST. Одновременно на 8 хостах появились «Redis failure», «Unexpected Redis exception» и Predis «Connection timed out». В 11:39 впервые за 14 дней появилась сигнатура «LOADING Valkey is loading the dataset in memory»: 215 249 строк с 35 хостов. Это говорит о рестарте или failover узла Valkey. Средний CPU приложений вырос до 95 %. RPS сначала просел до 61,7 тыс., затем удвоился до 136,6 тыс. — похоже на ретраи и промахи кэша. Ошибки получили не менее 114,8 тыс. клиентов."
           }
         },
         {
@@ -4813,7 +4704,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Рестарт или failover узлов Valkey: узлы загружают датасет (LOADING), карта слотов меняется (MOVED), клиенты получают ошибки и таймауты, и лавина промахов уходит в бэкенды _(высокая)_"
+              "text": "*Гипотеза:* Рестарт или failover узла Valkey: сначала он перестал отвечать (таймауты соединений Predis), затем поднялся и грузит датасет (LOADING). Промахи кэша и ожидание Redis подвешивают воркеры: отсюда CPU 95 %, массовые таймауты REST и 5xx _(высокая)_"
             }
           ]
         },
@@ -4842,7 +4733,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788348600.000098"
+      "ts": "1788348600.000096"
     },
     "meta": {
       "incident": "ARG-011",
@@ -4851,7 +4742,7 @@
     }
   },
   {
-    "ts": "1788391800.000106",
+    "ts": "1788391800.000104",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alert-predictions",
@@ -4896,7 +4787,7 @@
     }
   },
   {
-    "ts": "1788405000.000107",
+    "ts": "1788405000.000105",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4910,7 +4801,7 @@
           }
         }
       ],
-      "thread_ts": "1788142800.000058",
+      "thread_ts": "1788142800.000056",
       "reply_broadcast": false
     },
     "meta": {
@@ -4920,7 +4811,7 @@
     }
   },
   {
-    "ts": "1788417000.000108",
+    "ts": "1788417000.000106",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4934,7 +4825,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -4944,7 +4835,7 @@
     }
   },
   {
-    "ts": "1788418800.000109",
+    "ts": "1788418800.000107",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4958,7 +4849,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -4968,7 +4859,7 @@
     }
   },
   {
-    "ts": "1788420600.000110",
+    "ts": "1788420600.000108",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -4982,7 +4873,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -4992,7 +4883,7 @@
     }
   },
   {
-    "ts": "1788421800.000111",
+    "ts": "1788421800.000109",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5006,7 +4897,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -5016,7 +4907,7 @@
     }
   },
   {
-    "ts": "1788426000.000112",
+    "ts": "1788426000.000110",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5030,7 +4921,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -5040,7 +4931,7 @@
     }
   },
   {
-    "ts": "1788427200.000113",
+    "ts": "1788427200.000111",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5054,7 +4945,7 @@
           }
         }
       ],
-      "thread_ts": "1788142800.000058",
+      "thread_ts": "1788142800.000056",
       "reply_broadcast": false
     },
     "meta": {
@@ -5064,17 +4955,17 @@
     }
   },
   {
-    "ts": "1788434400.000114",
+    "ts": "1788434400.000112",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Трафик из BR вырос в 1,9 раза с 09:20, без ошибок и роста нагрузки на инфраструктуру — SEO Specialist",
+      "text": "🟡 SEV-3 · Трафик из BR вырос в 1,9 раза с 03.09 09:20 скачком; в BR — обычные провайдеры, CPU в норме — SEO Specialist",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Трафик из BR вырос в 1,9 раза с 09:20, без ошибок и роста нагрузки на инфраструктуру",
+            "text": "🟡 SEV-3 · Трафик из BR вырос в 1,9 раза с 03.09 09:20 скачком; в BR — обычные провайдеры, CPU в норме",
             "emoji": true
           }
         },
@@ -5103,7 +4994,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 03.09 09:20 трафик из Бразилии резко вырос: около 1052 хитов/с за 10 мин в норме, пик 2030 в 11:20. Всего за окно 22 024. Рост пришёл ступенькой между 08:50 и 09:30 и продолжается. Пакет не показывает влияния на сервис: ошибок от инцидента нет, CPU 22,5 % против 21,3 % вчера, задержки эндпоинтов на уровне вчерашних. Трафик идёт с тысяч IP у обычных бразильских домашних провайдеров, поэтому это больше похоже на органический или маркетинговый приток, чем на бот-атаку."
+            "text": "С 03.09 09:20 трафик из Бразилии резко вырос: за 10 минут он поднялся примерно с 1 тыс. до 1,8 тыс. хитов/с (выборка) и к 11:20 дошёл до 2 тыс. хитов/с. Обычный уровень — 1052, рост в 1,9 раза. Рост продолжается. Почти все клиенты анонимные. Ошибки размазаны по крупным бразильским провайдерам (Telefonica, Claro), по 1 строке на IP. Явных признаков бота или скана нет. Общий RPS и CPU почти как вчера, задержки эндпоинтов не изменились. Детектор не связал с этим инцидентом ни одной ошибки."
           }
         },
         {
@@ -5111,7 +5002,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический рост из Бразилии: позиции в поиске или индексация (Google BR), вирусный контент или внешний реферер _(высокая)_"
+              "text": "*Гипотеза:* Органический или маркетинговый приток из Бразилии: изменение позиций в поиске, внешняя ссылка, промо-кампания или вирусный контент _(средняя)_"
             }
           ]
         },
@@ -5150,7 +5041,7 @@
     }
   },
   {
-    "ts": "1788450600.000115",
+    "ts": "1788450600.000113",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5164,7 +5055,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -5174,7 +5065,7 @@
     }
   },
   {
-    "ts": "1788458400.000116",
+    "ts": "1788458400.000114",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5188,7 +5079,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": true
     },
     "meta": {
@@ -5198,7 +5089,7 @@
     }
   },
   {
-    "ts": "1788466200.000117",
+    "ts": "1788466200.000115",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5212,7 +5103,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5222,7 +5113,7 @@
     }
   },
   {
-    "ts": "1788510000.000118",
+    "ts": "1788510000.000116",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5236,7 +5127,7 @@
           }
         }
       ],
-      "thread_ts": "1788434400.000114",
+      "thread_ts": "1788434400.000112",
       "reply_broadcast": false
     },
     "meta": {
@@ -5246,17 +5137,17 @@
     }
   },
   {
-    "ts": "1788510000.000119",
+    "ts": "1788510000.000117",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Трафик из BR вырос в 1,9 раза с 09:20, без ошибок и роста нагрузки на инфраструктуру — SEO Specialist",
+      "text": "✅ SEV-3 · Трафик из BR вырос в 1,9 раза с 03.09 09:20 скачком; в BR — обычные провайдеры, CPU в норме — SEO Specialist",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Трафик из BR вырос в 1,9 раза с 09:20, без ошибок и роста нагрузки на инфраструктуру",
+            "text": "✅ SEV-3 · Трафик из BR вырос в 1,9 раза с 03.09 09:20 скачком; в BR — обычные провайдеры, CPU в норме",
             "emoji": true
           }
         },
@@ -5285,7 +5176,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 03.09 09:20 трафик из Бразилии резко вырос: около 1052 хитов/с за 10 мин в норме, пик 2030 в 11:20. Всего за окно 22 024. Рост пришёл ступенькой между 08:50 и 09:30 и продолжается. Пакет не показывает влияния на сервис: ошибок от инцидента нет, CPU 22,5 % против 21,3 % вчера, задержки эндпоинтов на уровне вчерашних. Трафик идёт с тысяч IP у обычных бразильских домашних провайдеров, поэтому это больше похоже на органический или маркетинговый приток, чем на бот-атаку."
+            "text": "С 03.09 09:20 трафик из Бразилии резко вырос: за 10 минут он поднялся примерно с 1 тыс. до 1,8 тыс. хитов/с (выборка) и к 11:20 дошёл до 2 тыс. хитов/с. Обычный уровень — 1052, рост в 1,9 раза. Рост продолжается. Почти все клиенты анонимные. Ошибки размазаны по крупным бразильским провайдерам (Telefonica, Claro), по 1 строке на IP. Явных признаков бота или скана нет. Общий RPS и CPU почти как вчера, задержки эндпоинтов не изменились. Детектор не связал с этим инцидентом ни одной ошибки."
           }
         },
         {
@@ -5293,7 +5184,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Органический рост из Бразилии: позиции в поиске или индексация (Google BR), вирусный контент или внешний реферер _(высокая)_"
+              "text": "*Гипотеза:* Органический или маркетинговый приток из Бразилии: изменение позиций в поиске, внешняя ссылка, промо-кампания или вирусный контент _(средняя)_"
             }
           ]
         },
@@ -5322,7 +5213,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788434400.000114"
+      "ts": "1788434400.000112"
     },
     "meta": {
       "incident": "ARG-012",
@@ -5331,7 +5222,7 @@
     }
   },
   {
-    "ts": "1788513600.000120",
+    "ts": "1788513600.000118",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5345,7 +5236,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": true
     },
     "meta": {
@@ -5355,7 +5246,7 @@
     }
   },
   {
-    "ts": "1788518400.000121",
+    "ts": "1788518400.000119",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5369,7 +5260,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5379,7 +5270,7 @@
     }
   },
   {
-    "ts": "1788518400.000122",
+    "ts": "1788518400.000120",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5393,7 +5284,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": true
     },
     "meta": {
@@ -5403,7 +5294,7 @@
     }
   },
   {
-    "ts": "1788521400.000123",
+    "ts": "1788521400.000121",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5417,7 +5308,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5427,7 +5318,7 @@
     }
   },
   {
-    "ts": "1788522600.000124",
+    "ts": "1788522600.000122",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5441,7 +5332,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5451,7 +5342,7 @@
     }
   },
   {
-    "ts": "1788525600.000125",
+    "ts": "1788525600.000123",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5465,7 +5356,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5475,7 +5366,7 @@
     }
   },
   {
-    "ts": "1788526800.000126",
+    "ts": "1788526800.000124",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5489,7 +5380,7 @@
           }
         }
       ],
-      "thread_ts": "1787659800.000030",
+      "thread_ts": "1787659800.000028",
       "reply_broadcast": false
     },
     "meta": {
@@ -5499,7 +5390,7 @@
     }
   },
   {
-    "ts": "1788532800.000127",
+    "ts": "1788532800.000125",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5513,7 +5404,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -5523,7 +5414,7 @@
     }
   },
   {
-    "ts": "1788536400.000128",
+    "ts": "1788536400.000126",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5537,7 +5428,7 @@
           }
         }
       ],
-      "thread_ts": "1788348600.000098",
+      "thread_ts": "1788348600.000096",
       "reply_broadcast": false
     },
     "meta": {
@@ -5547,17 +5438,17 @@
     }
   },
   {
-    "ts": "1788547200.000129",
+    "ts": "1788547200.000127",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token) отдаёт HTML вместо API-ответа — вход через Twitter не работает — Backend Lead",
+      "text": "🟡 SEV-3 · Twitter OAuth (request_token): ошибки входа через Twitter на 220 хостах с 04.09 16:30 — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟡 SEV-3 · Twitter OAuth (oauth/request_token) отдаёт HTML вместо API-ответа — вход через Twitter не работает",
+            "text": "🟡 SEV-3 · Twitter OAuth (request_token): ошибки входа через Twitter на 220 хостах с 04.09 16:30",
             "emoji": true
           }
         },
@@ -5586,7 +5477,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 04.09 16:30 растут ошибки `Twitter integration error` при запросе oauth/request_token: вместо JSON Twitter возвращает HTML-страницу (`<html lang=\"en\" class=\"icecream\">`). Ошибки идут на 220 из 282 хостов и из всех крупных стран, то есть проблема не в конкретном узле или регионе, а во внешнем провайдере или в нашей OAuth-конфигурации. Такая же сигнатура уже была 24–26.08: 3246, 4956 и 1236 строк в сутки. Затем она почти пропала и снова начала расти: 195 строк 02.09, 760 — 03.09, 2213 — 04.09. 5xx нет, RPS и CPU не выросли."
+            "text": "С 04.09 16:30 растёт «Twitter integration error» на вызове oauth/request_token: это вход через Twitter. Две сигнатуры дали 897 и 403 строки, пик 90 за 10 минут. Ошибок 5xx нет. Сигнатура не новая: она была 24–26.08 (3246 и 4956 строк в сутки), затем почти пропала и снова растёт с 02.09 (195 → 760 → 2213 за сутки). Признаков сбоя инфраструктуры (MongoDB, Valkey, DNS) или аномалии трафика нет. Скорее всего, провайдер Twitter/X отвергает запросы или изменил API."
           }
         },
         {
@@ -5594,7 +5485,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* На стороне Twitter/X сбой или изменение OAuth 1.0a API: request_token отдаёт HTML-страницу ошибки вместо API-ответа _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер Twitter/X отвергает oauth/request_token: поменялся API, отозваны или ограничены ключи приложения, сработал rate limit либо callback URL не проходит проверку _(высокая)_"
             }
           ]
         },
@@ -5633,7 +5524,7 @@
     }
   },
   {
-    "ts": "1788553800.000130",
+    "ts": "1788553800.000128",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5647,7 +5538,7 @@
           }
         }
       ],
-      "thread_ts": "1788547200.000129",
+      "thread_ts": "1788547200.000127",
       "reply_broadcast": false
     },
     "meta": {
@@ -5657,17 +5548,17 @@
     }
   },
   {
-    "ts": "1788553800.000131",
+    "ts": "1788553800.000129",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token) отдаёт HTML вместо API-ответа — вход через Twitter не работает — Backend Lead",
+      "text": "✅ SEV-3 · Twitter OAuth (request_token): ошибки входа через Twitter на 220 хостах с 04.09 16:30 — Backend Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-3 · Twitter OAuth (oauth/request_token) отдаёт HTML вместо API-ответа — вход через Twitter не работает",
+            "text": "✅ SEV-3 · Twitter OAuth (request_token): ошибки входа через Twitter на 220 хостах с 04.09 16:30",
             "emoji": true
           }
         },
@@ -5696,7 +5587,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "С 04.09 16:30 растут ошибки `Twitter integration error` при запросе oauth/request_token: вместо JSON Twitter возвращает HTML-страницу (`<html lang=\"en\" class=\"icecream\">`). Ошибки идут на 220 из 282 хостов и из всех крупных стран, то есть проблема не в конкретном узле или регионе, а во внешнем провайдере или в нашей OAuth-конфигурации. Такая же сигнатура уже была 24–26.08: 3246, 4956 и 1236 строк в сутки. Затем она почти пропала и снова начала расти: 195 строк 02.09, 760 — 03.09, 2213 — 04.09. 5xx нет, RPS и CPU не выросли."
+            "text": "С 04.09 16:30 растёт «Twitter integration error» на вызове oauth/request_token: это вход через Twitter. Две сигнатуры дали 897 и 403 строки, пик 90 за 10 минут. Ошибок 5xx нет. Сигнатура не новая: она была 24–26.08 (3246 и 4956 строк в сутки), затем почти пропала и снова растёт с 02.09 (195 → 760 → 2213 за сутки). Признаков сбоя инфраструктуры (MongoDB, Valkey, DNS) или аномалии трафика нет. Скорее всего, провайдер Twitter/X отвергает запросы или изменил API."
           }
         },
         {
@@ -5704,7 +5595,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* На стороне Twitter/X сбой или изменение OAuth 1.0a API: request_token отдаёт HTML-страницу ошибки вместо API-ответа _(высокая)_"
+              "text": "*Гипотеза:* Внешний провайдер Twitter/X отвергает oauth/request_token: поменялся API, отозваны или ограничены ключи приложения, сработал rate limit либо callback URL не проходит проверку _(высокая)_"
             }
           ]
         },
@@ -5733,7 +5624,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788547200.000129"
+      "ts": "1788547200.000127"
     },
     "meta": {
       "incident": "ARG-013",
@@ -5742,7 +5633,7 @@
     }
   },
   {
-    "ts": "1788633600.000132",
+    "ts": "1788633600.000130",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5756,7 +5647,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5766,7 +5657,7 @@
     }
   },
   {
-    "ts": "1788635400.000133",
+    "ts": "1788635400.000131",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5780,7 +5671,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5790,7 +5681,7 @@
     }
   },
   {
-    "ts": "1788639000.000134",
+    "ts": "1788639000.000132",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5804,7 +5695,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {
@@ -5814,17 +5705,17 @@
     }
   },
   {
-    "ts": "1788659400.000135",
+    "ts": "1788659400.000133",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
-      "text": "🟠 SEV-2 · Всплеск 5xx «Adapter failure» на 229 хостах: трафик с ротируемых IP RapidSeedbox — Security Lead",
+      "text": "🟠 SEV-2 · Всплеск «Adapter failure» (503) в 01:37 от ротируемых прокси RapidSeedbox на 229 хостах — Security Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "🟠 SEV-2 · Всплеск 5xx «Adapter failure» на 229 хостах: трафик с ротируемых IP RapidSeedbox",
+            "text": "🟠 SEV-2 · Всплеск «Adapter failure» (503) в 01:37 от ротируемых прокси RapidSeedbox на 229 хостах",
             "emoji": true
           }
         },
@@ -5853,7 +5744,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В окне 01:30–01:40 06.09 сигнатура «Adapter failure» выросла до 17 639 строк за 10 минут при обычных 3 (в 5 880 раз), все строки — 5xx, ошибки размазаны по 229 из 274 хостов. 52,7 % ошибок пришлось на ISP RapidSeedbox Ltd (за предыдущие сутки — 2,0 %): 9 309 строк с 9 309 разных IP (по одному запросу на IP), только из US и FR. 98,4 % запросов анонимные. RPS (54,3 тыс./с против 53,8 тыс./с вчера) и CPU (14,8 % против 14,0 %) почти не изменились, к 01:50 всплеск закончился. Картина похожа на автоматизированный трафик через пул ротируемых прокси, а не на сбой инфраструктуры."
+            "text": "06.09 01:37 за одну минуту записано 17 635 ошибок «Adapter failure» (HTTP 503) на 229 из 274 хостов; в 01:38 их было уже 4, в 01:41 — 1. Ошибки распределены не пропорционально трафику: 52,7 % строк приходится на RapidSeedbox Ltd (за предыдущие 24 ч — 1,98 %), каждый IP сделал ровно один запрос, 98,4 % запросов анонимные. Индия, крупнейшая по трафику страна, дала всего 178 ошибок. RPS (54,3 тыс./с против 53,8 тыс./с вчера), CPU (14,8 % против 14,0 %) и задержки в норме. Картина похожа на короткий автоматизированный залп через пул прокси, а не на сбой инфраструктуры."
           }
         },
         {
@@ -5861,7 +5752,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Автоматизированный трафик (бот, скрейпинг или перебор) через пул ротируемых прокси, прежде всего RapidSeedbox; его запросы ломают адаптер и получают 5xx _(высокая)_"
+              "text": "*Гипотеза:* Автоматизированный залп через пул ротируемых прокси (RapidSeedbox и хостинговые ISP): запросы попадают в путь, который отвечает «Adapter failure» _(высокая)_"
             }
           ]
         },
@@ -5900,7 +5791,7 @@
     }
   },
   {
-    "ts": "1788662400.000136",
+    "ts": "1788662400.000134",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -5914,7 +5805,7 @@
           }
         }
       ],
-      "thread_ts": "1788659400.000135",
+      "thread_ts": "1788659400.000133",
       "reply_broadcast": false
     },
     "meta": {
@@ -5924,17 +5815,17 @@
     }
   },
   {
-    "ts": "1788662400.000137",
+    "ts": "1788662400.000135",
     "method": "chat.update",
     "payload": {
       "channel": "#app-alerts",
-      "text": "✅ SEV-2 · Всплеск 5xx «Adapter failure» на 229 хостах: трафик с ротируемых IP RapidSeedbox — Security Lead",
+      "text": "✅ SEV-2 · Всплеск «Adapter failure» (503) в 01:37 от ротируемых прокси RapidSeedbox на 229 хостах — Security Lead",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "✅ SEV-2 · Всплеск 5xx «Adapter failure» на 229 хостах: трафик с ротируемых IP RapidSeedbox",
+            "text": "✅ SEV-2 · Всплеск «Adapter failure» (503) в 01:37 от ротируемых прокси RapidSeedbox на 229 хостах",
             "emoji": true
           }
         },
@@ -5963,7 +5854,7 @@
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "В окне 01:30–01:40 06.09 сигнатура «Adapter failure» выросла до 17 639 строк за 10 минут при обычных 3 (в 5 880 раз), все строки — 5xx, ошибки размазаны по 229 из 274 хостов. 52,7 % ошибок пришлось на ISP RapidSeedbox Ltd (за предыдущие сутки — 2,0 %): 9 309 строк с 9 309 разных IP (по одному запросу на IP), только из US и FR. 98,4 % запросов анонимные. RPS (54,3 тыс./с против 53,8 тыс./с вчера) и CPU (14,8 % против 14,0 %) почти не изменились, к 01:50 всплеск закончился. Картина похожа на автоматизированный трафик через пул ротируемых прокси, а не на сбой инфраструктуры."
+            "text": "06.09 01:37 за одну минуту записано 17 635 ошибок «Adapter failure» (HTTP 503) на 229 из 274 хостов; в 01:38 их было уже 4, в 01:41 — 1. Ошибки распределены не пропорционально трафику: 52,7 % строк приходится на RapidSeedbox Ltd (за предыдущие 24 ч — 1,98 %), каждый IP сделал ровно один запрос, 98,4 % запросов анонимные. Индия, крупнейшая по трафику страна, дала всего 178 ошибок. RPS (54,3 тыс./с против 53,8 тыс./с вчера), CPU (14,8 % против 14,0 %) и задержки в норме. Картина похожа на короткий автоматизированный залп через пул прокси, а не на сбой инфраструктуры."
           }
         },
         {
@@ -5971,7 +5862,7 @@
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Гипотеза:* Автоматизированный трафик (бот, скрейпинг или перебор) через пул ротируемых прокси, прежде всего RapidSeedbox; его запросы ломают адаптер и получают 5xx _(высокая)_"
+              "text": "*Гипотеза:* Автоматизированный залп через пул ротируемых прокси (RapidSeedbox и хостинговые ISP): запросы попадают в путь, который отвечает «Adapter failure» _(высокая)_"
             }
           ]
         },
@@ -6000,7 +5891,7 @@
       ],
       "unfurl_links": false,
       "unfurl_media": false,
-      "ts": "1788659400.000135"
+      "ts": "1788659400.000133"
     },
     "meta": {
       "incident": "ARG-014",
@@ -6009,7 +5900,7 @@
     }
   },
   {
-    "ts": "1788705600.000138",
+    "ts": "1788705600.000136",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -6023,7 +5914,7 @@
           }
         }
       ],
-      "thread_ts": "1787650800.000027",
+      "thread_ts": "1787650800.000025",
       "reply_broadcast": false
     },
     "meta": {
@@ -6033,7 +5924,7 @@
     }
   },
   {
-    "ts": "1788774000.000139",
+    "ts": "1788774000.000137",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -6047,7 +5938,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": true
     },
     "meta": {
@@ -6057,7 +5948,7 @@
     }
   },
   {
-    "ts": "1788777600.000140",
+    "ts": "1788777600.000138",
     "method": "chat.postMessage",
     "payload": {
       "channel": "#app-alerts",
@@ -6071,7 +5962,7 @@
           }
         }
       ],
-      "thread_ts": "1788163800.000059",
+      "thread_ts": "1788163800.000057",
       "reply_broadcast": false
     },
     "meta": {

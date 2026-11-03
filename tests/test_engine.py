@@ -53,3 +53,14 @@ def test_replay_has_no_lookahead(dataset, tmp_path):
     opened_at, opened_lines = record.opened_at, record.opened_lines
     seen_before = sum(1 for i in range(1500) if start + timedelta(seconds=2 * i) < opened_at)
     assert opened_lines == seen_before < 1500  # numbers at alert time come only from data before it
+
+
+def test_rerender_rewrites_files_with_stable_names(dataset, tmp_path):
+    cfg, _ = burst_dataset(dataset, tmp_path)
+    replay(build_engine(cfg, llm="off"))
+    old = tmp_path / "out" / "tasks" / "ARG-001-legacy-name.md"
+    old.write_text("stale")
+    engine = build_engine(cfg, llm="off")
+    engine.rerender()
+    names = sorted(p.name for p in (tmp_path / "out" / "tasks").glob("ARG-*.md"))
+    assert names == ["ARG-001-20260826-1420.md"]

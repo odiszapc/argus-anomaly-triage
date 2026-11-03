@@ -28,7 +28,7 @@ def ttd_minutes(incident: Incident) -> int:
 
 
 def stem(incident: Incident) -> str:
-    return incident.slug or f"{incident.task_id}-{incident.component}-{incident.start:%Y%m%d-%H%M}"
+    return incident.slug or f"{incident.task_id}-{incident.start:%Y%m%d-%H%M}"
 
 
 def _fingerprint(incident: Incident) -> str:

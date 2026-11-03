@@ -1,6 +1,6 @@
 """Predictions for #app-alert-predictions.
 
-Recurrence watch: a data-store or infrastructure incident that began under load and was "fixed" by
+Recurrence watch: a data-store incident that began under load and was "fixed" by
 the load going away tends to come back at the next ramp (in this data: Valkey 02.09 → 03.09 morning,
 MongoDB 25.08 → 26.08 morning). When such a SEV-1/2 incident resolves, the predictor forecasts RPS
 for the next 24 hours from the same time of day on previous days and warns before the forecast

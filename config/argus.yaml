@@ -1,7 +1,7 @@
 # Argus settings. Paths are relative to the repo root; ARGUS_DATA_DIR / ARGUS_VAR_DIR / ARGUS_OUT_DIR override them.
 paths:
   data_dir: ../data          # logs.json + rps.csv + cpu-usage.csv + rps-by-country.csv + endpoint-timings-ms.csv
-  var_dir: var               # argus.duckdb, state.json (git-ignored)
+  var_dir: var               # argus.duckdb (git-ignored); run state lives in <out>/.argus/
   out_dir: .                 # tasks/, postmortems/, slack-log.json, report.html
   routing: config/routing.yaml
   gold: evals/gold.yaml
