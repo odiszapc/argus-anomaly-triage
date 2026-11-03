@@ -1,0 +1,141 @@
+# Who owns what. Edit this file (not the code) to change routing; `make eval` shows the effect.
+#
+# component  → role (the assignee), family (incidents of the same family merge), kind:
+#   cause   — points at the failing part (DB, cache, DNS, code)
+#   symptom — what users see (timeouts, 5xx); attaches to a co-active cause
+# patterns   — case-insensitive regexes over log templates; first matching component wins.
+# hypotheses — starting points for triage (the LLM analyst refines them with evidence).
+
+families:            # priority: when several are co-active, the higher one owns the incident
+                     # merge: components of the family join one incident (cache + DB fail together)
+  data_store: {priority: 5, merge: true}
+  infra: {priority: 4}
+  app: {priority: 3}
+  upstream: {priority: 2}
+  capacity: {priority: 1}
+
+components:
+  cache:
+    title: Кэш (Valkey/Redis)
+    role: DBA
+    family: data_store
+    kind: cause
+    patterns: ['valkey', 'redis', '^LOADING ', '^MOVED ', 'CROSSSLOT', 'CLUSTERDOWN', '^Adapter failure']
+    hypotheses:
+      - Рестарт или failover узла Valkey — узел загружает датасет в память (LOADING) и не обслуживает запросы
+      - Решардинг/смена топологии кластера (MOVED, CROSSSLOT) — клиенты работают со старой картой слотов
+      - Нехватка памяти или массовое вытеснение ключей на узлах кэша, лавина промахов в БД
+
+  database:
+    title: База данных (MongoDB/SQL)
+    role: DBA
+    family: data_store
+    kind: cause
+    patterns: ['mongo', 'topology is closed', 'connection <monitor>', 'query execution', 'statement execution']
+    hypotheses:
+      - Потеря связности с репликасетом MongoDB (таймауты мониторинга, закрытая топология драйвера)
+      - Выборы primary/failover или перегрузка узла БД
+      - Долгие запросы упираются в лимит времени выполнения
+
+  infra_dns:
+    title: Сеть и service discovery
+    role: PaaS Engineer
+    family: infra
+    kind: cause
+    patterns: ['could not resolve host', 'ETIMEDOUT', 'connection refused', 'name resolution']
+    hypotheses:
+      - Сбой DNS/service discovery в кластере или удалённый сервис
+      - Ошибка конфигурации окружения после выкладки (неверный адрес сервиса)
+
+  app_lock:
+    title: Блокировки и конкурентный доступ в приложении
+    role: Backend Lead
+    family: app
+    kind: cause
+    patterns: ['wait exceeded', 'acquire a lock', 'elapsed after .* ms waiting']
+    hypotheses:
+      - Регрессия после выкладки — больше конкурирующих запросов за одну блокировку
+      - Синхронное истечение TTL (cache stampede) — пачки запросов перестраивают один и тот же ключ
+
+  app_bug:
+    title: Ошибки кода приложения
+    role: Backend Lead
+    family: app
+    kind: cause
+    patterns: ['Argument #', 'must be of type', 'is not valid for the enum', 'assignment error', 'memory size',
+               'Maximum execution time', 'Json encode', 'Invalid SSR', 'Render error', 'Call to ', 'Undefined ']
+    hypotheses:
+      - Регрессия в коде после выкладки (новые типы ошибок)
+      - Некорректные данные из зависимости, которые код не валидирует
+
+  external:
+    title: Внешние интеграции
+    role: Backend Lead
+    family: app
+    kind: cause
+    patterns: ['twitter integration', 'google', 'facebook', 'apple']
+    hypotheses:
+      - Сбой или изменение API внешнего провайдера
+
+  upstream:
+    title: Таймауты и ошибки внутренних API
+    role: Backend Lead
+    family: upstream
+    kind: symptom
+    patterns: ['rest error', 'operation timed out', 'grpc', 'deadline exceeded', 'privileges api',
+               '^failed get', 'payload parsing timeout', '^server error', 'invalid response', 'operation failed']
+    hypotheses:
+      - Деградация зависимого внутреннего сервиса (таймауты REST/GRPC)
+      - Рост ошибок приложения после выкладки
+
+  app_errors:            # default for log templates that match nothing above
+    title: Ошибки приложения
+    role: Backend Lead
+    family: app
+    kind: symptom
+    hypotheses:
+      - Рост ошибок приложения; нужен разбор стека и последних выкладок
+
+  capacity:              # rps_shift, cpu_high, traffic_shift; also upstream-only incidents under load
+    title: Нагрузка и ёмкость
+    role: PaaS Engineer
+    family: capacity
+    kind: symptom
+    hypotheses:
+      - Пиковая нагрузка превысила ёмкость — не сработал или запоздал автоскейлинг
+      - Неожиданный рост трафика (кампания, бот, ретраи клиентов)
+
+  country_traffic:       # country_shift
+    title: Трафик отдельной страны
+    role: SEO Specialist
+    family: seo
+    kind: cause
+    hypotheses:
+      - Изменение позиций в поиске или индексации для региона (Google, локальные поисковики)
+      - Маркетинговая кампания, внешний трафик или бот-трафик из региона
+      - Блокировка/проблемы у провайдеров в стране (для падения)
+
+  observability:         # rps_artifact
+    title: Качество метрик
+    role: PaaS Engineer
+    family: data_quality
+    kind: cause
+    hypotheses:
+      - Двойной сбор метрики (дублирующиеся scrape targets или реплики экспортера)
+      - Сброс/перезапуск счётчика при выкладке, irate ловит скачок
+
+  abuse:                 # set by bot features, never by patterns
+    title: Вредоносная активность
+    role: Security Lead
+    family: security
+    kind: cause
+    hypotheses:
+      - Автоматизированный трафик через пул ротируемых прокси (seedbox/residential proxies)
+      - Сканирование или перебор, вызывающий ошибки адаптера
+
+metric_components:
+  rps_shift: capacity
+  cpu_high: capacity
+  traffic_shift: capacity
+  country_shift: country_traffic
+  rps_artifact: observability

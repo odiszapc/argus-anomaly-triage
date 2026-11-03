@@ -22,7 +22,7 @@ class CountryCfg:
     up: float = 1.5
     down: float = 0.65
     divergence: float = 0.3
-    min_len: int = 6
+    min_len: int = 12  # 2 h: shorter night-time wobbles of small countries are not an SEO matter
     max_gap: int = 3
     min_days: int = 2
 

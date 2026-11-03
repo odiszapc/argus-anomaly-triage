@@ -153,3 +153,11 @@ def test_detect_all_finds_burst_through_store(dataset, tmp_path):
     bursts = [s for s in signals if s.kind == "log_burst"]
     assert len(bursts) == 1 and bursts[0].label == "Redis failure"
     assert bursts[0].start == datetime(2026, 8, 26, 14, 20)
+
+
+def test_hourly_cron_bursts_on_first_day_are_not_anomalies():
+    values = np.full(DAY, 20.0)
+    values[3::6] = 2500  # an hourly job, before any daily history exists
+    counts = pd.DataFrame({"a": values}, index=idx(DAY))
+    late = [s for s in log_bursts(counts, {"a": "Timeout <N> wait exceeded"}, LogCfg()) if s.start >= idx(DAY)[72]]
+    assert late == []

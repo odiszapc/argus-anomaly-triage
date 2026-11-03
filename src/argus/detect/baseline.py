@@ -25,20 +25,28 @@ def regular(s: pd.Series, start: datetime, end: datetime, fill: float | None = N
     return out.fillna(fill) if fill is not None else out
 
 
-def seasonal_baseline(s: pd.Series, days: int = 7, min_days: int = 2, fallback: int = 12) -> pd.Series:
+def _nanmedian_rows(columns: list[np.ndarray]) -> tuple[np.ndarray, np.ndarray]:
+    lagged = np.column_stack(columns)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)  # rows with no history → NaN
+        return np.nanmedian(lagged, axis=1), np.sum(~np.isnan(lagged), axis=1)
+
+
+def seasonal_baseline(s: pd.Series, days: int = 7, min_days: int = 2, fallback: int = 12,
+                      hourly: int = 6) -> pd.Series:
     """Median of the same time of day over the previous `days` days.
 
-    With fewer than `min_days` days of history, the median of the previous `fallback` buckets
-    (`fallback=0`: NaN, i.e. "no opinion yet").
+    With fewer than `min_days` days of history: the larger of the median of the previous `fallback`
+    buckets and the median of the same 10-minute slot over the previous `hourly` hours, so an
+    hourly cron burst is not an anomaly on day one (`fallback=0`: NaN, i.e. "no opinion yet").
     """
-    lagged = np.column_stack([s.shift(d * BUCKETS_PER_DAY).to_numpy() for d in range(1, days + 1)])
-    available = np.sum(~np.isnan(lagged), axis=1)
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore", RuntimeWarning)  # rows with no history → NaN, replaced below
-        seasonal = np.nanmedian(lagged, axis=1)
+    seasonal, available = _nanmedian_rows([s.shift(d * BUCKETS_PER_DAY).to_numpy() for d in range(1, days + 1)])
     if fallback <= 0:
         return pd.Series(np.where(available >= min_days, seasonal, np.nan), index=s.index)
     trailing = s.shift(1).rolling(fallback, min_periods=3).median().to_numpy()
+    if hourly:
+        slot, n_slots = _nanmedian_rows([s.shift(6 * k).to_numpy() for k in range(1, hourly + 1)])
+        trailing = np.fmax(trailing, np.where(n_slots >= 3, slot, np.nan))
     return pd.Series(np.where(available >= min_days, seasonal, trailing), index=s.index)
 
 
