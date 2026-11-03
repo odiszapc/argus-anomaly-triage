@@ -44,7 +44,7 @@ def _summary(engine, stats) -> None:
     for r in engine.memory.tasks.values():
         inc = engine.incident(r.incident_uid)
         rep = f" (+{len(r.repeats)} повт.)" if r.repeats else ""
-        typer.echo(f"  {r.task_id} {inc.severity} {r.triage.assignee:15} {inc.start:%m-%d %H:%M} {r.triage.title[:80]}{rep}")
+        typer.echo(f"  {r.task_id} {r.severity} {r.triage.assignee:15} {inc.start:%m-%d %H:%M} {r.triage.title[:80]}{rep}")
 
 
 def _parse(ts: str | None):

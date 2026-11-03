@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | Статус | черновик |
-| Severity | {{ incident.severity }} |
+| Severity | {{ severity }} |
 | Период (UTC) | {{ incident.start | short }} – {{ (incident.resolved_at | short) if incident.resolved_at else "продолжается" }} ({{ duration }}) |
 | Обнаружено | {{ incident.detected_at | short }}, через {{ ttd }} мин после начала |
 | Владелец | {{ triage.assignee }} |
@@ -66,7 +66,7 @@
 | Действие | Владелец | Приоритет | Задача |
 |---|---|---|---|
 {% for s in triage.next_steps %}
-| {{ s }} | {{ triage.assignee }} | {{ "P1" if incident.severity == "SEV-1" else "P2" }} | |
+| {{ s }} | {{ triage.assignee }} | {{ "P1" if severity == "SEV-1" else "P2" }} | |
 {% endfor %}
 | **[SRE]** Предотвращение повторения | | | |
 

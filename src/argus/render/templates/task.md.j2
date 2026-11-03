@@ -2,10 +2,10 @@
 id: {{ id }}
 title: {{ title | j }}
 assignee: {{ triage.assignee }}
-severity: {{ incident.severity }}
+severity: {{ severity }}
 status: {{ status }}
 component: {{ incident.component }}
-labels: [argus, {{ incident.component }}, {{ incident.severity | lower }}{% if triage.needs_human %}, needs-human{% endif %}{% if repeats %}, recurring{% endif %}]
+labels: [argus, {{ incident.component }}, {{ severity | lower }}{% if triage.needs_human %}, needs-human{% endif %}{% if repeats %}, recurring{% endif %}]
 started_at: {{ incident.start | ts }}
 detected_at: {{ incident.detected_at | ts }}
 resolved_at: {{ (incident.resolved_at | ts) if incident.resolved_at else "null" }}
@@ -21,7 +21,7 @@ postmortem: {{ postmortem_path }}
 
 # {{ id }} · {{ title }}
 
-**Исполнитель:** {{ triage.assignee }} · **Severity:** {{ incident.severity }} · **Начало:** {{ incident.start | short }} UTC · **Обнаружено:** {{ incident.detected_at | short }} (через {{ ttd }} мин){{ (" · **Закрыт:** " ~ (incident.resolved_at | short)) if incident.resolved_at else "" }}
+**Исполнитель:** {{ triage.assignee }} · **Severity:** {{ severity }} · **Начало:** {{ incident.start | short }} UTC · **Обнаружено:** {{ incident.detected_at | short }} (через {{ ttd }} мин){{ (" · **Закрыт:** " ~ (incident.resolved_at | short)) if incident.resolved_at else "" }}
 
 {% if triage.needs_human %}
 > ⚠️ **Нужно решение человека.** {{ triage.arbiter_note }}

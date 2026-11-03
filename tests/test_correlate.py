@@ -300,3 +300,21 @@ def test_symptom_only_incidents_do_not_chain():
     bursts = [sig("log_burst", REST, i, i + 1) for i in (0, 6, 12, 18)]
     _, events = run(bursts, 40)
     assert len(opened(events)) >= 3
+
+
+def test_cause_reclaims_recent_symptoms_from_weaker_incident():
+    book, events = run([sig("log_burst", "Twitter integration error (x)", 0, 20),
+                        sig("log_burst", REST, 10, 15, value=400_000),
+                        sig("log_burst", "Topology is closed", 11, 14, new_template=True)], 40)
+    db = next(i for i in book.incidents if i.component == "database")
+    twitter = next(i for i in book.incidents if i.component == "external")
+    assert any(s.label == REST for s in db.signals.values())
+    assert not any(s.label == REST for s in twitter.signals.values())
+
+
+def test_familiar_blip_cause_does_not_reclaim_symptoms():
+    book, _ = run([sig("rps_shift", "RPS", 0, 10, value=110_000, base=80_000, key="rps"),
+                   sig("log_burst", REST, 8, 14, value=20_000),
+                   sig("log_burst", "Timeout <N> wait exceeded", 9, 9, value=3500, new_template=False)], 30)
+    capacity = next(i for i in book.incidents if i.component == "capacity")
+    assert any(s.label == REST for s in capacity.signals.values())

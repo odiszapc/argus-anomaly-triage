@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 from typing import Protocol
 
 from .config import Config
-from .correlate import Event, Fingerprint, Incident, IncidentBook, IncidentCfg
+from .correlate import SEVERITY_ORDER, Event, Fingerprint, Incident, IncidentBook, IncidentCfg
 from .detect import DetectCfg, detect_all
 from .detect.security import BotCfg
 from .model import Signal
@@ -64,6 +64,7 @@ class TaskRecord:
     related: list[str] = field(default_factory=list)
     prediction: str | None = None
     last_active: datetime | None = None
+    severity: str = "SEV-3"            # worst over the task's incidents
 
 
 @dataclass
@@ -74,6 +75,7 @@ class Memory:
     tasks: dict[str, TaskRecord] = field(default_factory=dict)   # task id → record
     by_incident: dict[str, str] = field(default_factory=dict)    # incident uid → task id
     stats: dict[str, int] = field(default_factory=dict)
+    predictions: list = field(default_factory=list)
 
 
 @dataclass
@@ -140,7 +142,9 @@ class Engine:
         if event.kind == "updated":
             text = f"{prefix}{event.detail}"
             if "переназначено" in event.detail and not repeat:
-                record.triage = self.analyst.triage(inc, self.store, now)
+                record.triage = self._analyse(inc, now)
+            if SEVERITY_ORDER[inc.severity] > SEVERITY_ORDER[record.severity]:
+                self._escalate(record, inc, now, repeat)
         elif event.kind == "resolved":
             text = (f"{prefix}закрыт: ≈{human(inc.impact.clients)} клиентов, пик ошибок "
                     f"{pct(inc.impact.peak_error_rate)}, {inc.severity}")
@@ -169,22 +173,38 @@ class Engine:
         return [{"task": r.task_id, "title": r.triage.title, "assignee": r.triage.assignee,
                  "opened": f"{r.opened_at:%d.%m %H:%M}", "repeats": len(r.repeats)} for r in recent[-5:]]
 
-    def _opened(self, inc: Incident, now: datetime) -> None:
+    def _analyse(self, inc: Incident, now: datetime) -> Triage:
         if isinstance(self.analyst, RulesAnalyst):
             triage = self.analyst.triage(inc, self.store, now)
         else:
             triage = self.analyst.triage(inc, self.store, now, related=self._related(now))
         if self.arbiter:
             self.arbiter.review(inc, triage, self.store, now, self.router)
-        parent = self.dedup.match(inc, triage, self.memory, now) if self.dedup else None
+        return triage
+
+    def _escalate(self, record: TaskRecord, inc: Incident, now: datetime, repeat: bool) -> None:
+        """A task's incident got worse than the task ever was: re-analyse it and tell the channel."""
+        before, record.severity = record.severity, inc.severity
+        if repeat:  # the task text describes the first, milder occurrence: analyse the escalated one
+            record.triage = self._analyse(inc, now)
+        record.history.append((now, f"эскалация {before} → {inc.severity}"))
+        if record.slack_ts:
+            self.slack.reply(record.slack_ts, note_payload(
+                self.channel, f"⬆️ *Эскалация {record.task_id}: {before} → {inc.severity}.* {record.triage.title}"),
+                now, {"incident": record.task_id, "event": "escalated"}, broadcast=True)
+
+    def _opened(self, inc: Incident, now: datetime) -> None:
         summary = (f"открыт ({inc.reason}): ≈{human(inc.impact.clients)} клиентов, "
                    f"{human(inc.impact.lines)} строк ошибок, пик {pct(inc.impact.peak_error_rate)}, {inc.severity}")
-        if parent is not None:
-            self._repeat(parent, inc, triage, now, summary)
+        rules = fallback_triage(inc, self.router)
+        parent = self.dedup.match(inc, rules, self.memory, now) if self.dedup else None
+        if parent is not None:  # checked before the LLM: a repeat costs no model call
+            self._repeat(parent, inc, rules, now, f"{summary}; {self.dedup.last_reason}")
             return
+        triage = rules if isinstance(self.analyst, RulesAnalyst) and not self.arbiter else self._analyse(inc, now)
         ref = self.tracker.create(inc, triage, history=[(now, summary)])
         record = TaskRecord(ref.id, inc.uid, triage, inc.fingerprint(), now, inc.impact.lines, inc.impact.clients,
-                            history=[(now, summary)], last_active=now)
+                            history=[(now, summary)], last_active=now, severity=inc.severity)
         self.memory.tasks[ref.id] = record
         self.memory.by_incident[inc.uid] = ref.id
         record.slack_ts = self.slack.post(
@@ -198,6 +218,8 @@ class Engine:
         self.memory.by_incident[inc.uid] = record.task_id
         text = f"{triage.summary} Обнаружен {now:%d.%m %H:%M}, {summary}."
         record.repeats.append({"uid": inc.uid, "start": f"{inc.start:%d.%m %H:%M}", "text": text})
+        if SEVERITY_ORDER[inc.severity] > SEVERITY_ORDER[record.severity]:
+            self._escalate(record, inc, now, repeat=True)
         record.history.append((now, f"повтор: {summary}"))
         record.last_active = now
         major = inc.severity in ("SEV-1", "SEV-2")
@@ -209,12 +231,21 @@ class Engine:
 
     def _predict(self, prediction, now: datetime) -> None:
         self.memory.stats["predicted"] = self.memory.stats.get("predicted", 0) + 1
+        self.memory.predictions.append(prediction)
         self.slack.post(prediction.payload(self.prediction_channel), now,
-                        {"event": "prediction", "kind": prediction.kind, "target": prediction.target})
+                        {"event": "prediction", "kind": prediction.kind, "target": prediction.target,
+                         "window": [f"{prediction.window_start:%Y-%m-%dT%H:%M}Z", f"{prediction.window_end:%Y-%m-%dT%H:%M}Z"]})
+        record = self.memory.tasks.get(prediction.target)
+        if record:
+            record.prediction = (f"{now:%d.%m %H:%M} — риск повтора в окне {prediction.window_start:%d.%m %H:%M}–"
+                                 f"{prediction.window_end:%H:%M} UTC")
+            record.history.append((now, f"прогноз в #app-alert-predictions: {record.prediction}"))
+            self._write(record)
 
     def _write(self, record: TaskRecord) -> None:
         inc = self.incident(record.incident_uid)
-        self.tracker.write(inc, record.triage, record.history, record.repeats, record.related, record.prediction)
+        self.tracker.write(inc, record.triage, record.history, record.repeats, record.related, record.prediction,
+                           record.severity)
 
     # --- persistence --------------------------------------------------------------------------
 
@@ -226,7 +257,7 @@ class Engine:
         summary = {"cursor": self.memory.cursor.isoformat() if self.memory.cursor else None,
                    "stats": self.memory.stats,
                    "tasks": [{"id": r.task_id, "title": r.triage.title, "assignee": r.triage.assignee,
-                              "severity": self.incident(r.incident_uid).severity,
+                              "severity": r.severity,
                               "status": self.incident(r.incident_uid).status,
                               "file": f"tasks/{stem(self.incident(r.incident_uid))}.md",
                               "repeats": len(r.repeats)} for r in self.memory.tasks.values()]}
@@ -285,10 +316,10 @@ def build_engine(cfg: Config, llm: str | None = None) -> Engine:
         from .llm import make_analyst_and_arbiter
         analyst, arbiter = make_analyst_and_arbiter(cfg, router, mode)
     dedup = predictor = None
-    if cfg.dedup.get("enabled", False):
+    if cfg.dedup.get("enabled", True):
         from .dedup import Dedup
         dedup = Dedup(cfg.dedup, router)
-    if cfg.predict.get("enabled", False):
+    if cfg.predict.get("enabled", True):
         from .predict import Predictor
         predictor = Predictor(cfg.predict, router, store)
     return Engine(cfg, store, router, analyst, arbiter, dedup, predictor)

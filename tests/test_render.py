@@ -94,3 +94,11 @@ def test_fallback_title_names_the_cause_not_the_symptom():
     inc.signals["rest"] = rest
     title = fallback_triage(inc, Router.load()).title
     assert "LOADING Valkey" in title and "Rest error" not in title
+
+
+def test_task_shows_worst_severity_of_its_incidents():
+    md = render_task(incident(), triage(), history=[], severity="SEV-1")
+    assert "severity: SEV-1" in md
+    inc = incident()
+    inc.severity = "SEV-3"
+    assert "severity: SEV-1" in render_task(inc, triage(), history=[], severity="SEV-1")

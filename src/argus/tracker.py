@@ -45,13 +45,13 @@ class Tracker:
 
     def write(self, incident: Incident, triage: Triage, history: list[tuple[datetime, str]],
               repeats: list[dict] | None = None, related: list[str] | None = None,
-              prediction: str | None = None) -> TaskRef:
+              prediction: str | None = None, severity: str | None = None) -> TaskRef:
         self.tasks_dir.mkdir(parents=True, exist_ok=True)
         self.pm_dir.mkdir(parents=True, exist_ok=True)
         name = stem(incident) + ".md"
         task_path, pm_path = self.tasks_dir / name, self.pm_dir / name
-        task_path.write_text(render_task(incident, triage, history, repeats, related))
-        pm_path.write_text(render_postmortem(incident, triage, history, prediction))
+        task_path.write_text(render_task(incident, triage, history, repeats, related, severity))
+        pm_path.write_text(render_postmortem(incident, triage, history, prediction, severity))
         return TaskRef(incident.task_id, task_path, pm_path)
 
     def list(self) -> list[dict]:

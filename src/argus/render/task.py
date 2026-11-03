@@ -50,8 +50,8 @@ def _signals(incident: Incident, limit: int = 12):
 
 
 def render_task(incident: Incident, triage: Triage, history: list[tuple[datetime, str]],
-                repeats: list[dict] | None = None, related: list[str] | None = None) -> str:
-    return _env.get_template("task.md.j2").render(
+                repeats: list[dict] | None = None, related: list[str] | None = None, severity: str | None = None) -> str:
+    return _env.get_template("task.md.j2").render(severity=severity or incident.severity, 
         id=incident.task_id, title=triage.title.replace("\n", " "), incident=incident, triage=triage,
         status="resolved" if incident.resolved_at else "open", ttd=ttd_minutes(incident),
         fingerprint=_fingerprint(incident), postmortem_path=f"postmortems/{stem(incident)}.md",
@@ -60,13 +60,13 @@ def render_task(incident: Incident, triage: Triage, history: list[tuple[datetime
 
 
 def render_postmortem(incident: Incident, triage: Triage, history: list[tuple[datetime, str]],
-                      prediction: str | None = None) -> str:
+                      prediction: str | None = None, severity: str | None = None) -> str:
     key_signals = [(s.start, f"начало сигнала «{s.label[:70]}»") for s in _signals(incident, 8)]
     timeline = sorted(key_signals + list(history), key=lambda x: x[0])
     end = incident.resolved_at or incident.end
     minutes = (end - incident.start).total_seconds() / 60 + 10
     return _env.get_template("postmortem.md.j2").render(
-        id=incident.task_id, title=triage.title.replace("\n", " "), incident=incident, triage=triage,
+        severity=severity or incident.severity, id=incident.task_id, title=triage.title.replace("\n", " "), incident=incident, triage=triage,
         ttd=ttd_minutes(incident), duration=dur(minutes), timeline=timeline, prediction=prediction,
         task_link=f"../tasks/{stem(incident)}.md", signals=list(incident.signals.values()),
         countries=_countries(incident))

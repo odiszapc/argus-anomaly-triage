@@ -5,3 +5,37 @@ paths:
   out_dir: .                 # tasks/, postmortems/, slack-log.json, report.html
   routing: config/routing.yaml
   gold: evals/gold.yaml
+
+llm:
+  mode: auto                     # auto | claude | local | off  (ARGUS_LLM, --llm)
+  analyst_model: claude-opus-5-5 # Claude Agent SDK: ANTHROPIC_API_KEY or a Claude Code login
+  effort: medium
+  max_turns: 10
+  max_budget_usd: 2.0            # per incident
+  arbiter_model: qwen3:14b       # Ollama, a different model family from the analyst
+  claude_arbiter_model: claude-sonnet-5-5   # used only when Ollama is unreachable
+  ollama_host: http://127.0.0.1:11434       # OLLAMA_HOST overrides
+
+dedup:
+  enabled: true
+  window_h: 72
+  jaccard: 0.34
+  cosine: 0.85
+  embedding_model: qwen3-embedding:0.6b
+
+predict:
+  enabled: true
+  families: [data_store, infra]
+  severities: [SEV-1, SEV-2]
+  horizon_h: 24
+
+slack:
+  channel: "#app-alerts"
+  prediction_channel: "#app-alert-predictions"
+  tracker_url: https://tracker.example.com/browse/{id}
+  mentions:
+    DBA: "@dba-oncall"
+    PaaS Engineer: "@paas-oncall"
+    SEO Specialist: "@seo"
+    Backend Lead: "@backend-lead"
+    Security Lead: "@security-lead"

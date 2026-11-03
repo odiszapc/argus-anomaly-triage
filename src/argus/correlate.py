@@ -259,7 +259,26 @@ class IncidentBook:
                             role=component.role, family=component.family, start=s.start, last_active=s.end,
                             created_at=now)
         self.incidents.append(incident)
+        if incident.partition == "ops" and component.kind == "cause" and (s.attrs.get("new_template") or s.end > s.start):
+            self._reclaim(incident, s, now)  # only a new or lasting cause; a familiar blip explains nothing
         return incident
+
+    def _reclaim(self, incident: Incident, cause: Signal, now: datetime) -> None:
+        """Symptoms often show up a bucket before their cause; when the cause arrives, take the symptoms that
+        began around it away from a lower-priority incident they were parked in."""
+        tol = self.cfg.tol_buckets * BUCKET
+        mine = self.router.priority(incident.family)
+        for other in self.active("ops"):
+            if other is incident or self.router.priority(other.family) >= mine:
+                continue
+            for key, s in list(other.signals.items()):
+                if (self.router.component_of(s).kind == "symptom" and s.start >= cause.start - tol
+                        and s.end >= now - tol and len(other.signals) > 1):
+                    del other.signals[key]
+                    incident.signals[key] = s
+                    incident.last_active = max(incident.last_active, s.end)
+                    incident.start = min(incident.start, s.start)
+                    self.owner[key] = incident
 
     def _compose(self, incident: Incident) -> None:
         """Primary component: the highest-priority cause, else the highest-priority symptom."""
