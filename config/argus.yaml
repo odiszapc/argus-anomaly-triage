@@ -6,6 +6,25 @@ paths:
   routing: config/routing.yaml
   gold: evals/gold.yaml
 
+# Detector thresholds (defaults live in code; listed here so operators can tune them; `make eval` shows the effect)
+detect:
+  logs:      {z: 6.0, min_count: 30, min_ratio: 3.0, warmup_buckets: 36, max_gap: 2}
+  metrics:   {artifact_ratio: 0.5, calm_band: 0.15, shift_ratio: 0.3, cpu_high_pct: 85.0, traffic_ratio: 0.25}
+  countries: {up: 1.5, down: 0.65, divergence: 0.3, min_len: 12, max_gap: 3, min_days: 2}
+  bots:      {min_share: 0.3, min_rotation: 0.8, max_prior_share: 0.05, min_requests: 1000}
+
+# Incident lifecycle (buckets are 10 minutes)
+incidents:
+  close_after: 6            # quiet buckets before an incident resolves (SEV-1: close_after_sev1)
+  close_after_sev1: 12
+  open_min_clients: 1000    # sustained (>= 2 buckets) incidents open from here
+  open_big_clients: 5000    # a single bucket this big opens immediately
+  recurring_count: 3        # the 3rd blip of the same fingerprint in 24 h opens an incident
+  sev1_peak_rate: 0.01      # 1 % of requests failing in the worst 10 minutes
+  sev2_peak_rate: 0.001
+  regression_h: 6           # incidents this long are watched for a comeback for reopen_window_h
+  reopen_window_h: 72
+
 llm:
   mode: auto                     # auto | claude | local | off  (ARGUS_LLM, --llm)
   analyst_model: claude-opus-5-5 # Claude Agent SDK: ANTHROPIC_API_KEY or a Claude Code login
@@ -25,7 +44,7 @@ dedup:
 
 predict:
   enabled: true
-  families: [data_store, infra]
+  families: [data_store]        # load-driven recurrence; DNS/config failures do not follow traffic
   severities: [SEV-1, SEV-2]
   horizon_h: 24
 

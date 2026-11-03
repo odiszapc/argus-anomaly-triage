@@ -1,0 +1,56 @@
+# Incidents labelled by hand during EDA (not the SRE team's list, which we have not seen).
+# Times UTC. `repeat_of`: the system should file it as a repeat of the parent's task, not a new task.
+# `kind: data_quality`: no page expected, one low-priority task for the metric owner.
+incidents:
+  - id: G1
+    name: Valkey cache cluster failure (LOADING, MOVED, REST timeout storm, CPU 96 %)
+    start: 2026-09-02 11:20
+    end: 2026-09-02 19:10
+    role: DBA
+    severity: SEV-1
+  - id: G1b
+    name: Valkey failure comes back at the morning ramp
+    start: 2026-09-03 06:20
+    end: 2026-09-03 10:00
+    role: DBA
+    repeat_of: G1
+  - id: G2
+    name: MongoDB connectivity loss (monitor timeouts, then "Topology is closed")
+    start: 2026-08-25 02:30
+    end: 2026-08-25 08:40
+    role: DBA
+    severity: SEV-1
+  - id: G2b
+    name: MongoDB topology closed again
+    start: 2026-08-26 06:30
+    end: 2026-08-26 07:30
+    role: DBA
+    repeat_of: G2
+  - id: G3
+    name: Lock-wait regression ("Timeout 0 wait exceeded" x200-500, 15-minute bursts)
+    start: 2026-08-25 14:45
+    end: 2026-09-04 12:15
+    role: Backend Lead
+  - id: G4
+    name: Brazil traffic +60-95 % for 17 hours
+    start: 2026-09-03 09:00
+    end: 2026-09-04 02:00
+    role: SEO Specialist
+    country: BR
+  - id: G5
+    name: Bot through rotating proxies (RapidSeedbox), "Adapter failure" burst
+    start: 2026-09-06 01:30
+    end: 2026-09-06 01:45
+    role: Security Lead
+  - id: G6
+    name: Timeouts at the evening traffic peak
+    start: 2026-08-24 17:00
+    end: 2026-08-24 19:00
+    role: PaaS Engineer
+  - id: G7
+    name: RPS metric doublings not confirmed by CPU or per-country hits
+    start: 2026-08-24 11:10
+    end: 2026-09-07 11:10
+    role: PaaS Engineer
+    kind: data_quality
+    component: observability

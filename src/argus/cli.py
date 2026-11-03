@@ -96,5 +96,26 @@ def watch(interval: int = typer.Option(300, help="Seconds between passes"), llm:
         time.sleep(interval)
 
 
+
+@app.command("eval")
+def eval_(out: Path = OutOpt, write: Path = typer.Option(None, help="Also write the markdown table here"),
+          config: Path = ConfigOpt) -> None:
+    """Score the last run against evals/gold.yaml: recall, assignee, time to detect, repeats, predictions."""
+    import pickle
+
+    from .evals import detections_from, evaluate, load_gold, render
+
+    cfg = load_config(config, out_dir=out)
+    state = cfg.paths.out_dir / ".argus" / "state.pkl"
+    if not state.exists():
+        raise typer.BadParameter(f"no run state at {state}; run `argus replay` first")
+    memory = pickle.loads(state.read_bytes())
+    result = evaluate(load_gold(cfg.paths.gold), detections_from(memory), memory.predictions)
+    text = render(result)
+    typer.echo(text)
+    if write:
+        Path(write).write_text(text + "\n")
+
+
 if __name__ == "__main__":
     app()
