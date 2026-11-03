@@ -25,9 +25,9 @@ from .correlate import (
     IncidentCfg,
     backed_by_new_signature,
 )
-from .llm.vote import vote
 from .detect import DetectCfg, detect_all
 from .detect.security import BotCfg
+from .llm.vote import vote
 from .model import Signal
 from .probe import StoreProbe
 from .render.fmt import human, pct
