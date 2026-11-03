@@ -84,3 +84,13 @@ def test_fallback_triage_is_complete():
     t = fallback_triage(incident(), Router.load())
     assert t.assignee == "DBA" and t.title and t.hypotheses and t.symptoms and t.next_steps
     assert t.source == "rules"
+
+
+def test_fallback_title_names_the_cause_not_the_symptom():
+    inc = incident()
+    pts = [Point(T, 900_000, 5, 900, True)]
+    rest = Signal("log_burst", "aaaa", "Rest error: Operation timed out after <N> milliseconds", T, T, T, T,
+                  900_000, 5, 900, 5_000_000, {}, pts)
+    inc.signals["rest"] = rest
+    title = fallback_triage(inc, Router.load()).title
+    assert "LOADING Valkey" in title and "Rest error" not in title

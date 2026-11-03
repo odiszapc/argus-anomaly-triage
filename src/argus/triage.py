@@ -80,13 +80,14 @@ def _title(incident: Incident, router: Router) -> str:
         return f"Трафик из {s.key} {verb} в {s.value / s.baseline:.1f} раза относительно обычного" if s.baseline else \
             f"Аномалия трафика из {s.key}"
     if incident.component == "observability":
-        return f"Метрика RPS: {len(incident.signals)} скачков без подтверждения CPU и трафиком по странам"
+        return "Метрика RPS: повторяющиеся скачки без подтверждения CPU и трафиком по странам"
     if incident.component == "abuse" and incident.bot:
         return f"Автоматизированный трафик через {incident.bot.top_isp}: {pct(incident.bot.top_share)} запросов"
     if incident.component == "capacity":
         return "Пиковая нагрузка: рост RPS и таймауты внутренних API"
-    if logs:
-        return f"{comp.title}: всплеск «{logs[0].label[:70]}»"
+    own = [s for s in logs if router.same_problem(router.component_of(s).name, incident.component)]
+    if own or logs:
+        return f"{comp.title}: всплеск «{(own or logs)[0].label[:70]}»"
     return comp.title
 
 
