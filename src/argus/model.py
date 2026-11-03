@@ -46,9 +46,9 @@ class Signal:
             return None
         if self.end <= now or not self.points:
             return self
-        flagged = [p for p in self.points if p.ts <= now and p.flagged]
+        flagged = [p for p in self.points if p.ts <= now and p.flagged and p.value == p.value]
         end = flagged[-1].ts if flagged else self.start
         pts = [p for p in self.points if p.ts <= end]  # live segmentation ends at the last flagged bucket
         peak = max(flagged, key=lambda p: p.value) if flagged else pts[-1]
         return replace(self, end=end, peak_at=peak.ts, value=peak.value, baseline=peak.baseline,
-                       score=peak.score, total=sum(p.value for p in pts), points=pts)
+                       score=peak.score, total=sum(p.value for p in pts if p.value == p.value), points=pts)

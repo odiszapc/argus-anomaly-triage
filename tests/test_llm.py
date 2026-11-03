@@ -130,3 +130,27 @@ def test_vote_keeps_rules_backed_by_a_new_signature():
     llm = Verdict(True, "Backend Lead", "SEV-1", 0.7, "таймауты REST")
     role, needs_human, note = vote("DBA", "Backend Lead", llm, rules_strong=True)
     assert role == "DBA" and needs_human and "DBA" in note
+
+
+def test_verifier_checks_dot_decimals_and_small_percentages():
+    known = [8_561_654, 0.007]
+    assert verify_numbers(["≈8.99 млн клиентов"], known) == ["8.99 млн"]
+    assert verify_numbers(["7 % запросов падали"], known) == ["7 %"]
+    assert verify_numbers(["0,7 % запросов падали"], known) == []
+
+
+def test_tool_output_ids_and_timestamps_do_not_verify_numbers():
+    from argus.llm.verify import known_numbers
+    known = known_numbers({}, ["ts,ip,n\n2026-09-02 11:40:00,10.0.0.100,42"])
+    assert 42 in known and 100 not in known and 11 not in known
+
+
+def test_empty_llm_answer_falls_back_to_rules(store):
+    from test_render import incident
+
+    from argus.llm.analyst import AgentResult
+    empty = {"title": "", "summary": "", "symptoms": [], "hypotheses": [], "assignee": "DBA",
+             "assignee_reason": "", "next_steps": [], "impact_note": ""}
+    t = ClaudeAnalyst(Router.load(), runner=lambda **kw: AgentResult(empty, None, 0.1)).triage(
+        incident(), store, T0 + timedelta(minutes=60))
+    assert t.source == "rules" and t.title and t.symptoms

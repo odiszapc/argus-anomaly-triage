@@ -71,6 +71,7 @@ def replay(since: str = typer.Option(None, help="Start (UTC), default: start of 
 
 @app.command()
 def run(until: str = typer.Option(None, help="Process up to this time (UTC), default: latest data"),
+        max_seconds: float = typer.Option(600, help="Stop cleanly after this long; the next pass continues"),
         llm: str = LlmOpt, out: Path = OutOpt, config: Path = ConfigOpt) -> None:
     """One pass from the saved cursor to the latest data (for cron / Kubernetes CronJob)."""
     from .engine import build_engine
@@ -78,7 +79,7 @@ def run(until: str = typer.Option(None, help="Process up to this time (UTC), def
 
     cfg = load_config(config, out_dir=out)
     engine = build_engine(cfg, llm)
-    _summary(engine, run_replay(engine, until=_parse(until)))
+    _summary(engine, run_replay(engine, until=_parse(until), max_seconds=max_seconds))
 
 
 @app.command()

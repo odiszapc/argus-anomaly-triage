@@ -64,3 +64,55 @@ def test_rerender_rewrites_files_with_stable_names(dataset, tmp_path):
     engine.rerender()
     names = sorted(p.name for p in (tmp_path / "out" / "tasks").glob("ARG-*.md"))
     assert names == ["ARG-001-20260826-1420.md"]
+
+
+def test_interrupted_pass_does_not_duplicate_on_retry(dataset, tmp_path, monkeypatch):
+    cfg, start = burst_dataset(dataset, tmp_path)
+    engine = build_engine(cfg, llm="off")
+    real_tick, calls = engine.tick, {"n": 0}
+
+    def dying_tick(now, signals):
+        events = real_tick(now, signals)
+        calls["n"] += 1
+        if engine.memory.tasks and calls["n"] > 340:  # the job is killed after the task was filed
+            raise KeyboardInterrupt
+        return events
+
+    monkeypatch.setattr(engine, "tick", dying_tick)
+    try:
+        replay(engine)
+    except KeyboardInterrupt:
+        pass
+    replay(build_engine(cfg, llm="off"))  # the next cron pass
+    log = json.loads((tmp_path / "out" / "slack-log.json").read_text())
+    assert len(list((tmp_path / "out" / "tasks").glob("ARG-*.md"))) == 1
+    assert sum(1 for e in log if e["meta"].get("event") == "opened") == 1
+
+
+def test_old_state_without_new_fields_still_loads(dataset, tmp_path):
+    import pickle
+
+    cfg, _ = burst_dataset(dataset, tmp_path)
+    replay(build_engine(cfg, llm="off"))
+    path = tmp_path / "out" / ".argus" / "state.pkl"
+    memory = pickle.loads(path.read_bytes())
+    for inc in memory.incidents:
+        inc.__dict__.pop("slug", None)
+    for rec in memory.tasks.values():
+        rec.__dict__.pop("severity", None)
+    path.write_bytes(pickle.dumps(memory))
+    build_engine(cfg, llm="off").rerender()  # must not raise AttributeError
+
+
+def test_live_ticks_equal_replay(dataset, tmp_path):
+    from argus.detect import detect_all
+    from argus.store import Store
+
+    cfg, start = burst_dataset(dataset, tmp_path)
+    store = Store(cfg.paths.db)
+    full = detect_all(store)
+    for now in (start + timedelta(minutes=10), start + timedelta(minutes=30), start + timedelta(hours=2)):
+        store.set_now(now)
+        live = sorted((s.kind, s.key, s.start, s.end, round(s.total)) for s in detect_all(store))
+        cut = sorted((s.kind, s.key, s.start, s.end, round(s.total)) for s in (x.truncate(now) for x in full) if s)
+        assert live == cut

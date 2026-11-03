@@ -11,8 +11,9 @@ import json
 import re
 
 UNITS = {"млрд": 1e9, "млн": 1e6, "тыс.": 1e3, "тыс": 1e3, "%": 1.0}
+_DATE_NOT_DECIMAL = r"\b\d{1,2}\.\d{1,2}(\.\d{2,4})?\b(?![ \u00a0]?(?:млрд|млн|тыс|%))"  # 02.09, but not 8.56 млн
 _SKIP = [re.compile(p) for p in (r"«[^»]*»", r'"[^"]*"', r"`[^`]*`", r"\b\d{1,2}:\d{2}(:\d{2})?\b",
-                                 r"\b\d{4}-\d{2}-\d{2}\b", r"\b\d{1,2}\.\d{1,2}(\.\d{2,4})?\b",
+                                 r"\b\d{4}-\d{2}-\d{2}\b", _DATE_NOT_DECIMAL,
                                  r"\b(SEV|ARG|P)-?\d+\b", r"\b[A-Za-z_]+\d+[A-Za-z_\d]*\b")]
 _NUM = re.compile(r"(?<![\w.,])(\d{1,3}(?:[   ]\d{3})+|\d+)(?:[.,](\d+))?(?:[  ]?(млрд|млн|тыс\.?|%))?")
 
@@ -37,12 +38,13 @@ def _tolerance(raw: str, value: float) -> float:
 
 
 def verify_numbers(texts: list[str], known: list[float]) -> list[str]:
-    candidates = [abs(k) for k in known] + [abs(k) * 100 for k in known if abs(k) <= 1.5]
+    candidates = [abs(k) for k in known] + [abs(k) * 100 for k in known if abs(k) <= 1.0]
     unverified = []
     for text in texts:
         for raw, value in extract_numbers(text):
-            if value <= 10 or 2020 <= value <= 2030:
-                continue
+            has_unit = any(raw.endswith(u) for u in UNITS)
+            if not has_unit and (value <= 10 or 2020 <= value <= 2030):
+                continue  # small counts and years; never a percentage or a magnitude
             tol = _tolerance(raw, value)
             if not any(abs(value - k) <= tol for k in candidates):
                 unverified.append(raw)
@@ -65,6 +67,7 @@ def known_numbers(evidence: dict, tool_outputs: list[str]) -> list[float]:
                 walk(v)
 
     walk(json.loads(json.dumps(evidence, default=str)))
-    for out in tool_outputs:
-        nums += [float(v) for v in re.findall(r"-?\d+(?:\.\d+)?(?:e[+-]?\d+)?", out)]
+    cell = re.compile(r"-?\d+(?:\.\d+)?(?:e[+-]?\d+)?")
+    for out in tool_outputs:  # numeric cells only: timestamps, IPs and ids are not evidence for a number
+        nums += [float(c) for line in out.splitlines() for c in line.split(",") if cell.fullmatch(c.strip())]
     return nums

@@ -15,7 +15,7 @@ from .timeutil import BUCKET, fmt, sql_ts
 
 
 def _r(x: float | None, nd: int = 1):
-    return None if x is None else round(float(x), nd)
+    return None if x is None or x != x else round(float(x), nd)  # NaN = no data
 
 
 def _metrics(store: Store, start: datetime, end: datetime) -> dict:

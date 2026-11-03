@@ -400,9 +400,10 @@ class IncidentBook:
             return "SEV-3"
         floor = "SEV-2" if incident.component == "abuse" else "SEV-3"
         minutes = (incident.end - incident.start) / timedelta(minutes=1) + 10
-        if (imp.peak_error_rate >= cfg.sev1_peak_rate or imp.clients >= cfg.sev1_clients
-                or any(s.kind == "cpu_high" for s in incident.signals.values())):
+        if imp.peak_error_rate >= cfg.sev1_peak_rate or imp.clients >= cfg.sev1_clients:
             return "SEV-1"
+        if any(s.kind == "cpu_high" for s in incident.signals.values()):
+            return "SEV-2"  # saturation alone is a warning sign, not proof of user impact
         if (imp.peak_error_rate >= cfg.sev2_peak_rate or imp.clients >= cfg.sev2_clients
                 or (minutes >= cfg.sev2_minutes and imp.clients >= cfg.sev2_long_clients)):
             return "SEV-2"

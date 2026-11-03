@@ -319,3 +319,10 @@ def test_familiar_blip_cause_does_not_reclaim_symptoms():
                    sig("log_burst", "Timeout <N> wait exceeded", 9, 9, value=3500, new_template=False)], 30)
     capacity = next(i for i in book.incidents if i.component == "capacity")
     assert any(s.label == REST for s in capacity.signals.values())
+
+
+def test_cpu_saturation_alone_does_not_make_sev1():
+    _, events = run([sig("log_burst", REST, 0, 3), sig("cpu_high", "CPU", 1, 3, value=90, base=30, key="cpu")], 20,
+                    FakeProbe(clients=2000))
+    [inc] = opened(events)
+    assert inc.severity == "SEV-2"

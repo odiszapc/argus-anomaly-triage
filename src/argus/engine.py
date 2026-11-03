@@ -8,10 +8,11 @@ task or a Slack post.
 from __future__ import annotations
 
 import json
+import os
 import pickle
 import shutil
 import time
-from dataclasses import dataclass, field
+from dataclasses import MISSING, dataclass, field, fields
 from datetime import datetime, timedelta
 from typing import Protocol
 
@@ -111,7 +112,7 @@ class Engine:
         self.tracker = Tracker(cfg.paths.out_dir, slack.get("tracker_url", "https://tracker.example.com/browse/{id}"))
         self.slack = SlackLog(cfg.paths.out_dir / "slack-log.json")
         self.state_path = cfg.paths.out_dir / ".argus" / "state.pkl"  # state belongs to these outputs
-        self.memory: Memory = pickle.loads(self.state_path.read_bytes()) if self.state_path.exists() else Memory()
+        self.memory: Memory = _load_memory(self.state_path)
         known = {k: v for k, v in (cfg.incidents or {}).items() if k in IncidentCfg.__dataclass_fields__}
         self.book = IncidentBook(router, StoreProbe(store), IncidentCfg(**known), self.detect_cfg.bots or BotCfg())
         self.book.incidents = self.memory.incidents
@@ -284,7 +285,9 @@ class Engine:
         self.memory.incidents = self.book.incidents
         self.memory.owner = {k: i.uid for k, i in self.book.owner.items()}
         self.state_path.parent.mkdir(parents=True, exist_ok=True)
-        self.state_path.write_bytes(pickle.dumps(self.memory))
+        tmp = self.state_path.with_suffix(".tmp")
+        tmp.write_bytes(pickle.dumps(self.memory))
+        os.replace(tmp, self.state_path)  # a kill mid-write leaves the previous state intact
         summary = {"cursor": self.memory.cursor.isoformat() if self.memory.cursor else None,
                    "stats": self.memory.stats,
                    "tasks": [{"id": r.task_id, "title": r.triage.title, "assignee": r.triage.assignee,
@@ -295,8 +298,13 @@ class Engine:
         (self.state_path.parent / "state.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2))
 
 
-def replay(engine: Engine, since: datetime | None = None, until: datetime | None = None) -> RunStats:
-    """Process ticks after the saved cursor up to `until` (default: end of data)."""
+def replay(engine: Engine, since: datetime | None = None, until: datetime | None = None,
+           max_seconds: float | None = None) -> RunStats:
+    """Process ticks after the saved cursor up to `until` (default: end of data).
+
+    State is saved after every tick that produced output, so a killed pass resumes without repeating a task
+    or a post; `max_seconds` stops cleanly before a scheduler's deadline (the next pass continues).
+    """
     started = time.monotonic()
     t0, t1 = engine.store.time_range()
     start = since or t0
@@ -309,10 +317,15 @@ def replay(engine: Engine, since: datetime | None = None, until: datetime | None
     engine.store.set_now(end + BUCKET)
     signals = detect_all(engine.store, engine.detect_cfg)
     now = start
+    last_post = engine.slack.entries[-1]["ts"] if engine.slack.entries else None
     while now <= end:
         visible = [v for v in (s.truncate(now) for s in signals if s.detected_at <= now)
                    if v and v.end >= now - LOOKBACK]
-        for event in engine.tick(now, visible):
+        events = engine.tick(now, visible)
+        if events or engine.slack.entries and engine.slack.entries[-1]["ts"] != last_post:
+            engine.save()
+            last_post = engine.slack.entries[-1]["ts"] if engine.slack.entries else None
+        for event in events:
             if event.kind == "opened":
                 stats.opened += 1
             elif event.kind == "resolved":
@@ -321,11 +334,34 @@ def replay(engine: Engine, since: datetime | None = None, until: datetime | None
                 stats.blips += 1
         stats.ticks += 1
         now += BUCKET
+        if max_seconds is not None and time.monotonic() - started > max_seconds:
+            break
     stats.repeats = sum(len(r.repeats) for r in engine.memory.tasks.values())
     stats.predictions = engine.memory.stats.get("predicted", 0)
     engine.save()
     stats.seconds = round(time.monotonic() - started, 1)
     return stats
+
+
+def _load_memory(path) -> Memory:
+    if not path.exists():
+        return Memory()
+    try:
+        memory = pickle.loads(path.read_bytes())
+    except Exception as e:  # noqa: BLE001
+        raise RuntimeError(f"cannot read run state {path}: {e}. Restore it or start over with --fresh.") from e
+    for obj in [memory, *memory.incidents, *memory.tasks.values()]:
+        _fill_defaults(obj)  # state written by an older version lacks newer fields
+    return memory
+
+
+def _fill_defaults(obj) -> None:
+    for f in fields(obj):
+        if f.name not in obj.__dict__:
+            if f.default is not MISSING:
+                setattr(obj, f.name, f.default)
+            elif f.default_factory is not MISSING:
+                setattr(obj, f.name, f.default_factory())
 
 
 def reset_outputs(cfg: Config) -> None:

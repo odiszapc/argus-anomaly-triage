@@ -67,6 +67,12 @@ def triage_from_output(out: dict, rules_role: str) -> Triage:
                   impact_note=str(out.get("impact_note", "")).strip() or IMPACT_NOTE)
 
 
+def _require_content(t: Triage) -> None:
+    """A schema-valid but empty answer is a failure: the task must say what, why and what to do."""
+    if not (t.title and t.summary and t.symptoms and t.hypotheses and t.next_steps):
+        raise ValueError("the model returned an empty triage")
+
+
 def _texts(t: Triage) -> list[str]:
     return [t.title, t.summary, t.assignee_reason, t.impact_note, *t.symptoms, *t.next_steps,
             *(h.cause + " " + h.evidence for h in t.hypotheses)]
@@ -149,6 +155,7 @@ class ClaudeAnalyst:
         result = self.runner(prompt=prompt, **kw)
         self.cost_usd += result.cost_usd or 0.0
         triage = triage_from_output(result.output, incident.role)
+        _require_content(triage)
         unverified = verify_numbers(_texts(triage), known_numbers(evidence, [o for _, o in log]))
         unverified_first, fixed = bool(unverified and result.session_id), None
         if unverified_first:
@@ -197,6 +204,7 @@ class OllamaAnalyst:
                               "Evidence pack (JSON):\n" + json.dumps(evidence, ensure_ascii=False, default=str),
                               TRIAGE_SCHEMA)
             triage = triage_from_output(out, incident.role)
+            _require_content(triage)
             triage.unverified = verify_numbers(_texts(triage), known_numbers(evidence, []))
             triage.source, triage.model = "ollama", self.model
             triage.votes = {"rules": incident.role, "analyst": triage.assignee}
