@@ -1,0 +1,78 @@
+# Post-mortem: {{ id }} — {{ title }}
+
+> Черновик, подготовленный Argus. Факты и хронология собраны автоматически; разделы с пометкой **[SRE]** заполняются по итогам разбора.
+
+| | |
+|---|---|
+| Статус | черновик |
+| Severity | {{ incident.severity }} |
+| Период (UTC) | {{ incident.start | short }} – {{ (incident.resolved_at | short) if incident.resolved_at else "продолжается" }} ({{ duration }}) |
+| Обнаружено | {{ incident.detected_at | short }}, через {{ ttd }} мин после начала |
+| Владелец | {{ triage.assignee }} |
+| Задача | [{{ id }}]({{ task_link }}) |
+
+## Краткое содержание
+
+{{ triage.summary }}
+
+## Влияние
+
+{% if incident.impact.clients %}
+- ≈{{ incident.impact.clients | human }} уникальных клиентов получили ошибки ({{ incident.impact.users | human }} залогиненных)
+{% endif %}
+{% if incident.impact.peak_error_rate %}
+- Пик: {{ incident.impact.peak_error_rate | pct }} запросов завершались ошибкой; всего {{ incident.impact.n5xx | human }} ответов 5xx в логах
+{% endif %}
+{% if countries %}
+- Больше всего затронуты: {{ countries }}
+{% endif %}
+{% if incident.impact.requests_delta %}
+- Изменение трафика: {{ "+" if incident.impact.requests_delta > 0 }}{{ incident.impact.requests_delta | human }} запросов
+{% endif %}
+- **[SRE]** Бизнес-влияние (выручка, SLA, жалобы):
+
+## Хронология (UTC)
+
+| Время | Событие |
+|---|---|
+{% for at, text in timeline %}
+| {{ at | short }} | {{ text }} |
+{% endfor %}
+| | **[SRE]** действия команды, коммуникация, восстановление |
+
+## Обнаружение
+
+Обнаружено автоматически через {{ ttd }} мин после начала ({{ incident.reason }}).
+{% if prediction %}Предупреждение в #app-alert-predictions: {{ prediction }}.{% endif %}
+
+**[SRE]** Можно ли было заметить раньше? Какой сигнал сработал бы первым?
+
+## Первопричина
+
+**[SRE]** Подтверждённая причина:
+
+Гипотезы на момент обнаружения:
+{% for h in triage.hypotheses %}
+{{ loop.index }}. {{ h.cause }} — {{ h.evidence }} _(уверенность: {{ h.confidence }})_
+{% endfor %}
+
+## Что сработало и что нет
+
+- **[SRE]** Сработало:
+- **[SRE]** Не сработало:
+
+## Action items
+
+| Действие | Владелец | Приоритет | Задача |
+|---|---|---|---|
+{% for s in triage.next_steps %}
+| {{ s }} | {{ triage.assignee }} | {{ "P1" if incident.severity == "SEV-1" else "P2" }} | |
+{% endfor %}
+| **[SRE]** Предотвращение повторения | | | |
+
+## Уроки
+
+**[SRE]**
+
+---
+_Сигналы и числа — из данных Argus ({{ signals | length }} сигналов); проверка чисел: {{ "есть неподтверждённые" if triage.unverified else "все подтверждены кодом" }}._

@@ -1,0 +1,124 @@
+---
+id: {{ id }}
+title: {{ title | j }}
+assignee: {{ triage.assignee }}
+severity: {{ incident.severity }}
+status: {{ status }}
+component: {{ incident.component }}
+labels: [argus, {{ incident.component }}, {{ incident.severity | lower }}{% if triage.needs_human %}, needs-human{% endif %}{% if repeats %}, recurring{% endif %}]
+started_at: {{ incident.start | ts }}
+detected_at: {{ incident.detected_at | ts }}
+resolved_at: {{ (incident.resolved_at | ts) if incident.resolved_at else "null" }}
+time_to_detect_min: {{ ttd }}
+affected_clients: {{ incident.impact.clients }}
+peak_error_rate: {{ "%.5f" | format(incident.impact.peak_error_rate) }}
+fingerprint: {{ fingerprint | j }}
+votes: {{ triage.votes | j }}
+analysis: {{ (triage.source ~ (" (" ~ triage.model ~ ")" if triage.model else "")) | j }}
+verification: {{ "partial" if triage.unverified else "ok" }}
+postmortem: {{ postmortem_path }}
+---
+
+# {{ id }} · {{ title }}
+
+**Исполнитель:** {{ triage.assignee }} · **Severity:** {{ incident.severity }} · **Начало:** {{ incident.start | short }} UTC · **Обнаружено:** {{ incident.detected_at | short }} (через {{ ttd }} мин){{ (" · **Закрыт:** " ~ (incident.resolved_at | short)) if incident.resolved_at else "" }}
+
+{% if triage.needs_human %}
+> ⚠️ **Нужно решение человека.** {{ triage.arbiter_note }}
+
+{% endif %}
+## Что происходит
+
+{{ triage.summary }}
+
+## Симптомы
+
+{% for s in triage.symptoms %}
+- {{ s }}
+{% endfor %}
+
+## Возможные причины
+
+{% for h in triage.hypotheses %}
+{{ loop.index }}. **{{ h.cause }}** — {{ h.evidence }} _(уверенность: {{ h.confidence }})_
+{% endfor %}
+
+## Затронутые пользователи
+
+{% if incident.impact.clients %}
+- **≈{{ incident.impact.clients | human }} уникальных клиентов**, из них {{ incident.impact.users | human }} залогиненных
+{% endif %}
+{% if incident.impact.peak_error_rate %}
+- Пиковая доля ошибок: **{{ incident.impact.peak_error_rate | pct }}** запросов за 10 минут; всего {{ incident.impact.n5xx | human }} ответов 5xx в логах
+{% endif %}
+{% if countries %}
+- Страны: {{ countries }}
+{% endif %}
+{% if incident.impact.hosts %}
+- Хосты с ошибками: {{ incident.impact.hosts }} из {{ incident.impact.hosts_total }}
+{% endif %}
+{% if incident.impact.requests_delta %}
+- Изменение трафика: {{ "+" if incident.impact.requests_delta > 0 }}{{ incident.impact.requests_delta | human }} запросов за период аномалии
+{% endif %}
+{% if triage.impact_note %}
+
+_{{ triage.impact_note }}_
+{% endif %}
+
+## Почему {{ triage.assignee }}
+
+{{ triage.assignee_reason }}
+{% if votes %}
+
+Голоса: {{ votes }}
+{% endif %}
+
+## Что проверить в первую очередь
+
+{% for s in triage.next_steps %}
+- [ ] {{ s }}
+{% endfor %}
+{% if repeats %}
+
+## Повторы
+
+{% for r in repeats %}
+### Повтор {{ loop.index }}: {{ r.start }} UTC
+{{ r.text }}
+
+{% endfor %}
+{% endif %}
+{% if related %}
+
+Связанные задачи: {{ related | join(", ") }}
+{% endif %}
+
+## Данные
+
+| Сигнал | Начало | Конец | Пик за 10 мин | Норма | Всего |
+|---|---|---|---|---|---|
+{% for s in signals %}
+| {{ s.label }} | {{ s.start | short }} | {{ s.end | short }} | {{ s.value | human }} | {{ s.baseline | human }} | {{ s.total | human }} |
+{% endfor %}
+{% if triage.queries %}
+
+Запросы, которыми пользовался аналитик (DuckDB, `argus mcp` или `argus sql`):
+
+```sql
+{% for q in triage.queries %}{{ q }};
+{% endfor %}
+```
+{% endif %}
+{% if triage.unverified %}
+
+> Числа, которые код не смог подтвердить данными и пометил: {{ triage.unverified | join(", ") }}
+{% endif %}
+
+## История
+
+{% for at, text in history %}
+- {{ at | short }} — {{ text }}
+{% endfor %}
+
+---
+_Сформировано Argus: детекторы — статистика, текст — {{ "LLM-аналитик " ~ triage.model if triage.source != "rules" else "правила без LLM" }}._
