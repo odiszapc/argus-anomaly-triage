@@ -1,7 +1,7 @@
 """One tick = reveal signals at `now` → incident book → act: task, Slack, post-mortem, predictions.
 
 `replay` drives ticks over history with a moving `now` (the same loop serves `run` for cron and
-`watch` for a resident process). Progress is a cursor in var/state.pkl, so a rerun never repeats a
+`watch` for a resident process). Progress is a cursor in <out>/.argus/state.pkl, so a rerun never repeats a
 task or a Slack post.
 """
 
@@ -99,7 +99,7 @@ class Engine:
         self.mentions: dict[str, str] = slack.get("mentions", {})
         self.tracker = Tracker(cfg.paths.out_dir, slack.get("tracker_url", "https://tracker.example.com/browse/{id}"))
         self.slack = SlackLog(cfg.paths.out_dir / "slack-log.json")
-        self.state_path = cfg.paths.var_dir / "state.pkl"
+        self.state_path = cfg.paths.out_dir / ".argus" / "state.pkl"  # state belongs to these outputs
         self.memory: Memory = pickle.loads(self.state_path.read_bytes()) if self.state_path.exists() else Memory()
         known = {k: v for k, v in (cfg.incidents or {}).items() if k in IncidentCfg.__dataclass_fields__}
         self.book = IncidentBook(router, StoreProbe(store), IncidentCfg(**known), self.detect_cfg.bots or BotCfg())
@@ -164,10 +164,18 @@ class Engine:
                 self.slack.update(record.slack_ts, payload, now, {"incident": task_id, "event": f"{event.kind}-root"})
         self._write(record)
 
+    def _related(self, now: datetime) -> list[dict]:
+        recent = [r for r in self.memory.tasks.values() if r.last_active and now - r.last_active <= timedelta(hours=72)]
+        return [{"task": r.task_id, "title": r.triage.title, "assignee": r.triage.assignee,
+                 "opened": f"{r.opened_at:%d.%m %H:%M}", "repeats": len(r.repeats)} for r in recent[-5:]]
+
     def _opened(self, inc: Incident, now: datetime) -> None:
-        triage = self.analyst.triage(inc, self.store, now)
+        if isinstance(self.analyst, RulesAnalyst):
+            triage = self.analyst.triage(inc, self.store, now)
+        else:
+            triage = self.analyst.triage(inc, self.store, now, related=self._related(now))
         if self.arbiter:
-            self.arbiter.review(inc, triage, self.store, now)
+            self.arbiter.review(inc, triage, self.store, now, self.router)
         parent = self.dedup.match(inc, triage, self.memory, now) if self.dedup else None
         summary = (f"открыт ({inc.reason}): ≈{human(inc.impact.clients)} клиентов, "
                    f"{human(inc.impact.lines)} строк ошибок, пик {pct(inc.impact.peak_error_rate)}, {inc.severity}")
@@ -263,8 +271,9 @@ def reset_outputs(cfg: Config) -> None:
     for d in (out / "tasks", out / "postmortems"):
         if d.exists():
             shutil.rmtree(d)
-    for f in (out / "slack-log.json", cfg.paths.var_dir / "state.pkl", cfg.paths.var_dir / "state.json"):
-        f.unlink(missing_ok=True)
+    if (out / ".argus").exists():
+        shutil.rmtree(out / ".argus")
+    (out / "slack-log.json").unlink(missing_ok=True)
 
 
 def build_engine(cfg: Config, llm: str | None = None) -> Engine:

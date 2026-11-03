@@ -72,6 +72,10 @@ _{{ triage.impact_note }}_
 
 Голоса: {{ votes }}
 {% endif %}
+{% if triage.arbiter_note and not triage.needs_human %}
+
+_{{ triage.arbiter_note }}_
+{% endif %}
 
 ## Что проверить в первую очередь
 

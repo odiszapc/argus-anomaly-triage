@@ -60,6 +60,7 @@ class Triage:
     votes: dict[str, str] = field(default_factory=dict)
     needs_human: bool = False
     arbiter_note: str = ""
+    cost_usd: float = 0.0
 
     def to_dict(self) -> dict:
         return asdict(self)
