@@ -28,13 +28,16 @@ def regular(s: pd.Series, start: datetime, end: datetime, fill: float | None = N
 def seasonal_baseline(s: pd.Series, days: int = 7, min_days: int = 2, fallback: int = 12) -> pd.Series:
     """Median of the same time of day over the previous `days` days.
 
-    With fewer than `min_days` days of history, the median of the previous `fallback` buckets.
+    With fewer than `min_days` days of history, the median of the previous `fallback` buckets
+    (`fallback=0`: NaN, i.e. "no opinion yet").
     """
     lagged = np.column_stack([s.shift(d * BUCKETS_PER_DAY).to_numpy() for d in range(1, days + 1)])
     available = np.sum(~np.isnan(lagged), axis=1)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", RuntimeWarning)  # rows with no history → NaN, replaced below
         seasonal = np.nanmedian(lagged, axis=1)
+    if fallback <= 0:
+        return pd.Series(np.where(available >= min_days, seasonal, np.nan), index=s.index)
     trailing = s.shift(1).rolling(fallback, min_periods=3).median().to_numpy()
     return pd.Series(np.where(available >= min_days, seasonal, trailing), index=s.index)
 

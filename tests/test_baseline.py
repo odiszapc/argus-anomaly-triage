@@ -36,6 +36,11 @@ def test_fallback_on_short_history():
     assert seasonal_baseline(s, fallback=12).iloc[20] == 10.0
 
 
+def test_no_fallback_gives_nan_on_short_history():
+    s = grid([10.0] * 20 + [100.0])
+    assert np.isnan(seasonal_baseline(s, fallback=0).iloc[20])
+
+
 def test_segment_merges_small_gaps():
     flags = grid([0, 1, 1, 0, 0, 1, 0, 0, 0, 1]).astype(bool)
     episodes = segment(flags, max_gap=2)
