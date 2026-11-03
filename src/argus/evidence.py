@@ -63,11 +63,12 @@ def build_evidence(incident: Incident, store: Store, router: Router, now: dateti
     comp = router.get(incident.component)
     imp = incident.impact
     pack: dict = {
-        "incident": {"now": fmt(now), "first_anomalous_bucket_start": fmt(start), "last_anomalous_bucket": fmt(incident.end),
+        "incident": {"now": fmt(now), "first_anomalous_bucket_start": fmt(start),
+                     "last_anomalous_bucket": fmt(incident.end),
                      "duration_min": int((end - start).total_seconds() // 60), "severity": incident.severity,
                      "why_alerted": incident.reason},
-        "impact": {"error_lines": imp.lines, "lines_5xx": imp.n5xx, "clients": imp.clients, "logged_in_users": imp.users,
-                   "hosts_with_errors": imp.hosts, "hosts_total": imp.hosts_total,
+        "impact": {"error_lines": imp.lines, "lines_5xx": imp.n5xx, "clients": imp.clients,
+                   "logged_in_users": imp.users, "hosts_with_errors": imp.hosts, "hosts_total": imp.hosts_total,
                    "peak_error_rate": _r(imp.peak_error_rate, 5), "window_error_rate": _r(imp.error_rate, 5),
                    "requests_in_window": _r(imp.requests, 0), "requests_delta": _r(imp.requests_delta, 0),
                    "top_countries_by_clients": [{"country": c, "clients": n} for c, n in imp.top_countries]},
@@ -84,7 +85,8 @@ def build_evidence(incident: Incident, store: Store, router: Router, now: dateti
         b = incident.bot
         pack["traffic_source"] = {"top_isp": b.top_isp, "top_isp_share": _r(b.top_share, 3),
                                   "distinct_ips_per_request": _r(b.top_rotation, 3),
-                                  "same_isp_share_prev_24h": _r(b.prior_share, 4), "anonymous_share": _r(b.anon_share, 3)}
+                                  "same_isp_share_prev_24h": _r(b.prior_share, 4),
+                                  "anonymous_share": _r(b.anon_share, 3)}
     if not blind:
         pack["routing"] = {"component": comp.name, "component_title": comp.title, "rules_assignee": incident.role,
                            "typical_causes": comp.hypotheses}

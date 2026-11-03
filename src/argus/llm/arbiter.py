@@ -9,7 +9,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from ..correlate import Incident
+from ..correlate import Incident, backed_by_new_signature
 from ..evidence import build_evidence
 from ..model import ROLES
 from ..routing import Router
@@ -52,12 +52,13 @@ class BaseArbiter:
                 f"Арбитр ({self.model}) недоступен: {str(e)[:120]}."
             return None
         analyst = triage.assignee if triage.source != "rules" else None
-        role, needs_human, note = vote(incident.role, analyst, verdict)
+        role, needs_human, note = vote(incident.role, analyst, verdict, backed_by_new_signature(incident, router))
         triage.votes["arbiter"] = verdict.assignee
         triage.assignee, triage.needs_human = role, needs_human
         if not note:
             note = (f"Арбитр ({verdict.model}) согласен: {verdict.reason}" if verdict.assignee == role else
-                    f"Арбитр ({verdict.model}) предлагал {verdict.assignee}: {verdict.reason} Большинство голосов — {role}.")
+                    f"Арбитр ({verdict.model}) предлагал {verdict.assignee}: {verdict.reason} "
+                    f"Большинство голосов — {role}.")
         triage.arbiter_note = note
         incident.role = role
         return verdict

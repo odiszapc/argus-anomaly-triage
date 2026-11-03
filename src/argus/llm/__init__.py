@@ -40,8 +40,9 @@ def make_analyst_and_arbiter(cfg: Config, router: Router, mode: str):
     if mode == "local":
         return OllamaAnalyst(router, llm.get("local_analyst_model", local_model), host), \
             (OllamaArbiter(local_model, host) if local_ok else None)
-    analyst = ClaudeAnalyst(router, model=llm.get("analyst_model", "claude-opus-5-5"), effort=llm.get("effort", "medium"),
-                            max_turns=int(llm.get("max_turns", 10)), budget_usd=float(llm.get("max_budget_usd", 2.0)))
+    analyst = ClaudeAnalyst(router, model=llm.get("analyst_model", "claude-opus-5-5"),
+                            effort=llm.get("effort", "medium"), max_turns=int(llm.get("max_turns", 10)),
+                            budget_usd=float(llm.get("max_budget_usd", 2.0)))
     arbiter = OllamaArbiter(local_model, host) if local_ok else ClaudeArbiter(llm.get("claude_arbiter_model",
                                                                                       "claude-sonnet-5-5"))
     return analyst, arbiter

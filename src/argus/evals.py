@@ -103,7 +103,9 @@ def evaluate(gold: list[Gold], detections: list[Detection], predictions: list) -
     for g in gold:
         row = Row(g.id, g.name, g.role)
         cands = [d for d in detections if d.start <= g.end + SLACK and d.end >= g.start - SLACK
-                 and (g.component is None or d.component == g.component) and (g.country is None or d.country == g.country)]
+                 and (g.component is None or d.component == g.component)
+                 and (g.country is None or d.country == g.country)
+                 and (g.kind == "data_quality" or d.component != "observability")]
         if cands:
             best = sorted(cands, key=lambda d: (d.role != g.role, d.detected_at))[0]
             matched.add(best.task)

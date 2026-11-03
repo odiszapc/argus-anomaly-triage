@@ -28,7 +28,7 @@ def ttd_minutes(incident: Incident) -> int:
 
 
 def stem(incident: Incident) -> str:
-    return f"{incident.task_id}-{incident.component}-{incident.start:%Y%m%d-%H%M}"
+    return incident.slug or f"{incident.task_id}-{incident.component}-{incident.start:%Y%m%d-%H%M}"
 
 
 def _fingerprint(incident: Incident) -> str:
@@ -50,7 +50,8 @@ def _signals(incident: Incident, limit: int = 12):
 
 
 def render_task(incident: Incident, triage: Triage, history: list[tuple[datetime, str]],
-                repeats: list[dict] | None = None, related: list[str] | None = None, severity: str | None = None) -> str:
+                repeats: list[dict] | None = None, related: list[str] | None = None,
+                severity: str | None = None) -> str:
     return _env.get_template("task.md.j2").render(severity=severity or incident.severity, 
         id=incident.task_id, title=triage.title.replace("\n", " "), incident=incident, triage=triage,
         status="resolved" if incident.resolved_at else "open", ttd=ttd_minutes(incident),
@@ -66,7 +67,7 @@ def render_postmortem(incident: Incident, triage: Triage, history: list[tuple[da
     end = incident.resolved_at or incident.end
     minutes = (end - incident.start).total_seconds() / 60 + 10
     return _env.get_template("postmortem.md.j2").render(
-        severity=severity or incident.severity, id=incident.task_id, title=triage.title.replace("\n", " "), incident=incident, triage=triage,
-        ttd=ttd_minutes(incident), duration=dur(minutes), timeline=timeline, prediction=prediction,
-        task_link=f"../tasks/{stem(incident)}.md", signals=list(incident.signals.values()),
+        severity=severity or incident.severity, id=incident.task_id, title=triage.title.replace("\n", " "),
+        incident=incident, triage=triage, ttd=ttd_minutes(incident), duration=dur(minutes), timeline=timeline,
+        prediction=prediction, task_link=f"../tasks/{stem(incident)}.md", signals=list(incident.signals.values()),
         countries=_countries(incident))

@@ -36,5 +36,12 @@ testpaths = ["tests"]
 addopts = "-q"
 
 [tool.ruff]
-line-length = 110
+line-length = 120
 target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B008"]  # typer.Option in defaults is the Typer idiom
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501", "E731"]  # readable one-line fixtures

@@ -116,11 +116,12 @@ def test_bot_like_features():
 def test_bot_features_from_logs(dataset, tmp_path):
     from datetime import timedelta
 
+    from conftest import T0 as DATA_T0
+    from conftest import log_line
+
     from argus.detect.security import bot_features
     from argus.ingest import ingest
     from argus.store import Store
-    from conftest import T0 as DATA_T0
-    from conftest import log_line
 
     window = DATA_T0 + timedelta(hours=30)
     prior = [log_line(DATA_T0 + timedelta(hours=10, seconds=i), "Adapter failure", ip=f"10.1.0.{i % 50}",
@@ -139,11 +140,12 @@ def test_bot_features_from_logs(dataset, tmp_path):
 def test_detect_all_finds_burst_through_store(dataset, tmp_path):
     from datetime import timedelta
 
+    from conftest import T0 as DATA_T0
+    from conftest import log_line
+
     from argus.detect import detect_all
     from argus.ingest import ingest
     from argus.store import Store
-    from conftest import T0 as DATA_T0
-    from conftest import log_line
 
     quiet = [log_line(DATA_T0 + timedelta(minutes=10 * i, seconds=5), "Redis failure") for i in range(3 * DAY)]
     burst_at = DATA_T0 + timedelta(days=2, hours=3)

@@ -1,0 +1,28 @@
+# docker compose --profile setup run --rm ingest   # once: load the export into the volume
+# docker compose up -d                             # Ollama + Argus in resident mode
+services:
+  ollama:
+    image: ollama/ollama:latest          # pin a digest in production
+    volumes: [ollama:/root/.ollama]
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on: [ollama]
+    environment: [OLLAMA_HOST=ollama:11434]
+    entrypoint: ["sh", "-c", "ollama pull qwen3:14b && ollama pull qwen3-embedding:0.6b"]
+  ingest:
+    build: .
+    profiles: [setup]
+    command: ["ingest"]
+    volumes: ["${ARGUS_DATA:-../data}:/data:ro", "argus-var:/var/lib/argus"]
+  argus:
+    build: .
+    command: ["watch", "--interval", "300"]
+    depends_on: [ollama]
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - ARGUS_LLM=${ARGUS_LLM:-auto}     # claude needs ANTHROPIC_API_KEY; local = Ollama only; off = rules
+      - ANTHROPIC_API_KEY
+    volumes: ["${ARGUS_DATA:-../data}:/data:ro", "argus-var:/var/lib/argus", "./out:/out"]
+volumes:
+  ollama: {}
+  argus-var: {}

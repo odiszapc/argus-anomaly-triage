@@ -124,12 +124,13 @@ def test_upstream_under_load_routes_to_paas():
 
 
 def test_impact_counts_clients_not_lines(dataset, tmp_path):
+    from conftest import T0 as DATA_T0
+    from conftest import log_line
+
     from argus.correlate import Incident
     from argus.ingest import ingest
     from argus.probe import StoreProbe
     from argus.store import Store
-    from conftest import T0 as DATA_T0
-    from conftest import log_line
 
     t = DATA_T0 + timedelta(minutes=30)
     logs = [log_line(t + timedelta(seconds=i), "Redis failure", user_id="u1") for i in range(3)]
@@ -267,7 +268,7 @@ def test_abuse_is_at_least_sev2():
 
 def test_regression_reopens_after_a_dip():
     wait = "Timeout <N> wait exceeded"
-    level = lambda tpl, now: 5.0 if at(50) <= now < at(60) or now >= at(100) else 500.0  # noqa: E731
+    level = lambda tpl, now: 5.0 if at(50) <= now < at(60) or now >= at(100) else 500.0
     _, events = run([sig("log_burst", wait, 10, 12)], 130, FakeProbe(level=level))
     kinds = [e.kind for e in events if e.kind != "updated"]
     assert kinds == ["opened", "resolved", "reopened", "resolved"]
@@ -277,7 +278,7 @@ def test_regression_reopens_after_a_dip():
 
 def test_same_cause_returning_revives_resolved_incident():
     wait = "Timeout <N> wait exceeded"
-    level = lambda tpl, now: 500.0 if at(10) <= now < at(50) or now >= at(80) else 5.0  # noqa: E731
+    level = lambda tpl, now: 500.0 if at(10) <= now < at(50) or now >= at(80) else 5.0
     book, events = run([sig("log_burst", wait, 10, 12), sig("log_burst", wait, 81, 82)], 100, FakeProbe(level=level))
     assert len(opened(events)) == 1 and len(book.incidents) == 1
     assert [e.kind for e in events if e.kind != "updated"][:3] == ["opened", "resolved", "reopened"]
@@ -291,7 +292,7 @@ def test_burst_of_same_cause_after_resolve_is_a_new_incident():
 
 
 def test_short_incident_does_not_reopen():
-    level = lambda tpl, now: 500.0 if now >= at(30) else 5.0  # noqa: E731
+    level = lambda tpl, now: 500.0 if now >= at(30) else 5.0
     _, events = run([sig("log_burst", "Redis failure", 10, 12)], 60, FakeProbe(level=level))
     assert "reopened" not in [e.kind for e in events]
 

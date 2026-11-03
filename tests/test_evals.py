@@ -24,7 +24,8 @@ def test_match_by_overlap_and_role():
 
 def test_gold_with_component_and_country_matches_only_those():
     gold = [Gold("G4", "brazil", D(2026, 9, 3, 9, 0), D(2026, 9, 4, 2, 0), "SEO Specialist", country="BR"),
-            Gold("G7", "rps", D(2026, 8, 24, 11, 10), D(2026, 9, 7, 11, 10), "PaaS Engineer", component="observability")]
+            Gold("G7", "rps", D(2026, 8, 24, 11, 10), D(2026, 9, 7, 11, 10), "PaaS Engineer", kind="data_quality",
+                 component="observability")]
     detections = [
         Detection("ARG-007", "SEO Specialist", D(2026, 9, 3, 1, 10), D(2026, 9, 3, 2, 10), D(2026, 9, 3, 9, 20), None,
                   component="country_traffic", country="CN"),
@@ -37,3 +38,10 @@ def test_gold_with_component_and_country_matches_only_those():
     ]
     rows = {r.gold: r for r in evaluate(gold, detections, []).rows}
     assert (rows["G4"].task, rows["G7"].task) == ("ARG-012", "ARG-005")
+
+
+def test_data_quality_task_never_matches_an_outage():
+    gold = [Gold("G2b", "mongo again", D(2026, 8, 26, 6, 30), D(2026, 8, 26, 7, 30), "DBA")]
+    detections = [Detection("ARG-005", "PaaS Engineer", D(2026, 8, 24, 12, 30), D(2026, 8, 25, 9, 0),
+                            D(2026, 8, 28, 0, 0), None, component="observability")]
+    assert evaluate(gold, detections, []).rows[0].task is None

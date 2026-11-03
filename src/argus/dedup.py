@@ -102,7 +102,8 @@ class Dedup:
             if jaccard >= self.jaccard_min:
                 self.last_reason = f"те же сигнатуры (Jaccard {jaccard:.2f})"
                 return record
-            cosine = float(self.embed(" | ".join(sorted(mine.values()))) @ self.embed(" | ".join(sorted(theirs.values()))))
+            cosine = float(self.embed(" | ".join(sorted(mine.values())))
+                           @ self.embed(" | ".join(sorted(theirs.values()))))
             if cosine >= self.cosine_min:
                 self.last_reason = f"похожие сигнатуры (косинус {cosine:.2f})"
                 return record

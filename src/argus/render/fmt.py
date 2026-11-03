@@ -7,7 +7,7 @@ def _comma(s: str) -> str:
     return s.replace(".", ",")
 
 
-def human(n: float | int | None) -> str:
+def human(n: float | None) -> str:
     if n is None:
         return "—"
     a = abs(n)

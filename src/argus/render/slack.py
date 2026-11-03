@@ -7,7 +7,7 @@ Follow-ups go to the alert's thread (`thread_ts`), so one incident is one conver
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from ..correlate import Incident
@@ -51,7 +51,8 @@ def alert_payload(incident: Incident, triage: Triage, channel: str, task_url: st
     votes = " · ".join(f"{k}: {v}" for k, v in triage.votes.items())
     note = f"⚠️ *Нужно решение человека:* {triage.arbiter_note}" if triage.needs_human else f"Голоса — {votes}"
     blocks.append({"type": "context", "elements": [{"type": "mrkdwn", "text": _text(note)}]})
-    buttons = [{"type": "button", "text": {"type": "plain_text", "text": f"Задача {incident.task_id}"}, "url": task_url}]
+    buttons = [{"type": "button", "text": {"type": "plain_text", "text": f"Задача {incident.task_id}"},
+                "url": task_url}]
     if pm_url:
         buttons.append({"type": "button", "text": {"type": "plain_text", "text": "Post-mortem"}, "url": pm_url})
     blocks.append({"type": "actions", "elements": buttons})
@@ -65,7 +66,7 @@ def note_payload(channel: str, text: str) -> dict:
 
 
 def _epoch(at: datetime) -> int:
-    return int(at.replace(tzinfo=timezone.utc).timestamp())
+    return int(at.replace(tzinfo=UTC).timestamp())
 
 
 class SlackLog:

@@ -16,7 +16,16 @@ from datetime import datetime, timedelta
 from typing import Protocol
 
 from .config import Config
-from .correlate import SEVERITY_ORDER, Event, Fingerprint, Incident, IncidentBook, IncidentCfg
+from .correlate import (
+    SEVERITY_ORDER,
+    Event,
+    Fingerprint,
+    Incident,
+    IncidentBook,
+    IncidentCfg,
+    backed_by_new_signature,
+)
+from .llm.vote import vote
 from .detect import DetectCfg, detect_all
 from .detect.security import BotCfg
 from .model import Signal
@@ -168,8 +177,9 @@ class Engine:
                 self.slack.update(record.slack_ts, payload, now, {"incident": task_id, "event": f"{event.kind}-root"})
         self._write(record)
 
-    def _related(self, now: datetime) -> list[dict]:
-        recent = [r for r in self.memory.tasks.values() if r.last_active and now - r.last_active <= timedelta(hours=72)]
+    def _related(self, now: datetime, exclude: str | None = None) -> list[dict]:
+        recent = [r for r in self.memory.tasks.values() if r.last_active and now - r.last_active <= timedelta(hours=72)
+                  and r.task_id != exclude]
         return [{"task": r.task_id, "title": r.triage.title, "assignee": r.triage.assignee,
                  "opened": f"{r.opened_at:%d.%m %H:%M}", "repeats": len(r.repeats)} for r in recent[-5:]]
 
@@ -177,9 +187,14 @@ class Engine:
         if isinstance(self.analyst, RulesAnalyst):
             triage = self.analyst.triage(inc, self.store, now)
         else:
-            triage = self.analyst.triage(inc, self.store, now, related=self._related(now))
+            triage = self.analyst.triage(inc, self.store, now, related=self._related(now, exclude=inc.task_id))
         if self.arbiter:
             self.arbiter.review(inc, triage, self.store, now, self.router)
+        elif triage.source != "rules":  # analyst alone: still may not overrule a new-signature routing
+            role, needs_human, note = vote(inc.role, triage.assignee, None, backed_by_new_signature(inc, self.router))
+            triage.assignee, triage.needs_human = role, needs_human
+            triage.arbiter_note = note or triage.arbiter_note
+            inc.role = role
         return triage
 
     def _escalate(self, record: TaskRecord, inc: Incident, now: datetime, repeat: bool) -> None:
@@ -234,7 +249,8 @@ class Engine:
         self.memory.predictions.append(prediction)
         self.slack.post(prediction.payload(self.prediction_channel), now,
                         {"event": "prediction", "kind": prediction.kind, "target": prediction.target,
-                         "window": [f"{prediction.window_start:%Y-%m-%dT%H:%M}Z", f"{prediction.window_end:%Y-%m-%dT%H:%M}Z"]})
+                         "window": [f"{prediction.window_start:%Y-%m-%dT%H:%M}Z",
+                                    f"{prediction.window_end:%Y-%m-%dT%H:%M}Z"]})
         record = self.memory.tasks.get(prediction.target)
         if record:
             record.prediction = (f"{now:%d.%m %H:%M} — риск повтора в окне {prediction.window_start:%d.%m %H:%M}–"
@@ -279,7 +295,8 @@ def replay(engine: Engine, since: datetime | None = None, until: datetime | None
     signals = detect_all(engine.store, engine.detect_cfg)
     now = start
     while now <= end:
-        visible = [v for v in (s.truncate(now) for s in signals if s.detected_at <= now) if v and v.end >= now - LOOKBACK]
+        visible = [v for v in (s.truncate(now) for s in signals if s.detected_at <= now)
+                   if v and v.end >= now - LOOKBACK]
         for event in engine.tick(now, visible):
             if event.kind == "opened":
                 stats.opened += 1

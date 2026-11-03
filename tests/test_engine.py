@@ -1,10 +1,11 @@
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
+
+from conftest import T0, log_line
 
 from argus.config import load_config
 from argus.engine import build_engine, replay
 from argus.ingest import ingest
-from conftest import T0, log_line
 
 DAY = 144
 

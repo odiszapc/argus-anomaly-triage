@@ -71,6 +71,7 @@ class Incident:
     anchor_is_cause: bool = False
     bot: BotFeatures | None = None
     task_id: str | None = None
+    slug: str | None = None           # file stem, fixed when the task is created
     considered: set[str] = field(default_factory=set, repr=False)
 
     @property
@@ -141,6 +142,13 @@ class IncidentCfg:
     sev2_clients: int = 50_000
     sev2_minutes: int = 60
     sev2_long_clients: int = 5000
+
+
+def backed_by_new_signature(incident: Incident, router: Router) -> bool:
+    """The incident's own component shows a cause template never seen before (a new failure mode)."""
+    return any(s.attrs.get("new_template") and router.component_of(s).kind == "cause"
+               and router.same_problem(router.component_of(s).name, incident.component)
+               for s in incident.log_signals())
 
 
 def signal_key(s: Signal) -> str:
@@ -259,7 +267,8 @@ class IncidentBook:
                             role=component.role, family=component.family, start=s.start, last_active=s.end,
                             created_at=now)
         self.incidents.append(incident)
-        if incident.partition == "ops" and component.kind == "cause" and (s.attrs.get("new_template") or s.end > s.start):
+        if (incident.partition == "ops" and component.kind == "cause"
+                and (s.attrs.get("new_template") or s.end > s.start)):
             self._reclaim(incident, s, now)  # only a new or lasting cause; a familiar blip explains nothing
         return incident
 

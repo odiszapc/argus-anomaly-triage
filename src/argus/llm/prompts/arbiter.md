@@ -8,6 +8,7 @@ Decide:
   - SEO Specialist: traffic deviates in one specific country
   - Backend Lead: the application's own error flow grows (code, locks, internal API errors with no infrastructure cause)
   - Security Lead: malicious activity is suspected (bots, rotating proxies, scanning)
+  Timeouts of internal APIs are usually symptoms; a never-seen-before signature that names a database, cache or DNS points at the cause even when it is small.
 - severity: SEV-1 (most users affected or at least 1 % of requests failing), SEV-2 (a noticeable share or a long incident), SEV-3 (limited), SEV-4 (no user impact).
 - confidence from 0 to 1, and reason: one sentence in Russian.
 

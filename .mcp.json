@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "argus": {"command": "uv", "args": ["run", "--quiet", "argus", "mcp"]}
+  }
+}

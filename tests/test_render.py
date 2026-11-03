@@ -102,3 +102,12 @@ def test_task_shows_worst_severity_of_its_incidents():
     inc = incident()
     inc.severity = "SEV-3"
     assert "severity: SEV-1" in render_task(inc, triage(), history=[], severity="SEV-1")
+
+
+def test_task_file_name_is_stable_after_reassignment(tmp_path):
+    tracker = Tracker(tmp_path)
+    inc = incident()
+    tracker.create(inc, triage(), history=[])
+    inc.component = "upstream"
+    tracker.write(inc, triage(), history=[])
+    assert len(list((tmp_path / "tasks").glob("ARG-*.md"))) == 1

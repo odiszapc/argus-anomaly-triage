@@ -1,7 +1,8 @@
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import pytest
+from conftest import T0, log_line
 
 from argus.ingest import ingest
 from argus.llm.analyst import ClaudeAnalyst, triage_from_output
@@ -10,7 +11,6 @@ from argus.llm.verify import extract_numbers, verify_numbers
 from argus.llm.vote import Verdict, vote
 from argus.routing import Router
 from argus.store import Store
-from conftest import T0, log_line
 
 
 @pytest.fixture
@@ -76,8 +76,9 @@ def test_analyst_failure_falls_back(store):
 
 
 def test_evidence_pack_is_small_and_has_no_future(store):
-    from argus.evidence import build_evidence
     from test_render import incident
+
+    from argus.evidence import build_evidence
 
     inc = incident()
     now = T0 + timedelta(minutes=60)
@@ -88,9 +89,10 @@ def test_evidence_pack_is_small_and_has_no_future(store):
 
 
 def test_outvoted_arbiter_is_reported_as_dissent(store):
+    from test_render import incident
+
     from argus.llm.arbiter import BaseArbiter
     from argus.triage import fallback_triage
-    from test_render import incident
 
     class Dissent(BaseArbiter):
         model = "qwen3:14b"
@@ -107,8 +109,9 @@ def test_outvoted_arbiter_is_reported_as_dissent(store):
 
 
 def test_analyst_uses_agent_output_and_counts_cost(store):
-    from argus.llm.analyst import AgentResult
     from test_render import incident
+
+    from argus.llm.analyst import AgentResult
 
     out = {"title": "Valkey недоступен", "summary": "Кэш перезапустился.", "symptoms": ["LOADING"],
            "hypotheses": [{"cause": "рестарт", "evidence": "LOADING", "confidence": "высокая"}], "assignee": "DBA",
@@ -121,3 +124,9 @@ def test_analyst_uses_agent_output_and_counts_cost(store):
 
     t = ClaudeAnalyst(Router.load(), runner=runner).triage(incident(), store, T0 + timedelta(minutes=60))
     assert (t.source, t.title, t.cost_usd, len(calls)) == ("claude", "Valkey недоступен", 0.25, 1)
+
+
+def test_vote_keeps_rules_backed_by_a_new_signature():
+    llm = Verdict(True, "Backend Lead", "SEV-1", 0.7, "таймауты REST")
+    role, needs_human, note = vote("DBA", "Backend Lead", llm, rules_strong=True)
+    assert role == "DBA" and needs_human and "DBA" in note

@@ -1,10 +1,11 @@
 import math
 from datetime import datetime
 
+from conftest import log_line
+
 from argus.ingest import ingest, load_wide_csv
 from argus.store import Store
 from argus.timeutil import bucket_end
-from conftest import log_line
 
 
 def test_bucket_end_alignment():

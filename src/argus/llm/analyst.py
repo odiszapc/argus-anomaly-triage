@@ -13,10 +13,10 @@ import asyncio
 import json
 import os
 import tempfile
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Callable
 
 import httpx
 
@@ -80,7 +80,8 @@ class AgentResult:
 
 
 def run_claude_agent(*, system: str, prompt: str, schema: dict, model: str, effort: str, max_turns: int,
-                     budget_usd: float, sql: Callable[[str], str] | None = None, resume: str | None = None) -> AgentResult:
+                     budget_usd: float, sql: Callable[[str], str] | None = None,
+                     resume: str | None = None) -> AgentResult:
     """One Claude Agent SDK session: our SQL tool only, no built-in tools, no user settings, JSON answer."""
     from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, create_sdk_mcp_server, query, tool
 

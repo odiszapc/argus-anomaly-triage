@@ -41,6 +41,7 @@ class Tracker:
 
     def create(self, incident: Incident, triage: Triage, history: list[tuple[datetime, str]]) -> TaskRef:
         incident.task_id = self.next_id()
+        incident.slug = stem(incident)  # the file keeps its name if routing changes later
         return self.write(incident, triage, history)
 
     def write(self, incident: Incident, triage: Triage, history: list[tuple[datetime, str]],

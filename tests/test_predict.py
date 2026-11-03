@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-import numpy as np
+from conftest import T0
 
 from argus.correlate import Impact, Incident
 from argus.ingest import ingest
@@ -8,7 +8,6 @@ from argus.model import Point, Signal
 from argus.predict import Predictor
 from argus.routing import Router
 from argus.store import Store
-from conftest import T0
 
 DAY = 144
 

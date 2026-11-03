@@ -16,8 +16,12 @@ class Verdict:
     model: str = ""
 
 
-def vote(rules: str, analyst: str | None, verdict: Verdict | None) -> tuple[str, bool, str]:
-    """Return (assignee, needs_human, note)."""
+def vote(rules: str, analyst: str | None, verdict: Verdict | None, rules_strong: bool = False) -> tuple[str, bool, str]:
+    """Return (assignee, needs_human, note).
+
+    `rules_strong`: the rules' choice rests on a cause signature never seen before (a new failure mode).
+    Models may disagree with it, but not overrule it silently: the rules' owner keeps the task and a person decides.
+    """
     ballots = {"правила": rules}
     if analyst:
         ballots["аналитик"] = analyst
@@ -28,6 +32,10 @@ def vote(rules: str, analyst: str | None, verdict: Verdict | None) -> tuple[str,
     if count < 2 and len(ballots) > 1:
         role, needs_human = analyst or rules, True
         notes.append("голоса разошлись: " + ", ".join(f"{k} — {v}" for k, v in ballots.items()))
+    if rules_strong and role != rules:
+        notes.append(f"правила опираются на новую сигнатуру-причину и назначили {rules}; модели предлагали {role} — "
+                     "проверьте назначение")
+        role, needs_human = rules, True
     if verdict and not verdict.is_anomaly:
         needs_human = True
         notes.append(f"арбитр сомневается, что это аномалия: {verdict.reason}")

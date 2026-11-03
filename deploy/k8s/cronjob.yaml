@@ -1,0 +1,37 @@
+# Periodic mode: one pass every 5 minutes from the saved cursor (state lives on the /out volume).
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: argus
+  namespace: monitoring
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid          # a slow LLM pass must not overlap the next one
+  startingDeadlineSeconds: 120
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 900
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: argus
+              image: registry.example.com/sre/argus:0.1.0
+              args: ["run"]
+              env:
+                - {name: ARGUS_LLM, value: claude}
+                - {name: OLLAMA_HOST, value: "http://ollama.monitoring.svc:11434"}
+                - name: ANTHROPIC_API_KEY
+                  valueFrom: {secretKeyRef: {name: argus-secrets, key: anthropic-api-key}}
+              resources:
+                requests: {cpu: "1", memory: 2Gi}
+                limits: {memory: 6Gi}
+              volumeMounts:
+                - {name: var, mountPath: /var/lib/argus}
+                - {name: out, mountPath: /out}
+          volumes:
+            - name: var
+              persistentVolumeClaim: {claimName: argus-var}
+            - name: out
+              persistentVolumeClaim: {claimName: argus-out}

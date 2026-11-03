@@ -58,7 +58,8 @@ def replay(since: str = typer.Option(None, help="Start (UTC), default: start of 
            llm: str = LlmOpt, fresh: bool = typer.Option(False, help="Drop state and generated outputs first"),
            out: Path = OutOpt, config: Path = ConfigOpt) -> None:
     """Replay history as if live: 10-minute ticks, every decision uses only data before `now`."""
-    from .engine import build_engine, replay as run_replay, reset_outputs
+    from .engine import build_engine, reset_outputs
+    from .engine import replay as run_replay
 
     cfg = load_config(config, out_dir=out)
     if fresh:
@@ -71,7 +72,8 @@ def replay(since: str = typer.Option(None, help="Start (UTC), default: start of 
 def run(until: str = typer.Option(None, help="Process up to this time (UTC), default: latest data"),
         llm: str = LlmOpt, out: Path = OutOpt, config: Path = ConfigOpt) -> None:
     """One pass from the saved cursor to the latest data (for cron / Kubernetes CronJob)."""
-    from .engine import build_engine, replay as run_replay
+    from .engine import build_engine
+    from .engine import replay as run_replay
 
     cfg = load_config(config, out_dir=out)
     engine = build_engine(cfg, llm)
@@ -84,7 +86,8 @@ def watch(interval: int = typer.Option(300, help="Seconds between passes"), llm:
     """Resident mode: a pass every --interval seconds (state survives restarts)."""
     import time
 
-    from .engine import build_engine, replay as run_replay
+    from .engine import build_engine
+    from .engine import replay as run_replay
 
     cfg = load_config(config, out_dir=out)
     while True:
@@ -115,6 +118,39 @@ def eval_(out: Path = OutOpt, write: Path = typer.Option(None, help="Also write 
     typer.echo(text)
     if write:
         Path(write).write_text(text + "\n")
+
+
+
+@app.command()
+def mcp(config: Path = ConfigOpt, out: Path = OutOpt) -> None:
+    """MCP server (stdio) with read-only SQL and the task tracker, for Claude Code and other agents."""
+    from .mcp_server import build_server
+
+    build_server(load_config(config, out_dir=out)).run()
+
+
+@app.command()
+def sql(query: str, config: Path = ConfigOpt) -> None:
+    """Run one read-only query against the data (the analyst's tool, from the shell)."""
+    from .llm.tools import run_sql
+    from .store import Store
+
+    typer.echo(run_sql(Store(load_config(config).paths.db), query, max_rows=200, timeout_s=120))
+
+
+@app.command()
+def report(out: Path = OutOpt, config: Path = ConfigOpt) -> None:
+    """One self-contained HTML page about a run (scores, timeline, tasks, eval, predictions) → <out>/report.html."""
+    from .report import build_report
+
+    cfg = load_config(config, out_dir=out)
+    try:
+        page = build_report(cfg)
+    except FileNotFoundError as e:
+        raise typer.BadParameter(str(e)) from None
+    path = cfg.paths.out_dir / "report.html"
+    path.write_text(page, encoding="utf-8")
+    typer.echo(str(path))
 
 
 if __name__ == "__main__":

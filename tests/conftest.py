@@ -46,9 +46,9 @@ def write_dataset(root: Path, *, logs: list[str] | None = None, points: int = 6,
 
     (root / "logs.json").write_text("\n".join(logs or []) + "\n")
     (root / "rps.csv").write_text('"Time","Current"\n' + "\n".join(
-        f"{epoch_ms(t)},{fmt(v)}" for t, v in zip(times, rps)))
+        f"{epoch_ms(t)},{fmt(v)}" for t, v in zip(times, rps, strict=True)))
     (root / "cpu-usage.csv").write_text('"Time","AVG Current"\n' + "\n".join(
-        f"{epoch_ms(t)},{fmt(v)}" for t, v in zip(times, cpu)))
+        f"{epoch_ms(t)},{fmt(v)}" for t, v in zip(times, cpu, strict=True)))
     for name, table in (("rps-by-country.csv", countries), ("endpoint-timings-ms.csv", endpoints)):
         cols = list(table)
         lines = ['"Time",' + ",".join(f'"{c}"' for c in cols)]
