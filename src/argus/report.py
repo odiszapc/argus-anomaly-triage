@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import pickle
 from collections import defaultdict
 from datetime import UTC, datetime
@@ -59,14 +60,14 @@ def build_report(cfg: Config) -> str:
     }
     blob = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
     body = "".join([
-        _header(cfg, memory, records, period),
+        _header(memory, records, period),
         _kpis(records, result),
         _timeline(metrics, records, by_uid),
         _tasks_table(records, by_uid, cfg.paths.out_dir),
         _eval_section(result, cfg),
         _predictions(memory.predictions, result),
-        f'<footer>argus report · состояние: {_e(cfg.paths.out_dir / ".argus" / "state.pkl")} · '
-        f"данные: {_e(cfg.paths.db)}</footer>",
+        f'<footer>argus report · состояние: {_e(_shown(cfg.paths.out_dir / ".argus" / "state.pkl", cfg))} · '
+        f"данные: {_e(_shown(cfg.paths.db, cfg))}</footer>",
     ])
     return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">'
@@ -141,7 +142,7 @@ def _task_json(rec, by_uid) -> dict:
 
 # ---------- sections ----------
 
-def _header(cfg, memory, records, period) -> str:
+def _header(memory, records, period) -> str:
     lo, hi = period
     llm = [r for r in records if r.triage.source != "rules"]
     models = sorted({f"{SOURCES.get(r.triage.source, r.triage.source)} {r.triage.model}".strip() for r in llm})
@@ -152,8 +153,7 @@ def _header(cfg, memory, records, period) -> str:
             f'<p class="meta">Период данных: <b>{lo:%Y-%m-%d %H:%M} → {hi:%Y-%m-%d %H:%M} UTC</b> '
             f"({_plural(round((hi - lo).total_seconds() / 86400), ('день', 'дня', 'дней'))})"
             f" · обработано до {_ts(memory.cursor, '%Y-%m-%d %H:%M')} · анализ: {_e(mode)}"
-            f" · отчёт сформирован {now:%Y-%m-%d %H:%M} UTC</p>"
-            f'<p class="meta">Прогон: {_e(cfg.paths.out_dir)}</p></header>')
+            f" · отчёт сформирован {now:%Y-%m-%d %H:%M} UTC</p></header>")
 
 
 def _kpis(records, result: EvalResult) -> str:
@@ -263,7 +263,7 @@ def _tasks_table(records, by_uid, out_dir: Path) -> str:
 def _eval_section(result: EvalResult, cfg) -> str:
     if not result.rows:
         return (f'<section class="card"><h2>Сверка с эталоном</h2><p class="meta">Нет разметки: '
-                f"{_e(cfg.paths.gold)}.</p></section>")
+                f"{_e(_shown(cfg.paths.gold, cfg))}.</p></section>")
     rows = []
     for r in result.rows:
         if r.task:
@@ -365,6 +365,11 @@ def _ts(ts: datetime | None, fmt: str = "%d.%m %H:%M") -> str:
 
 def _e(v) -> str:
     return html.escape(str(v), quote=True)
+
+
+def _shown(path: Path, cfg: Config) -> str:
+    """A path as seen from the report's folder: the page gets shared, the author's local directories do not."""
+    return os.path.relpath(path, cfg.paths.out_dir)
 
 
 CSS = """

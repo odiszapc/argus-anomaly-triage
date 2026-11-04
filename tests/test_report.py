@@ -42,6 +42,13 @@ def test_report_has_tasks_period_and_links(dataset, tmp_path):
     assert str(path) in res.output and "ARG-001" in path.read_text(encoding="utf-8")
 
 
+def test_report_shows_paths_relative_to_its_folder(dataset, tmp_path):
+    cfg = tiny_run(dataset, tmp_path)
+    page = build_report(cfg)
+    assert str(tmp_path) not in page  # the page gets shared; the author's local directories stay local
+    assert "состояние: .argus/state.pkl · данные: ../var/argus.duckdb" in page
+
+
 def test_report_without_a_run_is_a_clear_error(tmp_path):
     res = CliRunner().invoke(app, ["report", "--out", str(tmp_path / "nothing")])
     assert res.exit_code != 0 and "argus replay" in res.output
